@@ -1,0 +1,27 @@
+.home-container {
+    margin-left: 15%;
+    padding: 1rem 0;
+    background-color: whitesmoke;
+
+    .stats {
+        margin: 1rem 1rem;
+
+        .parents {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+
+            .box {
+                background-color: white;
+                border-radius: .4rem;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.253);
+                padding: 2rem 1rem;
+
+                &:hover {
+                    box-shadow: 8px 7px 9px rgba(0, 0, 0, 0.253);
+                    transition: all .6s;
+                }
+            }
+        }
+    }
+}

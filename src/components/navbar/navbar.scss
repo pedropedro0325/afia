@@ -1,0 +1,55 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(34, 6, 29, 0.815);
+
+    .logo {
+        padding: 0 .6rem;
+
+        a {
+            color: yellowgreen;
+        }
+    }
+
+    .left {
+        display: flex;
+        align-items: center;
+
+        li {
+            padding: .7rem 1.5rem;
+            font-weight: bold;
+            margin: 0 .3rem;
+            font-size: 14px;
+
+            a {
+                color: #fff;
+            }
+
+            &:hover {
+                background-color: black;
+                cursor: pointer;
+                transition: all .5s;
+            }
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+
+        li {
+            color: #fff;
+            padding: .5rem 2rem;
+            font-weight: bold;
+            font-size: 14px;
+
+            &:hover {
+                background-color: black;
+                cursor: pointer;
+                transition: all .5s;
+            }
+        }
+    }
+
+}

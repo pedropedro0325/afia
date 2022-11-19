@@ -1,0 +1,40 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15%;
+    height: 43vw;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.301);
+    position: fixed;
+    background-color: white;
+
+    .dash {
+        padding: 1rem .6rem;
+        border-bottom: 1px solid rgba(68, 24, 110, 0.397);
+
+        a {
+            color: rgba(68, 24, 110, 0.274);
+            font-weight: bold;
+        }
+    }
+
+    .categories {
+        li {
+            padding: .6rem .6rem;
+            font-size: 15px;
+
+            a {
+                color: #000;
+                font-weight: 500;
+            }
+
+            &:hover {
+                background-color: rgba(168, 158, 177, 0.199);
+                color: #000;
+                font-weight: 600;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
