@@ -3,6 +3,9 @@
     align-items: center;
     justify-content: space-between;
     background-color: rgba(34, 6, 29, 0.815);
+    position: sticky;
+    top: 0;
+    left: 0;
 
     .logo {
         padding: 0 .6rem;
@@ -17,7 +20,7 @@
         align-items: center;
 
         li {
-            padding: .7rem 1.5rem;
+            padding: .9rem 1.5rem;
             font-weight: bold;
             margin: 0 .3rem;
             font-size: 14px;
