@@ -13,6 +13,7 @@ const Home = () => {
                         <div className='box'>Salles</div>
                         <div className='box'>Médecins</div>
                         <div className='box'>Infermières</div>
+                        <div className='box'>Médicaments</div>
                     </div>
                 </div>
             </div>
