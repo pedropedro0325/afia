@@ -1,8 +1,12 @@
-
-import { Outlet } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Outlet, Link } from 'react-router-dom'
 import './patient.scss'
 
 const Patient = () => {
+    const patients = [
+        { id: 1, nom: "Jhon", email: "jhon@gmail.com", adresse: "19 solomom suisse" },
+        { id: 2, nom: "Jack", email: "jack@gmail.com", adresse: "12 becker street londre" }
+    ]
     return (
         <div>
             <div className='home-container'>
@@ -14,31 +18,26 @@ const Patient = () => {
                     <h3>La liste des patients</h3>
                     <div className='table-patient'>
                         <table>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Adresse</th>
-                            </tr>
-                            <tr>
-                                <td>Peter</td>
-                                <td>Griffin</td>
-                                <td>Gironde 20</td>
-                            </tr>
-                            <tr>
-                                <td>Lois</td>
-                                <td>Griffin</td>
-                                <td>Gironde 20</td>
-                            </tr>
-                            <tr>
-                                <td>Joe</td>
-                                <td>Swanson</td>
-                                <td>Gironde 20</td>
-                            </tr>
-                            <tr>
-                                <td>Cleveland</td>
-                                <td>Brown</td>
-                                <td>Gironde 20</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>email</th>
+                                    <th>Adresse</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    patients.map((patient) => (
+                                        <tr>
+                                            <td>{patient.nom}</td>
+                                            <td>{patient.email}</td>
+                                            <td>{patient.adresse}</td>
+                                            <td><Link to={`/detail-patient/${patient.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>
