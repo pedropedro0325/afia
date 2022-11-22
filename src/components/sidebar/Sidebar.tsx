@@ -12,8 +12,6 @@ const Sidebar = () => {
                 <div className='categories'>
                     <Link to='/patient'><li>Patients</li></Link>
                     <Link to='/medecin'><li>Médecins</li></Link>
-                    <Link to='/'><li>Infirmerie</li></Link>
-                    <Link to='/'><li>Laboratoire</li></Link>
                     <Link to='/agenda'><li>L'Agenda</li></Link>
                 </div>
             </div>

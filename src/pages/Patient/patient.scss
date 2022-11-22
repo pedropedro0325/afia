@@ -1,5 +1,5 @@
 .patient-container {
-    margin: 1rem 1rem;
+    margin: .1rem 1rem;
 
     nav {
         display: flex;
@@ -11,9 +11,17 @@
             border: none;
             padding: .6rem;
             background-color: white;
-            border-radius: .5rem;
+            border-radius: .3rem;
             box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.26);
             cursor: pointer;
+        }
+
+        .btn-add {
+            &:hover {
+                background-color: blueviolet;
+                color: #fff;
+                transition: all .4s;
+            }
         }
     }
 

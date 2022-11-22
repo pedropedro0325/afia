@@ -13,9 +13,10 @@ const Patient = () => {
                 <Outlet />
                 <div className='patient-container'>
                     <nav>
-                        <button>+ Ajouter un patient</button>
+                        <Link to={`/ajouter-un-patient`}><button className='btn-add'>+ Ajouter un patient</button></Link>
                     </nav>
-                    <h3>La liste des patients</h3>
+                    <h2>La liste des patients</h2>
+                    <br />
                     <div className='table-patient'>
                         <table>
                             <thead>

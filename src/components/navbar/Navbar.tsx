@@ -11,7 +11,6 @@ const Navbar = () => {
                         <h2><Link to='/'>Logo</Link></h2>
                     </div>
                     <li><Link to='/'>Tableau de bord</Link></li>
-                    <li><Link to='/'>Services</Link></li>
                 </div>
                 <div className='right'>
                     <li></li>

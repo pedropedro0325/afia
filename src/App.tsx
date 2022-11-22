@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import Agenda from './pages/Agenda/Agenda';
+import AjouterPatient from './pages/Creer/AjouterPatient/AjouterPatient';
 import DetailPatient from './pages/DetailsPatients/DetailPatient';
 import Home from './pages/Home/Home';
 import Medecin from './pages/Medecins/Medecin';
@@ -16,6 +17,7 @@ const App = () => {
           <Route path='/medecin' element={<Medecin />} />
           <Route path='/agenda' element={<Agenda />} />
           <Route path='/detail-patient/:id' element={<DetailPatient />} />
+          <Route path='/ajouter-un-patient' element={<AjouterPatient />} />
         </Route>
       </Routes>
     </div>
