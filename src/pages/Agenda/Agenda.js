@@ -55,7 +55,7 @@ const Agenda = () => {
             <Outlet />
             <div className='agenda'>
                 <div className='agenda-top'>
-                    <div>
+                    {/* <div>
                         <h3>Consultez l'agenda de la clinique</h3>
                         <div className='filtre'>
                             <select name="" id="">
@@ -64,10 +64,10 @@ const Agenda = () => {
                                 <option value="">Chambres</option>
                             </select>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='addEvent'>
                         <h3>Ajouter un évènement</h3>
-
+                        <br />
                         <input type="text" placeholder='ajouter un titre' style={{ marginBottom: 10 }}
                             value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
                         />

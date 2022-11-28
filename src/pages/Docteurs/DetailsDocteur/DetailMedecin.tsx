@@ -1,6 +1,6 @@
 import { Outlet, useParams } from 'react-router-dom'
 import { useState } from 'react'
-import './detailPatient.scss'
+import './detailMedecin.scss'
 
 const DetailPatient = () => {
 
@@ -21,13 +21,13 @@ const DetailPatient = () => {
                             className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
                             onClick={() => toggleTab(1)}
                         >
-                            <h2>Information du patient</h2>
+                            <h2>Information du médecin</h2>
                         </button>
                         <button
                             className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
                             onClick={() => toggleTab(2)}
                         >
-                            <h2>Dossier médical</h2>
+                            <h2>Agenda</h2>
                         </button>
                         <button
                             className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
@@ -41,7 +41,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
-                            <h2>Patient N° {id}</h2>
+                            <h2>Docteur N° {id}</h2>
                             <hr />
                             <ul>
                                 <li>Prénom :</li>
