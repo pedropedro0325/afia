@@ -6,10 +6,18 @@
     height: 43vw;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.301);
     position: fixed;
-    background-color: rgb(34, 6, 29);
+    background-color: #17202A;
+    padding: .7rem;
+
+    .active li {
+        background-color: #999da16c;
+        font-weight: 600;
+        border-radius: .4rem;
+    }
 
     li {
         color: white;
+        margin-bottom: .4rem;
     }
 
     .dash {
@@ -26,16 +34,17 @@
         li {
             padding: .6rem .6rem;
             font-size: 15px;
-            color: white;
 
             a {
                 font-weight: 500;
+                color: white;
             }
 
             &:hover {
-                background-color: rgba(168, 158, 177, 0.199);
+                background-color: #999da16c;
                 font-weight: 600;
                 cursor: pointer;
+                border-radius: .4rem;
             }
         }
     }

@@ -2,12 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(34, 6, 29);
+    background-color: #17202A;
     position: sticky;
     z-index: 1000;
     top: 0;
     left: 0;
     border-bottom: #fff .1px solid;
+
+    .active {
+        background-color: #999da16c;
+    }
 
     .logo {
         padding: 0 .6rem;
@@ -26,13 +30,14 @@
             font-weight: bold;
             margin: 0 .3rem;
             font-size: 14px;
+            color: #fff;
 
             a {
                 color: #fff;
             }
 
             &:hover {
-                background-color: black;
+                color: yellowgreen;
                 cursor: pointer;
                 transition: all .5s;
             }
@@ -50,7 +55,7 @@
             font-size: 14px;
 
             &:hover {
-                background-color: black;
+                color: yellowgreen;
                 cursor: pointer;
                 transition: all .5s;
             }

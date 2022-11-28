@@ -1,0 +1,57 @@
+.prendreRendezVous-container {
+    margin: .1rem 1rem;
+
+    h2 {
+        background-color: #fff;
+        padding: 1rem;
+        max-width: fit-content;
+        border-radius: .4rem;
+    }
+
+    .form {
+        background-color: #fff;
+        padding: 5rem;
+
+        .control {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+
+            .input {
+                padding: 1rem .5rem;
+                width: 20rem;
+                border-radius: .4rem;
+                border: .1px solid #D7BDE2;
+            }
+
+            .radio {
+                width: 2rem;
+            }
+        }
+
+        .save {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+
+            .btn-save {
+                background-color: blueviolet;
+                color: #fff;
+                padding: 1rem;
+                border: none;
+                outline: none;
+                border-radius: .4rem;
+            }
+
+            .btn-cancel {
+                background-color: red;
+                color: #fff;
+                padding: 1rem;
+                border: none;
+                outline: none;
+                border-radius: .4rem;
+            }
+        }
+    }
+}

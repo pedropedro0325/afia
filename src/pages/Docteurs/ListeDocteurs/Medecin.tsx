@@ -1,6 +1,9 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import './medecin.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 
 const Medecin = () => {
     const medecins = [
@@ -12,10 +15,24 @@ const Medecin = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='medecin-container'>
-                    <nav>
-                        <button>+ Ajouter un médecin</button>
-                    </nav>
-                    <h3>La liste des médecins</h3>
+                    <h2>La liste des médecins</h2>
+                    <br />
+                    <div className='top'>
+                        <div className='nav'>
+                            <h4>Médecin</h4>
+                            <div className='search'>
+                                <input type="search" placeholder='Recherche' />
+                            </div>
+                            <Link to={`/ajouter-un-medecin`}>
+                                <button className='btn-blue'>
+                                    <FontAwesomeIcon icon={faPlus} className="i-plus" />
+                                </button>
+                            </Link>
+                            <button className='btn-blue'>
+                                <FontAwesomeIcon icon={faRotateRight} className="i-plus" />
+                            </button>
+                        </div>
+                    </div>
                     <div className='table-patient'>
                         <table>
                             <thead>
@@ -23,6 +40,7 @@ const Medecin = () => {
                                     <th>Nom</th>
                                     <th>email</th>
                                     <th>Adresse</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,6 +50,7 @@ const Medecin = () => {
                                             <td>{medecin.nom}</td>
                                             <td>{medecin.email}</td>
                                             <td>{medecin.adresse}</td>
+                                            <td><Link to={`/detail-medecin/${medecin.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))
                                 }
