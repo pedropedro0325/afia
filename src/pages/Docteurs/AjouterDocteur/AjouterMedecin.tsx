@@ -13,11 +13,11 @@ const AjouterMedecin = () => {
                         <div className='card identite'>
                             <h3>Identité</h3>
                             <div className='control'>
-                                <label>Nom</label>
+                                <label>Nom</label><br />
                                 <input type="text" placeholder='' />
                             </div>
                             <div className='control'>
-                                <label>Prénom</label>
+                                <label>Prénom</label><br />
                                 <input type="text" />
                             </div>
                             <div className='control'>

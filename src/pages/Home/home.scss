@@ -1,7 +1,7 @@
 .home-container {
     margin-left: 15%;
     padding: 1rem 0;
-    background-color: whitesmoke;
+    background-color: #F9EBEA;
 
     .stats {
         margin: 1rem 1rem;
@@ -13,7 +13,7 @@
 
             .box {
                 background-color: white;
-                border-radius: .4rem;
+                border-radius: .6rem .6rem 0 2rem;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.253);
 
                 h3 {

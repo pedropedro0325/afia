@@ -31,9 +31,6 @@ const RendezVous = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
-                            <button className='btn-blue'>
-                                <FontAwesomeIcon icon={faRotateRight} className="i-plus" />
-                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>

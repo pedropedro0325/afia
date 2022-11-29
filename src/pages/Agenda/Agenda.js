@@ -72,11 +72,11 @@ const Agenda = () => {
                             value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
                         />
                         <div className='addDate'>
-                            <DatePicker placeholderText='Date de début' style={{}}
+                            <DatePicker className='date' placeholderText='Date de début' style={{}}
                                 selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })}
                                 timeFormat={"HH:mm"}
                             />
-                            <DatePicker placeholderText='Date de fin'
+                            <DatePicker className='date' placeholderText='Date de fin'
                                 selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })}
                                 timeFormat={"HH:mm"}
                             />

@@ -3,9 +3,17 @@ import { Outlet, Link } from 'react-router-dom'
 import './medecin.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
+import { useMedecins } from '../../../hooks/medecins/useMedecins'
 
 const Medecin = () => {
+
+    const { error, loading, data } = useMedecins()
+
+    console.log({ data });
+
+    if (loading) return <div>...loading</div>
+    if (error) return <div>something went wrong</div>
+
     const medecins = [
         { id: 1, nom: "Dr Sylvie", email: "sylvie@gmail.com", adresse: "19 solomom suisse", date: "22/11/2022", jour: "lundi", heure: "12h-13h" },
         { id: 2, nom: "Dr House", email: "house@gmail.com", adresse: "12 becker street londre", date: "22/11/2022", jour: "mardi", heure: "13h-13h" }
@@ -28,9 +36,6 @@ const Medecin = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
-                            <button className='btn-blue'>
-                                <FontAwesomeIcon icon={faRotateRight} className="i-plus" />
-                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -45,11 +50,11 @@ const Medecin = () => {
                             </thead>
                             <tbody>
                                 {
-                                    medecins.map((medecin) => (
-                                        <tr>
-                                            <td>{medecin.nom}</td>
+                                    data.partakers.map((medecin: any) => (
+                                        <tr key={medecin.id}>
+                                            <td>{medecin.name}</td>
                                             <td>{medecin.email}</td>
-                                            <td>{medecin.adresse}</td>
+                                            <td>{medecin.adressId}</td>
                                             <td><Link to={`/detail-medecin/${medecin.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))

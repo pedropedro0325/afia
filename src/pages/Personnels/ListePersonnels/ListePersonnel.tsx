@@ -4,8 +4,17 @@ import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
+import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
 
 const ListePersonnel = () => {
+
+    const { error, loading, data } = usePersonnels()
+
+    console.log({ data });
+
+    if (loading) return <div>...loading</div>
+    if (error) return <div>something went wrong</div>
+
     const personnels = [
         { id: 1, nom: "Jhon", genre: "M", email: "jhon@gmail.com", date: "02/10/2022", poste: "Réceptionniste" },
         { id: 2, nom: "Jack", genre: "M", email: "jack@gmail.com", date: "02/09/2022", poste: "Infirmier" },
@@ -31,32 +40,29 @@ const ListePersonnel = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
-                            <button className='btn-blue'>
-                                <FontAwesomeIcon icon={faRotateRight} className="i-plus" />
-                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Prénom</th>
                                     <th>Nom</th>
-                                    <th>Genre</th>
-                                    <th>email</th>
-                                    <th>date</th>
-                                    <th>Poste</th>
+                                    <th>Email</th>
+                                    <th>Spécialité</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    personnels.map((el) => (
-                                        <tr>
-                                            <td>{el.nom}</td>
-                                            <td>{el.genre}</td>
+                                    data.partakers.map((el: any) => (
+                                        <tr key={el.id}>
+                                            <td>{el.name}</td>
+                                            <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el.date}</td>
-                                            <td>{el.poste}</td>
+                                            <td>{el.speciality.description}</td>
+                                            <td>{el.description}</td>
                                             <td><Link to={`/detail-personnel/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))

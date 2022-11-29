@@ -12,12 +12,15 @@ import RendezVous from './pages/RendezVous/ListeRendez-vous/RendezVous';
 import PrendreRendezVous from './pages/RendezVous/PrendreRendezVous/PrendreRendezVous';
 import ListePersonnel from './pages/Personnels/ListePersonnels/ListePersonnel';
 import AjouterPersonnel from './pages/Personnels/AjouterPersonnel/AjouterPersonnel';
+import Events from './pages/Events/Events';
+import DetailsPersonnel from './pages/Personnels/DetailsPersonnel/DetailsPersonnel';
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path='/' element={<Navigation />} >
+          <Route path='' element={<Home />} />
           <Route index element={<Home />} />
           <Route path='/rendez-vous' element={<RendezVous />} />
           <Route path='/patient' element={<Patient />} />
@@ -30,6 +33,8 @@ const App = () => {
           <Route path='/ajouter-un-medecin' element={<AjouterMedecin />} />
           <Route path='/creer-un-rendez-vous' element={<PrendreRendezVous />} />
           <Route path='/ajouter-un-personnel' element={<AjouterPersonnel />} />
+          <Route path='/detail-personnel/:id' element={<DetailsPersonnel />} />
+          <Route path='/evenements' element={<Events />} />
         </Route>
       </Routes>
     </div>

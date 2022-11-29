@@ -36,15 +36,15 @@
             }
 
             .control {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: .5rem;
                 margin-top: 1rem;
 
+                label {
+                    font-weight: bold;
+                }
+
                 input {
-                    padding: .5rem 1rem;
-                    width: 70%;
+                    padding: .8rem 1rem;
+                    width: 100%;
                     border-radius: .2rem;
                     border: none;
                     border: .1px solid #D7BDE2;
