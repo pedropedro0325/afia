@@ -2,15 +2,27 @@ import { Outlet, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import './detailPatient.scss'
 import DossierMedical from '../../../components/DossierMedical/DossierMedical'
+import { usePatient } from '../../../hooks/Patients/usePatient'
 
 const DetailPatient = () => {
 
-    const { id } = useParams()
+
+
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index: any) => {
         setToggleState(index);
     };
+
+    const { patientId } = useParams()
+
+    const { data, error, loading } = usePatient(patientId)
+
+    if (loading) return <div style={{ margin: "1rem 15rem" }}>...loading</div>
+    if (error) return <div style={{ margin: "1rem 15rem" }}>something went wrong</div>
+
+    console.log({ error, loading, data });
+
 
     return (
         <div className='home-container'>
@@ -42,20 +54,16 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
-                            <h2>Patient N° {id}</h2>
+                            <h2>Patient N° {data.patient.id}</h2>
                             <hr />
                             <ul>
-                                <li>Prénom :</li>
-                                <li>Nom :</li>
-                                <li>N° de CIN :</li>
-                                <li>Date de naissance :</li>
-                                <li>Lieu de naissance :</li>
-                                <li>Nationalité :</li>
-                                <li>Adresse :</li>
-                                <li>Ville :</li>
-                                <li>Pays :</li>
-                                <li>Téléphone :</li>
-                                <li>Email :</li>
+                                <li>Prénom : {data.patient.name}</li>
+                                <li>Nom : {data.patient.lastName}</li>
+                                <li>Date de naissance : {data.patient.birthDate}</li>
+                                <li>Lieu de naissance : {data.patient.birthCityId}</li>
+                                <li>Adresse : {data.patient.adressId}</li>
+                                <li>Téléphone : {data.patient.phoneNumber}</li>
+                                <li>Email : {data.patient.email}</li>
                             </ul>
                         </div>
 

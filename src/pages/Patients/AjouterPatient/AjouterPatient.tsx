@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterPatient.scss'
+import Mutation from './Mutation'
 
 const AjouterPatient = () => {
     return (
@@ -8,6 +9,7 @@ const AjouterPatient = () => {
             <Outlet />
             <div className='add-patient'>
                 <h2>Enrégistrer un patient</h2>
+                <Mutation />
                 <div className='form'>
                     <div className='form-top'>
                         <div className='card identite'>

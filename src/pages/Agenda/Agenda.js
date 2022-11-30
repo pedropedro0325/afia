@@ -66,22 +66,9 @@ const Agenda = () => {
                         </div>
                     </div> */}
                     <div className='addEvent'>
-                        <h3>Ajouter un évènement</h3>
+                        <h2>L'agenda</h2>
                         <br />
-                        <input type="text" placeholder='ajouter un titre' style={{ marginBottom: 10 }}
-                            value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                        />
-                        <div className='addDate'>
-                            <DatePicker className='date' placeholderText='Date de début' style={{}}
-                                selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })}
-                                timeFormat={"HH:mm"}
-                            />
-                            <DatePicker className='date' placeholderText='Date de fin'
-                                selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })}
-                                timeFormat={"HH:mm"}
-                            />
-                        </div>
-                        <button className='btn-add' style={{ marginTop: "10px" }} onClick={handleAddEvent}>Ajouter</button>
+                        <Link to={`/ajouter-un-evenement`}><button className='btn-add'>Ajouter un évènement</button></Link>
                     </div>
                 </div>
                 <div className='calendrier'>

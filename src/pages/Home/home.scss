@@ -13,7 +13,7 @@
 
             .box {
                 background-color: white;
-                border-radius: .6rem .6rem 0 2rem;
+                border-radius: .6rem .6rem 0 1.2rem;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.253);
 
                 h3 {
@@ -52,48 +52,136 @@
 
                 .box-bot1 {
                     background-color: rgba(137, 43, 226, 0.507);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot2 {
                     background-color: rgba(255, 0, 0, 0.452);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot3 {
                     background-color: rgba(255, 255, 0, 0.486);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot4 {
                     background-color: rgba(0, 0, 0, 0.699);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot5 {
                     background-color: rgba(128, 128, 128, 0.623);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot6 {
                     background-color: rgba(210, 105, 30, 0.589);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot7 {
                     background-color: rgba(0, 128, 0, 0.575);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot8 {
                     background-color: rgba(255, 166, 0, 0.589);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
 
                 .box-bot9 {
                     background-color: rgba(95, 158, 160, 0.603);
-                    border-radius: 0 0 .4rem .4rem;
+                    border-radius: .6rem .6rem 0 3rem;
                 }
+            }
+        }
+    }
+
+    .table-stats {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 1rem 1rem;
+        margin-top: 3rem;
+
+        .reserve {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: .5rem;
+            width: 65%;
+            box-shadow: .1rem .1rem .3rem rgba(0, 0, 0, 0.308);
+
+            h3 {
+                margin-bottom: 1rem;
+            }
+
+            #customers {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #customers td,
+            #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                font-size: 15px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #fff;
+                color: black;
+            }
+        }
+
+        .dr {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: .5rem;
+            width: 35%;
+            box-shadow: .1rem .1rem .3rem rgba(0, 0, 0, 0.308);
+
+            h3 {
+                margin-bottom: 1rem;
+            }
+
+            #customers {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #customers td,
+            #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+                font-size: 15px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #fff;
+                color: black;
             }
         }
     }
