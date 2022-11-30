@@ -1,8 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import Agenda from './pages/Agenda/Agenda';
-import AjouterMedecin from './pages/Docteurs/AjouterDocteur/AjouterMedecin';
-import AjouterPatient from './pages/Patients/AjouterPatient/AjouterPatient';
 import DetailPatient from './pages/Patients/DetailsPatient/DetailPatient';
 import DetailMedecin from './pages/Docteurs/DetailsDocteur/DetailMedecin';
 import Home from './pages/Home/Home';
@@ -13,6 +11,9 @@ import AjouterPersonnel from './pages/Personnels/AjouterPersonnel/AjouterPersonn
 import Events from './pages/Events/ListeEvents/Events';
 import DetailsPersonnel from './pages/Personnels/DetailsPersonnel/DetailsPersonnel';
 import AjouterEvent from './pages/Events/AjouterEvent/AjouterEvent';
+import AjouterPatient from './pages/Patients/AjouterPatient/AjouterPatient';
+import Specialites from './pages/Specialities/ListeSpecialities/Specialites';
+import AjouterSpeciality from './pages/Specialities/AjouterSpeciality/AjouterSpeciality';
 
 const App = () => {
   return (
@@ -28,11 +29,12 @@ const App = () => {
           <Route path='/detail-patient/:patientId' element={<DetailPatient />} />
           <Route path='/ajouter-un-patient' element={<AjouterPatient />} />
           <Route path='/detail-medecin/:id' element={<DetailMedecin />} />
-          <Route path='/ajouter-un-medecin' element={<AjouterMedecin />} />
           <Route path='/ajouter-un-personnel' element={<AjouterPersonnel />} />
           <Route path='/detail-personnel/:id' element={<DetailsPersonnel />} />
           <Route path='/evenements' element={<Events />} />
           <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
+          <Route path='/specialites' element={<Specialites />} />
+          <Route path='/ajouter/specialite' element={<AjouterSpeciality />} />
         </Route>
       </Routes>
     </div>

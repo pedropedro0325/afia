@@ -9,15 +9,8 @@ const Medecin = () => {
 
     const { error, loading, data } = useMedecins()
 
-    console.log({ data });
-
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
-
-    const medecins = [
-        { id: 1, nom: "Dr Sylvie", email: "sylvie@gmail.com", adresse: "19 solomom suisse", date: "22/11/2022", jour: "lundi", heure: "12h-13h" },
-        { id: 2, nom: "Dr House", email: "house@gmail.com", adresse: "12 becker street londre", date: "22/11/2022", jour: "mardi", heure: "13h-13h" }
-    ]
     return (
         <div>
             <div className='home-container'>
@@ -31,7 +24,7 @@ const Medecin = () => {
                             <div className='search'>
                                 <input type="search" placeholder='Recherche' />
                             </div>
-                            <Link to={`/ajouter-un-medecin`}>
+                            <Link to={`/ajouter-un-personnel`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
