@@ -8,28 +8,31 @@ import DetailMedecin from './pages/Docteurs/DetailsDocteur/DetailMedecin';
 import Home from './pages/Home/Home';
 import Medecin from './pages/Docteurs/ListeDocteurs/Medecin';
 import Patient from './pages/Patients/ListePatients/Patient';
-import RendezVous from './pages/RendezVous/ListeRendez-vous/RendezVous';
-import PrendreRendezVous from './pages/RendezVous/PrendreRendezVous/PrendreRendezVous';
 import ListePersonnel from './pages/Personnels/ListePersonnels/ListePersonnel';
 import AjouterPersonnel from './pages/Personnels/AjouterPersonnel/AjouterPersonnel';
+import Events from './pages/Events/ListeEvents/Events';
+import DetailsPersonnel from './pages/Personnels/DetailsPersonnel/DetailsPersonnel';
+import AjouterEvent from './pages/Events/AjouterEvent/AjouterEvent';
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path='/' element={<Navigation />} >
+          <Route path='' element={<Home />} />
           <Route index element={<Home />} />
-          <Route path='/rendez-vous' element={<RendezVous />} />
           <Route path='/patient' element={<Patient />} />
           <Route path='/medecin' element={<Medecin />} />
           <Route path='/personnels' element={<ListePersonnel />} />
           <Route path='/agenda' element={<Agenda />} />
-          <Route path='/detail-patient/:id' element={<DetailPatient />} />
+          <Route path='/detail-patient/:patientId' element={<DetailPatient />} />
           <Route path='/ajouter-un-patient' element={<AjouterPatient />} />
           <Route path='/detail-medecin/:id' element={<DetailMedecin />} />
           <Route path='/ajouter-un-medecin' element={<AjouterMedecin />} />
-          <Route path='/creer-un-rendez-vous' element={<PrendreRendezVous />} />
           <Route path='/ajouter-un-personnel' element={<AjouterPersonnel />} />
+          <Route path='/detail-personnel/:id' element={<DetailsPersonnel />} />
+          <Route path='/evenements' element={<Events />} />
+          <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
         </Route>
       </Routes>
     </div>

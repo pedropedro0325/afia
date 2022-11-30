@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #17202A;
+    background-color: #2C3E50;
     position: sticky;
     z-index: 1000;
     top: 0;
@@ -58,6 +58,10 @@
                 color: yellowgreen;
                 cursor: pointer;
                 transition: all .5s;
+            }
+
+            img {
+                width: 1.5rem;
             }
         }
     }

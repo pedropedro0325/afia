@@ -1,18 +1,18 @@
-
 import { Outlet, Link } from 'react-router-dom'
 import './patient.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
+import { usePatients } from '../../../hooks/Patients/usePatients'
 
 const Patient = () => {
-    const patients = [
-        { id: 1, nom: "Jhon", genre: "M", email: "jhon@gmail.com", adresse: "19 solomom suisse", traitement: "Fièvre" },
-        { id: 2, nom: "Jack", genre: "M", email: "jack@gmail.com", adresse: "12 becker street londre", traitement: "Bléssure" },
-        { id: 3, nom: "Jimmy", genre: "M", email: "jimmy@gmail.com", adresse: "12 becker street londre", traitement: "Entorse" },
-        { id: 4, nom: "Orline", genre: "F", email: "orline@gmail.com", adresse: "12 becker street londre", traitement: "Maux de tête" },
-        { id: 5, nom: "Rose", genre: "F", email: "rose@gmail.com", adresse: "12 becker street londre", traitement: "Malaria" }
-    ]
+
+    const { error, loading, data } = usePatients()
+
+    console.log({ data });
+
+    if (loading) return <div>...loading</div>
+    if (error) return <div>something went wrong</div>
+
     return (
         <div>
             <div className='home-container'>
@@ -31,32 +31,29 @@ const Patient = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
-                            <button className='btn-blue'>
-                                <FontAwesomeIcon icon={faRotateRight} className="i-plus" />
-                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Prénom</th>
                                     <th>Nom</th>
-                                    <th>Genre</th>
-                                    <th>email</th>
+                                    <th>Email</th>
                                     <th>Adresse</th>
-                                    <th>Traitement</th>
+                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    patients.map((patient) => (
-                                        <tr>
-                                            <td>{patient.nom}</td>
-                                            <td>{patient.genre}</td>
+                                    data.patients.map((patient: any) => (
+                                        <tr key={patient.id}>
+                                            <td>{patient.name}</td>
+                                            <td>{patient.lastName}</td>
                                             <td>{patient.email}</td>
-                                            <td>{patient.adresse}</td>
-                                            <td>{patient.traitement}</td>
+                                            <td>{patient.adressId}</td>
+                                            <td>{patient.description}</td>
                                             <td><Link to={`/detail-patient/${patient.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))
