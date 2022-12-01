@@ -1,13 +1,16 @@
 import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
-import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
+import './listeSpecialites.scss'
+import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
 
-const ListePersonnel = () => {
+const Specialites = () => {
 
-    const { error, loading, data } = usePersonnels()
+    const { data, loading, error } = useSpecialities()
+
+    console.log({ data });
+
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -16,16 +19,16 @@ const ListePersonnel = () => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='personnel-container'>
-                    <h2>La liste des personnels</h2>
+                <div className='medecin-container'>
+                    <h2>La liste des spécialités</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Personnels</h4>
+                            <h4>Spécialités</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche' />
                             </div>
-                            <Link to={`/ajouter-un-personnel`}>
+                            <Link to={`/ajouter/specialite`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -36,24 +39,16 @@ const ListePersonnel = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Spécialité</th>
+                                    <th>N°</th>
                                     <th>Description</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    data.partakers.map((el: any) => (
-                                        <tr key={el.id}>
-                                            <td>{el.name}</td>
-                                            <td>{el.lastName}</td>
-                                            <td>{el.email}</td>
-                                            <td>{el.speciality.description}</td>
-                                            <td>{el.description}</td>
-                                            <td><Link to={`/detail-personnel/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                    data.specialities.map((speciality: any) => (
+                                        <tr key={speciality.id}>
+                                            <td>{speciality.id}</td>
+                                            <td>{speciality.description}</td>
                                         </tr>
                                     ))
                                 }
@@ -66,4 +61,4 @@ const ListePersonnel = () => {
     )
 }
 
-export default ListePersonnel
+export default Specialites

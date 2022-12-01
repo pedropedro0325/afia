@@ -16,7 +16,7 @@ const DetailPatient = () => {
 
     const { patientId } = useParams()
 
-    const { data, error, loading } = usePatient(patientId)
+    const { data, error, loading } = usePatient(Number(patientId))
 
     if (loading) return <div style={{ margin: "1rem 15rem" }}>...loading</div>
     if (error) return <div style={{ margin: "1rem 15rem" }}>something went wrong</div>

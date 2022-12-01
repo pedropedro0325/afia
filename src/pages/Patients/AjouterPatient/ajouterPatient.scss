@@ -60,6 +60,12 @@
             outline: none;
             border: none;
             border-radius: .4rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #D7BDE2;
+                color: black;
+            }
         }
     }
 }

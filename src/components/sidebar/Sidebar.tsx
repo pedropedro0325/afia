@@ -5,6 +5,7 @@ import { faCalendarDay } from '@fortawesome/free-solid-svg-icons'
 import { faUserDoctor } from '@fortawesome/free-solid-svg-icons'
 import { faHospitalUser } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import './sidebar.scss'
 
 const Sidebar = () => {
@@ -17,6 +18,7 @@ const Sidebar = () => {
                     <NavLink to='/patient'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />Patients</li></NavLink>
                     <NavLink to='/medecin'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />Médecins</li></NavLink>
                     <NavLink to='/personnels'><li><FontAwesomeIcon icon={faUsers} className="i-plus" />Personnels</li></NavLink>
+                    <NavLink to='/specialites'><li><FontAwesomeIcon icon={faFolder} className="i-plus" />Spécialités</li></NavLink>
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />Evènements</li></NavLink>
                     <NavLink to='/agenda'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />L'Agenda</li></NavLink>
                 </div>
