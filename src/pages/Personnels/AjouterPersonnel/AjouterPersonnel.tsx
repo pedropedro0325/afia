@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom'
 import './ajouterPersonnel.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
 import { gql, useMutation } from '@apollo/client'
+import { useForm } from '../../../utils/hooks'
+
 
 const CREATE_PERSONNEL = gql`
     mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: Int, $email: String, $typeId: String, $specialityId: String, $description: String) {
@@ -36,12 +38,31 @@ const AjouterPersonnel = () => {
 
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
-    const { data } = useSpecialities()
-    console.log({ data });
 
+
+    const [initialState, setReportValues] = useState({
+        nom: "",
+        prenom: "",
+        //il faudrait rajouter les autres propriétes du formulaire
+      });
+
+    const { data } = useSpecialities();
+
+    const { onChange, onSubmit, values } = useForm(
+        formCallback,
+        initialState
+    );
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
+    async function formCallback() {
+        // send "values" to database
+        console.log("=================", values)
+        // createPartaker({ variables: { name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId,
+        //      adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description,
+        //       typeId: typeId, specialityId: specialityId } })
+                      
+    }
 
     return (
         <div>
@@ -51,26 +72,23 @@ const AjouterPersonnel = () => {
                     <h2>Ajouter un personnel</h2>
                     <br />
                     <div className='form'>
-                        <form onSubmit={e => {
-                            e.preventDefault()
-                            createPartaker({ variables: { name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId, adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description, typeId: typeId, specialityId: specialityId } })
-                        }}>
+                        <form onSubmit={onSubmit}>
                             <div className='control'>
                                 <div>
-                                    <input value={name} onChange={(e) => { setName(e.target.value) }} type="text" className='input' placeholder='Prénom*' />
+                                    <input id="prenom"  name="prenom"  onChange={onChange} type="text" className='input' placeholder='Prénom*' />
                                 </div>
                                 <div>
-                                    <input value={lastName} onChange={(e) => { setLastName(e.target.value) }} type="text" className='input' placeholder='Nom*' />
+                                    <input id="nom" name="nom"  onChange={onChange} type="text" className='input' placeholder='Nom*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">Date de naissance*</label>
-                                    <input value={birthDate} onChange={(e) => { setBirthDate(e.target.value) }} type="date" className='input' />
+                                    <input id="birthDate" onChange={ onChange} type="date" className='input' />
                                 </div>
                                 <div>
                                     <label htmlFor="">Lieu de naissance*</label>
-                                    <input value={birthCityId} onChange={(e) => { setBirthCityId(e.target.value) }} type="text" className='input' />
+                                    <input value={birthCityId} onChange={onChange} type="text" className='input' />
                                 </div>
                             </div>
                             <div className='control'>
@@ -78,20 +96,20 @@ const AjouterPersonnel = () => {
                                     <input value={phoneNumber} type="text" className='input' placeholder='Téléphone*' />
                                 </div>
                                 <div>
-                                    <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="text" className='input' placeholder='Email*' />
+                                    <input value={email} onChange={onChange} type="text" className='input' placeholder='Email*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input value={typeId} onChange={(e) => { setTypeId(e.target.value) }} type="text" className='input' placeholder='Type*' />
+                                    <input value={typeId} onChange={onChange} type="text" className='input' placeholder='Type*' />
                                 </div>
                                 <div>
-                                    <input value={adressId} onChange={(e) => { setAdressId(e.target.value) }} type="text" className='input' placeholder='Adresse*' />
+                                    <input value={adressId} onChange={onChange} type="text" className='input' placeholder='Adresse*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
+                                    <input value={description} onChange={onChange} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
                                     <select className='input' placeholder='Specialité*'>
