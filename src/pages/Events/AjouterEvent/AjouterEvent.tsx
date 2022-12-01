@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterEvent.scss'
 import { gql, useMutation } from '@apollo/client'
@@ -16,7 +16,11 @@ const CREATE_EVENT = gql`
 
 const AjouterEvent = () => {
 
-    let description: any, statusId: any, startDate: any, endDate: any
+    const [description, setDescription] = useState<string>('')
+    const [startDate, setStartDate] = useState<string>('')
+    const [endDate, setEndDate] = useState<string>('')
+    const [statusId, setStatuId] = useState<string>('')
+
     const [createEvent, { loading, error }] = useMutation(CREATE_EVENT)
 
     if (loading) return 'Submitting...'
@@ -32,26 +36,32 @@ const AjouterEvent = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createEvent({ variables: { description: description.value, statusId: statusId.value, startDate: startDate.value, endDate: endDate.value } })
+                            createEvent({ variables: { description: description, statusId: statusId, startDate: startDate, endDate: endDate } })
+                            if (!error) {
+                                setStatuId('')
+                                setStartDate('')
+                                setEndDate('')
+                                setDescription('')
+                            }
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input ref={node => { statusId = node }} type="text" className='input' placeholder='Status*' />
+                                    <input value={statusId} onChange={(e) => { setStatuId(e.target.value) }} type="text" className='input' placeholder='Status*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">Date de début*</label><br />
-                                    <input ref={node => { startDate = node }} type="date" className='input' placeholder='Date du début*' />
+                                    <input value={startDate} onChange={(e) => { setStartDate(e.target.value) }} type="date" className='input' placeholder='Date du début*' />
                                 </div>
                                 <div>
                                     <label htmlFor="">Date de fin*</label><br />
-                                    <input ref={node => { endDate = node }} type="date" className='input' placeholder='Date de fin*' />
+                                    <input value={endDate} onChange={(e) => { setEndDate(e.target.value) }} type="date" className='input' placeholder='Date de fin*' />
                                 </div>
                             </div>
                             <div className='controls'>
                                 <div>
-                                    <input ref={node => { description = node }} type="text" className='input' placeholder='Description*' />
+                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
                                 </div>
                             </div>
                             <div className='save'>
