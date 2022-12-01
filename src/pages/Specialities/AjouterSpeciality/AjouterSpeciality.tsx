@@ -15,7 +15,7 @@ const CREATE_SPECIALITY = gql`
 const AjouterSpeciality = () => {
 
     let description: any
-    const [createSpeciality, { data, loading, error }] = useMutation(CREATE_SPECIALITY)
+    const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`

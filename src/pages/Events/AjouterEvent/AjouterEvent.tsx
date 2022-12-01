@@ -17,7 +17,7 @@ const CREATE_EVENT = gql`
 const AjouterEvent = () => {
 
     let description: any, statusId: any, startDate: any, endDate: any
-    const [createEvent, { data, loading, error }] = useMutation(CREATE_EVENT)
+    const [createEvent, { loading, error }] = useMutation(CREATE_EVENT)
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`

@@ -9,6 +9,9 @@ const Specialites = () => {
 
     const { data, loading, error } = useSpecialities()
 
+    console.log({ data });
+
+
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
 

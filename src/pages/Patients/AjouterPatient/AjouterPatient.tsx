@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterPatient.scss'
 import { gql, useMutation } from '@apollo/client'
@@ -20,7 +20,7 @@ const CREATE_PATIENT = gql`
 
 const AjouterPatient = () => {
     let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, phoneNumber: any, email: any, description: any
-    const [createPatient, { data, error, loading }] = useMutation(CREATE_PATIENT)
+    const [createPatient, { error, loading }] = useMutation(CREATE_PATIENT)
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`

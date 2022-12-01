@@ -15,10 +15,7 @@ const CREATE_PERSONNEL = gql`
         phoneNumber
         email
         typeId
-        speciality {
-            id
-            description 
-        }
+        specialityId
         description
     }
     }
@@ -26,10 +23,13 @@ const CREATE_PERSONNEL = gql`
 
 const AjouterPersonnel = () => {
 
-    let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, phoneNumber: any, email: any, typeId: any, speciality: any, description: any
+    let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, email: any, typeId: any, specialityId: any, description: any
+    let phoneNumber: any
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
     const { data } = useSpecialities()
+    console.log({ data });
+
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -44,7 +44,7 @@ const AjouterPersonnel = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createPartaker({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: phoneNumber.value, email: email.value, description: description.value, typeId: typeId.value, speciality: speciality.value } })
+                            createPartaker({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: Number(phoneNumber.value), email: email.value, description: description.value, typeId: typeId.value, specialityId: specialityId.value } })
                         }}>
                             <div className='control'>
                                 <div>
@@ -85,10 +85,10 @@ const AjouterPersonnel = () => {
                                     <input ref={node => { description = node }} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
-                                    <select ref={node => { speciality = node }} name="" className='input' placeholder='Specialité*'>
+                                    <select className='input' placeholder='Specialité*'>
                                         {
                                             data.specialities.map((speciality: any) => (
-                                                <option ref={node => { speciality = node }} key={speciality.id} value={speciality.id}>{speciality.description}</option>
+                                                <option key={speciality.id} value={speciality.description}>{speciality.description}</option>
                                             ))
                                         }
                                     </select>
