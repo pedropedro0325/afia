@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterPersonnel.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
@@ -23,8 +23,17 @@ const CREATE_PERSONNEL = gql`
 
 const AjouterPersonnel = () => {
 
-    let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, email: any, typeId: any, specialityId: any, description: any
-    let phoneNumber: any
+    const [name, setName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    const [birthDate, setBirthDate] = useState<string>('')
+    const [birthCityId, setBirthCityId] = useState<string>('')
+    const [adressId, setAdressId] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [typeId, setTypeId] = useState<string>('')
+    const [specialityId, setSpecialityId] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+    const [phoneNumber, setPhoneNumber] = useState<number>()
+
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
     const { data } = useSpecialities()
@@ -44,51 +53,51 @@ const AjouterPersonnel = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createPartaker({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: Number(phoneNumber.value), email: email.value, description: description.value, typeId: typeId.value, specialityId: specialityId.value } })
+                            createPartaker({ variables: { name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId, adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description, typeId: typeId, specialityId: specialityId } })
                         }}>
                             <div className='control'>
                                 <div>
-                                    <input ref={node => { name = node }} type="text" className='input' placeholder='Prénom*' />
+                                    <input value={name} onChange={(e) => { setName(e.target.value) }} type="text" className='input' placeholder='Prénom*' />
                                 </div>
                                 <div>
-                                    <input ref={node => { lastName = node }} type="text" className='input' placeholder='Nom*' />
+                                    <input value={lastName} onChange={(e) => { setLastName(e.target.value) }} type="text" className='input' placeholder='Nom*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">Date de naissance*</label>
-                                    <input ref={node => { birthDate = node }} type="date" className='input' />
+                                    <input value={birthDate} onChange={(e) => { setBirthDate(e.target.value) }} type="date" className='input' />
                                 </div>
                                 <div>
                                     <label htmlFor="">Lieu de naissance*</label>
-                                    <input ref={node => { birthCityId = node }} type="text" className='input' />
+                                    <input value={birthCityId} onChange={(e) => { setBirthCityId(e.target.value) }} type="text" className='input' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input ref={node => { phoneNumber = node }} type="text" className='input' placeholder='Téléphone*' />
+                                    <input value={phoneNumber} type="text" className='input' placeholder='Téléphone*' />
                                 </div>
                                 <div>
-                                    <input ref={node => { email = node }} type="text" className='input' placeholder='Email*' />
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <input ref={node => { typeId = node }} type="text" className='input' placeholder='Type*' />
-                                </div>
-                                <div>
-                                    <input ref={node => { adressId = node }} type="text" className='input' placeholder='Adresse*' />
+                                    <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="text" className='input' placeholder='Email*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input ref={node => { description = node }} type="text" className='input' placeholder='Description*' />
+                                    <input value={typeId} onChange={(e) => { setTypeId(e.target.value) }} type="text" className='input' placeholder='Type*' />
+                                </div>
+                                <div>
+                                    <input value={adressId} onChange={(e) => { setAdressId(e.target.value) }} type="text" className='input' placeholder='Adresse*' />
+                                </div>
+                            </div>
+                            <div className='control'>
+                                <div>
+                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
                                     <select className='input' placeholder='Specialité*'>
                                         {
-                                            data.specialities.map((speciality: any) => (
-                                                <option key={speciality.id} value={speciality.description}>{speciality.description}</option>
+                                            data?.specialities.map((speciality: any) => (
+                                                <option key={speciality.id} value={speciality.id}>{speciality.description}</option>
                                             ))
                                         }
                                     </select>
