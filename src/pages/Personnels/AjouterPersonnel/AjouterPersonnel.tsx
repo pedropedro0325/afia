@@ -25,6 +25,8 @@ const CREATE_PERSONNEL = gql`
 
 const AjouterPersonnel = () => {
 
+
+
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
 
@@ -44,7 +46,7 @@ const AjouterPersonnel = () => {
 
     const { data } = useSpecialities();
 
-    const { onChange, onSubmit, values } = useForm(
+    const { onChange, onChangeOption, onSubmit, values } = useForm(
         formCallback,
         initialState
     );
@@ -52,13 +54,14 @@ const AjouterPersonnel = () => {
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
     async function formCallback() {
-        //send "values" to database
+        const valuesCallBack: any = values
+        // send "values" to database
         console.log("=================", values)
         createPartaker({
             variables: {
-                name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId,
-                adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description,
-                typeId: typeId, specialityId: specialityId
+                name: valuesCallBack.name, lastName: valuesCallBack.lastName, birthDate: valuesCallBack.birthDate, birthCityId: valuesCallBack.birthCityId,
+                adressId: valuesCallBack.adressId, phoneNumber: valuesCallBack.phoneNumber, email: valuesCallBack.email, description: valuesCallBack.description,
+                typeId: valuesCallBack.typeId, specialityId: valuesCallBack.specialityId
             }
         })
 
@@ -112,10 +115,10 @@ const AjouterPersonnel = () => {
                                     <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
-                                    <select id="specialityId" name="specialityId" className='input' placeholder='Specialité*'>
+                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input' placeholder='Specialité*'>
                                         {
                                             data?.specialities.map((speciality: any) => (
-                                                <option key={speciality.id} value={specialityId}>{speciality.description}</option>
+                                                <option key={speciality.id} value={speciality.id}>{speciality.description}</option>
                                             ))
                                         }
                                     </select>
