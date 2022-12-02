@@ -25,26 +25,22 @@ const CREATE_PERSONNEL = gql`
 
 const AjouterPersonnel = () => {
 
-    const [name, setName] = useState<string>('')
-    const [lastName, setLastName] = useState<string>('')
-    const [birthDate, setBirthDate] = useState<string>('')
-    const [birthCityId, setBirthCityId] = useState<string>('')
-    const [adressId, setAdressId] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [typeId, setTypeId] = useState<string>('')
-    const [specialityId, setSpecialityId] = useState<string>('')
-    const [description, setDescription] = useState<string>('')
-    const [phoneNumber, setPhoneNumber] = useState<number>()
-
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
 
 
     const [initialState, setReportValues] = useState({
-        nom: "",
-        prenom: "",
-        //il faudrait rajouter les autres propriétes du formulaire
-      });
+        name: "",
+        lastName: "",
+        birthDate: "",
+        birthCityId: "",
+        adressId: "",
+        email: "",
+        typeId: "",
+        specialityId: "",
+        description: "",
+        phoneNumber: ""
+    });
 
     const { data } = useSpecialities();
 
@@ -56,12 +52,16 @@ const AjouterPersonnel = () => {
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
     async function formCallback() {
-        // send "values" to database
+        //send "values" to database
         console.log("=================", values)
-        // createPartaker({ variables: { name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId,
-        //      adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description,
-        //       typeId: typeId, specialityId: specialityId } })
-                      
+        createPartaker({
+            variables: {
+                name: name, lastName: lastName, birthDate: birthDate, birthCityId: birthCityId,
+                adressId: adressId, phoneNumber: Number(phoneNumber), email: email, description: description,
+                typeId: typeId, specialityId: specialityId
+            }
+        })
+
     }
 
     return (
@@ -75,47 +75,47 @@ const AjouterPersonnel = () => {
                         <form onSubmit={onSubmit}>
                             <div className='control'>
                                 <div>
-                                    <input id="prenom"  name="prenom"  onChange={onChange} type="text" className='input' placeholder='Prénom*' />
+                                    <input id="prenom" name="name" onChange={onChange} type="text" className='input' placeholder='Prénom*' />
                                 </div>
                                 <div>
-                                    <input id="nom" name="nom"  onChange={onChange} type="text" className='input' placeholder='Nom*' />
+                                    <input id="lastName" name="lastName" onChange={onChange} type="text" className='input' placeholder='Nom*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">Date de naissance*</label>
-                                    <input id="birthDate" onChange={ onChange} type="date" className='input' />
+                                    <input id="birthDate" name="birthDate" onChange={onChange} type="date" className='input' />
                                 </div>
                                 <div>
                                     <label htmlFor="">Lieu de naissance*</label>
-                                    <input value={birthCityId} onChange={onChange} type="text" className='input' />
+                                    <input id="birthCityId" name="birthCityId" onChange={onChange} type="text" className='input' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input value={phoneNumber} type="text" className='input' placeholder='Téléphone*' />
+                                    <input id="phoneNumber" name="phoneNumber" onChange={onChange} type="text" className='input' placeholder='Téléphone*' />
                                 </div>
                                 <div>
-                                    <input value={email} onChange={onChange} type="text" className='input' placeholder='Email*' />
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <input value={typeId} onChange={onChange} type="text" className='input' placeholder='Type*' />
-                                </div>
-                                <div>
-                                    <input value={adressId} onChange={onChange} type="text" className='input' placeholder='Adresse*' />
+                                    <input id="email" name="email" onChange={onChange} type="text" className='input' placeholder='Email*' />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input value={description} onChange={onChange} type="text" className='input' placeholder='Description*' />
+                                    <input id="typeId" name="typeId" onChange={onChange} type="text" className='input' placeholder='Type*' />
                                 </div>
                                 <div>
-                                    <select className='input' placeholder='Specialité*'>
+                                    <input id="adressId" name="adressId" onChange={onChange} type="text" className='input' placeholder='Adresse*' />
+                                </div>
+                            </div>
+                            <div className='control'>
+                                <div>
+                                    <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
+                                </div>
+                                <div>
+                                    <select id="specialityId" name="specialityId" className='input' placeholder='Specialité*'>
                                         {
                                             data?.specialities.map((speciality: any) => (
-                                                <option key={speciality.id} value={speciality.id}>{speciality.description}</option>
+                                                <option key={speciality.id} value={specialityId}>{speciality.description}</option>
                                             ))
                                         }
                                     </select>
