@@ -7,20 +7,21 @@ import { useForm } from '../../../utils/hooks'
 
 
 const CREATE_PERSONNEL = gql`
-    mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: Int, $email: String, $typeId: String, $specialityId: String, $description: String) {
-    createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, typeId: $typeId, specialityId: $specialityId, description: $description) {
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        typeId
-        specialityId
-        description
-    }
-    }
+mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: Int, $email: String, $typeId: String, $specialityId: String, $description: String) {
+  createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, typeId: $typeId, specialityId: $specialityId, description: $description) {
+    id
+    name
+    lastName
+    birthDate
+    birthCityId
+    adressId
+    phoneNumber
+    email
+    typeId
+    specialityId
+    description
+  }
+}
 `
 
 const AjouterPersonnel = () => {
@@ -86,12 +87,11 @@ const AjouterPersonnel = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <label htmlFor="">Date de naissance*</label>
-                                    <input id="birthDate" name="birthDate" onChange={onChange} type="date" className='input' />
+                                    <label htmlFor="">Date de naissance*</label><br />
+                                    <input id="birthDate" name="birthDate" onChange={onChange} type="date" className='input' placeholder='Date de naissance' />
                                 </div>
-                                <div>
-                                    <label htmlFor="">Lieu de naissance*</label>
-                                    <input id="birthCityId" name="birthCityId" onChange={onChange} type="text" className='input' />
+                                <div><br />
+                                    <input id="birthCityId" name="birthCityId" onChange={onChange} type="text" className='input' placeholder='Lieu de naissance*' />
                                 </div>
                             </div>
                             <div className='control'>

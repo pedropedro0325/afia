@@ -6,6 +6,9 @@ import { faUserDoctor } from '@fortawesome/free-solid-svg-icons'
 import { faHospitalUser } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faPersonBooth } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
+import { faPills } from '@fortawesome/free-solid-svg-icons'
 import './sidebar.scss'
 
 const Sidebar = () => {
@@ -20,7 +23,10 @@ const Sidebar = () => {
                     <NavLink to='/personnels'><li><FontAwesomeIcon icon={faUsers} className="i-plus" />Personnels</li></NavLink>
                     <NavLink to='/specialites'><li><FontAwesomeIcon icon={faFolder} className="i-plus" />Spécialités</li></NavLink>
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />Evènements</li></NavLink>
-                    <NavLink to='/agenda'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />L'Agenda</li></NavLink>
+                    <NavLink to='/agenda'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />Agenda</li></NavLink>
+                    <NavLink to='/chambre'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />Chambres</li></NavLink>
+                    <NavLink to='/facturation'><li><FontAwesomeIcon icon={faMoneyBill} className="i-plus" />Facturations</li></NavLink>
+                    <NavLink to='/medicament'><li><FontAwesomeIcon icon={faPills} className="i-plus" />Médicaments</li></NavLink>
                 </div>
             </div>
             <div className='bottom'>

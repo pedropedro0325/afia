@@ -14,8 +14,8 @@ const Navbar = () => {
                     <NavLink to='/'><li>Tableau de bord</li></NavLink>
                 </div>
                 <div className='right'>
-                    <li><img src={logo} alt="" /></li>
                     <li></li>
+                    <li><img src={logo} alt="" /></li>
                     <li>Compte</li>
                 </div>
             </nav>

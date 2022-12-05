@@ -21,7 +21,7 @@ const Events = () => {
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Patients</h4>
+                            <h4>Evènements</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche' />
                             </div>

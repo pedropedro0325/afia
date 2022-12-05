@@ -24,3 +24,78 @@ a {
 li {
   list-style: none;
 }
+
+.top {
+  background-color: white;
+  padding: .1rem;
+
+  .nav {
+    background-color: whitesmoke;
+    margin: 1rem;
+    padding: 1rem .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    h4 {
+      font-weight: 600;
+    }
+
+    .search {
+      background-color: white;
+      padding: .1rem;
+      border-radius: .4rem;
+
+      input {
+        border: none;
+        padding: .8rem .8rem;
+      }
+    }
+
+    .btn-blue {
+      background-color: #17202A;
+      padding: .8rem .9rem;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      cursor: pointer;
+
+      .i-plus {
+        font-size: larger;
+      }
+    }
+
+  }
+}
+
+.table-patient {
+
+  padding: 1rem;
+  background-color: #fff;
+
+  table,
+  td,
+  th {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td {
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(158, 137, 177);
+  }
+
+  th {
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+  }
+}

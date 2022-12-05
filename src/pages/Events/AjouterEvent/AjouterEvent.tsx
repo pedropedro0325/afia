@@ -46,7 +46,7 @@ const AjouterEvent = () => {
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input value={statusId} onChange={(e) => { setStatuId(e.target.value) }} type="text" className='input' placeholder='Status*' />
+                                    <input value={statusId} onChange={(e) => { setStatuId(e.target.value) }} type="text" className='input' placeholder='Statut*' />
                                 </div>
                             </div>
                             <div className='control'>

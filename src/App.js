@@ -14,6 +14,9 @@ import AjouterEvent from './pages/Events/AjouterEvent/AjouterEvent';
 import AjouterPatient from './pages/Patients/AjouterPatient/AjouterPatient';
 import Specialites from './pages/Specialities/ListeSpecialities/Specialites';
 import AjouterSpeciality from './pages/Specialities/AjouterSpeciality/AjouterSpeciality';
+import ListeChambres from './pages/Chambres/ListeChambres/ListeChambres';
+import ListeFacturations from './pages/Facturations/ListeFacturations/ListeFacturations';
+import Medicaments from './pages/Pharmacie/Medicaments/Medicaments';
 
 const App = () => {
   return (
@@ -35,6 +38,9 @@ const App = () => {
           <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
           <Route path='/specialites' element={<Specialites />} />
           <Route path='/ajouter/specialite' element={<AjouterSpeciality />} />
+          <Route path='/chambre' element={<ListeChambres />} />
+          <Route path='/facturation' element={<ListeFacturations />} />
+          <Route path='/medicament' element={<Medicaments />} />
         </Route>
       </Routes>
     </div>

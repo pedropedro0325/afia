@@ -13,7 +13,7 @@
 
             .box {
                 background-color: white;
-                border-radius: .6rem .6rem 0 1.2rem;
+                border-radius: .6rem;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.253);
 
                 h3 {
@@ -28,7 +28,7 @@
                     justify-content: space-between;
 
                     .i-user {
-                        color: rgba(0, 0, 255, 0.562);
+                        color: rgba(55, 55, 71, 0.562);
                         font-size: 40px;
                     }
                 }
@@ -36,63 +36,26 @@
                 &:hover {
                     box-shadow: 8px 7px 9px rgba(0, 0, 0, 0.253);
                     transition: all .6s;
-
-                    .box-bot1 {
-                        background-color: blue;
-                    }
-
-                    .box-bot2 {
-                        background-color: red;
-                    }
-
-                    h3 {
-                        transform: translate(45);
-                    }
                 }
 
                 .box-bot1 {
-                    background-color: rgba(137, 43, 226, 0.507);
-                    border-radius: .6rem .6rem 0 3rem;
+                    background-color: rgba(75, 13, 133, 0.507);
+                    border-radius: 0 0 .6rem .6rem;
                 }
 
                 .box-bot2 {
                     background-color: rgba(255, 0, 0, 0.452);
-                    border-radius: .6rem .6rem 0 3rem;
+                    border-radius: 0 0 .6rem .6rem;
                 }
 
                 .box-bot3 {
-                    background-color: rgba(255, 255, 0, 0.486);
-                    border-radius: .6rem .6rem 0 3rem;
+                    background-color: rgba(121, 121, 18, 0.705);
+                    border-radius: 0 0 .6rem .6rem;
                 }
 
                 .box-bot4 {
                     background-color: rgba(0, 0, 0, 0.699);
-                    border-radius: .6rem .6rem 0 3rem;
-                }
-
-                .box-bot5 {
-                    background-color: rgba(128, 128, 128, 0.623);
-                    border-radius: .6rem .6rem 0 3rem;
-                }
-
-                .box-bot6 {
-                    background-color: rgba(210, 105, 30, 0.589);
-                    border-radius: .6rem .6rem 0 3rem;
-                }
-
-                .box-bot7 {
-                    background-color: rgba(0, 128, 0, 0.575);
-                    border-radius: .6rem .6rem 0 3rem;
-                }
-
-                .box-bot8 {
-                    background-color: rgba(255, 166, 0, 0.589);
-                    border-radius: .6rem .6rem 0 3rem;
-                }
-
-                .box-bot9 {
-                    background-color: rgba(95, 158, 160, 0.603);
-                    border-radius: .6rem .6rem 0 3rem;
+                    border-radius: 0 0 .6rem .6rem;
                 }
             }
         }
