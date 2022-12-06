@@ -3,15 +3,15 @@ import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import './facturation.scss'
+import './departement.scss'
 
-const ListeFacturations = () => {
+const Departements = () => {
 
-    const [facture, setFacture] = useState([
-        { id: 1, NomPatient: "Jiji", admissionId: "JI1234", docteurName: "Silvy", status: "Payé", Date: "12-12-2021", tva: "12%", total: "142$" },
-        { id: 2, NomPatient: "Jhon", admissionId: "H123I3", docteurName: "Selvig", status: "Non payé", Date: "03-04-2022", tva: "12%", total: "124$" },
-        { id: 3, NomPatient: "Jean", admissionId: "M7685D", docteurName: "Sarah", status: "Payé", Date: "12-11-2021", tva: "12%", total: "200$" },
-        { id: 4, NomPatient: "Jane", admissionId: "FAZ345", docteurName: "Jack", status: "Non payé", Date: "22-11-2021", tva: "12%", total: "100$" }
+    const [departement, setDepartement] = useState([
+        { id: 1, departName: "Cardiologie", description: "Fournit des soins médicaux aux", dateDepart: "12-12-2021", ChefDepart: "Dr Woo", statut: "Active" },
+        { id: 2, departName: "Ressource humaine", description: "Le rôle est de fournir un professionnel", dateDepart: "03-04-2022", ChefDepart: "Dr Karim", statut: "Active" },
+        { id: 3, departName: "Gynécologue", description: "Enquête sur problèmes liés...", dateDepart: "12-11-2021", ChefDepart: "Dr Steve", statut: "Active" },
+        { id: 4, departName: "Pharmacie", description: "Responsible for drugs in a hospital", dateDepart: "22-11-2021", ChefDepart: "Dr Sarah", statut: "Active" }
     ])
 
     const [search, setSearch] = useState('')
@@ -20,12 +20,12 @@ const ListeFacturations = () => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='facturation-container'>
-                    <h2>La liste des factures</h2>
+                <div className='departement-container'>
+                    <h2>La liste des départements</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Facturations</h4>
+                            <h4>Départements</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -42,29 +42,25 @@ const ListeFacturations = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Nom du patient</th>
-                                    <th>Admission ID</th>
-                                    <th>Nom du docteur</th>
+                                    <th>Nom du département</th>
+                                    <th>Description</th>
+                                    <th>Date de département</th>
+                                    <th>Chef de département</th>
                                     <th>Statut</th>
-                                    <th>Date</th>
-                                    <th>TVA</th>
-                                    <th>Total</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    facture.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.NomPatient.toLowerCase().includes(search)
+                                    departement.filter((el) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.departName.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
-                                            <td>{el.NomPatient}</td>
-                                            <td>{el.admissionId}</td>
-                                            <td>{el.docteurName}</td>
-                                            <td>{el.status}</td>
-                                            <td>{el.Date}</td>
-                                            <td>{el.tva}</td>
-                                            <td>{el.total}</td>
+                                            <td>{el.departName}</td>
+                                            <td>{el.description}</td>
+                                            <td>{el.dateDepart}</td>
+                                            <td>{el.ChefDepart}</td>
+                                            <td><button className='btn-statut'>{el.statut}</button></td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
@@ -78,4 +74,4 @@ const ListeFacturations = () => {
     )
 }
 
-export default ListeFacturations
+export default Departements

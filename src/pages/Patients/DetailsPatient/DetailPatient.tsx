@@ -46,7 +46,7 @@ const DetailPatient = () => {
                             className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
                             onClick={() => toggleTab(3)}
                         >
-                            <h2>...</h2>
+                            <h2>Rapport général</h2>
                         </button>
                     </div>
 
@@ -56,15 +56,28 @@ const DetailPatient = () => {
                         >
                             <h2>Patient N° {data.patient.id}</h2>
                             <hr />
-                            <ul>
-                                <li>Prénom : {data.patient.name}</li>
-                                <li>Nom : {data.patient.lastName}</li>
-                                <li>Date de naissance : {data.patient.birthDate}</li>
-                                <li>Lieu de naissance : {data.patient.birthCityId}</li>
-                                <li>Adresse : {data.patient.adressId}</li>
-                                <li>Téléphone : {data.patient.phoneNumber}</li>
-                                <li>Email : {data.patient.email}</li>
-                            </ul>
+                            <br />
+                            <div className='pers'>
+                                <div className='part1'>
+                                    <ul className='info'>
+                                        <li>Prénom : <h5>{data.patient.name}</h5></li>
+                                        <li>Nom : <h5>{data.patient.lastName}</h5></li>
+                                        <li>Date de naissance : <h5>{data.patient.birthDate}</h5></li>
+                                        <li>Lieu de naissance : <h5>{data.patient.birthCityId}</h5></li>
+                                        <li>Adresse : <h5>{data.patient.adressId}</h5></li>
+                                        <li>Téléphone : <h5>{data.patient.phoneNumber}</h5></li>
+                                        <li>Email : <h5>{data.patient.email}</h5></li>
+                                    </ul>
+                                </div>
+                                <div className='part2'>
+                                    <h4>A propos</h4>
+                                    <p>
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
+                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         <div
@@ -76,16 +89,44 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 3 ? "content  active-content" : "content"}
                         >
-                            <h2>Content 3</h2>
-                            <hr />
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos sed
-                                nostrum rerum laudantium totam unde adipisci incidunt modi alias!
-                                Accusamus in quia odit aspernatur provident et ad vel distinctio
-                                recusandae totam quidem repudiandae omnis veritatis nostrum
-                                laboriosam architecto optio rem, dignissimos voluptatum beatae
-                                aperiam voluptatem atque. Beatae rerum dolores sunt.
-                            </p>
+                            <div className='gen'>
+                                <div className='rapport'>
+                                    <div className='space'>
+                                        <h5>Battement de coeur</h5>
+                                        <h5>76</h5>
+                                    </div>
+                                    <div className='stat1'>
+
+                                    </div>
+                                </div>
+                                <div className='rapport'>
+                                    <div className='space'>
+                                        <h5>Sucre</h5>
+                                        <h5>50</h5>
+                                    </div>
+                                    <div className='stat2'>
+
+                                    </div>
+                                </div>
+                                <div className='rapport'>
+                                    <div className='space'>
+                                        <h5>Pression artérielle</h5>
+                                        <h5>65</h5>
+                                    </div>
+                                    <div className='stat3'>
+
+                                    </div>
+                                </div>
+                                <div className='rapport'>
+                                    <div className='space'>
+                                        <h5>Hémoglobine</h5>
+                                        <h5>78%</h5>
+                                    </div>
+                                    <div className='stat4'>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

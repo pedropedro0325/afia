@@ -31,6 +31,7 @@
         h2 {
             text-transform: uppercase;
         }
+
     }
 
     .tabs:not(:last-child) {
@@ -63,6 +64,89 @@
 
     .content-tabs {
         flex-grow: 1;
+
+        .pers {
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            .part1 {
+                width: 40%;
+            }
+
+            .part2 {
+                width: 60%;
+                padding: 2rem;
+
+                h4 {
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .info {
+            li {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-weight: 600;
+                margin-bottom: .5rem;
+
+                h5 {
+                    color: blueviolet;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .gen {
+
+            .rapport {
+                width: 75%;
+                margin-top: 1rem;
+                margin-bottom: 2rem;
+
+                .space {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: .5rem;
+
+                    h5 {
+                        font-size: 1rem;
+                    }
+                }
+
+                .stat1 {
+                    border-bottom: #222 15px solid;
+                    border-radius: .4rem;
+                    width: 85%;
+                }
+
+                .stat2 {
+                    border-bottom: orange 15px solid;
+                    border-radius: .4rem;
+                    width: 50%;
+                }
+
+                .stat3 {
+                    border-bottom: blueviolet 15px solid;
+                    border-radius: .4rem;
+                    width: 65%;
+                }
+
+                .stat4 {
+                    border-bottom: red 15px solid;
+                    border-radius: .4rem;
+                    width: 78%;
+                }
+            }
+        }
     }
 
     .content {

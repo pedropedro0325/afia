@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -8,6 +8,8 @@ import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
 const Specialites = () => {
 
     const { data, loading, error } = useSpecialities()
+
+    const [search, setSearch] = useState('')
 
     console.log({ data });
 
@@ -26,7 +28,9 @@ const Specialites = () => {
                         <div className='nav'>
                             <h4>Spécialités</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             <Link to={`/ajouter/specialite`}>
                                 <button className='btn-blue'>
@@ -45,7 +49,9 @@ const Specialites = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.specialities.map((speciality: any) => (
+                                    data.specialities.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                    }).map((speciality: any) => (
                                         <tr key={speciality.id}>
                                             <td>{speciality.id}</td>
                                             <td>{speciality.description}</td>

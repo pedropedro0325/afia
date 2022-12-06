@@ -6,12 +6,16 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './medicament.scss'
 
 const Medicaments = () => {
+
     const [medicament, setMedicament] = useState([
         { id: 1, nomMedoc: "Paracétamol", categorie: "Tablette", dateAchat: "25-11-2022", prix: "6$", dateExp: "12-12-2023", stock: "122" },
         { id: 2, nomMedoc: "Amoxicilline", categorie: "Injectable", dateAchat: "22-11-2022", prix: "20$", dateExp: "03-04-2023", stock: "135" },
         { id: 3, nomMedoc: "Vitamine C", categorie: "Sirop", dateAchat: "15-11-2022", prix: "5$", dateExp: "12-11-2023", stock: "200" },
         { id: 4, nomMedoc: "Doliprane", categorie: "Tablette", dateAchat: "03-11-2022", prix: "8$", dateExp: "22-11-2023", stock: "189" }
     ])
+
+    const [search, setSearch] = useState('')
+
     return (
         <div>
             <div className='home-container'>
@@ -23,7 +27,9 @@ const Medicaments = () => {
                         <div className='nav'>
                             <h4>Médicaments</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             {/* <Link to={`/ajouter-un-evenement`}>
                                 <button className='btn-blue'>
@@ -47,7 +53,9 @@ const Medicaments = () => {
                             </thead>
                             <tbody>
                                 {
-                                    medicament.map((el: any) => (
+                                    medicament.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.nomMedoc.toLowerCase().includes(search)
+                                    }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.nomMedoc}</td>
                                             <td>{el.categorie}</td>

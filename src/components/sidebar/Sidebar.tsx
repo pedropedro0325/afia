@@ -9,6 +9,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faPersonBooth } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import { faPills } from '@fortawesome/free-solid-svg-icons'
+import { faCodeBranch } from '@fortawesome/free-solid-svg-icons'
 import './sidebar.scss'
 
 const Sidebar = () => {
@@ -16,7 +17,6 @@ const Sidebar = () => {
     return (
         <div className='sidebar'>
             <div>
-                <br />
                 <div className='categories'>
                     <NavLink to='/patient'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />Patients</li></NavLink>
                     <NavLink to='/medecin'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />Médecins</li></NavLink>
@@ -27,10 +27,11 @@ const Sidebar = () => {
                     <NavLink to='/chambre'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />Chambres</li></NavLink>
                     <NavLink to='/facturation'><li><FontAwesomeIcon icon={faMoneyBill} className="i-plus" />Facturations</li></NavLink>
                     <NavLink to='/medicament'><li><FontAwesomeIcon icon={faPills} className="i-plus" />Médicaments</li></NavLink>
+                    <NavLink to='/departement'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />Départements</li></NavLink>
                 </div>
             </div>
             <div className='bottom'>
-                <h3>AFIA</h3>
+                <h3>Afia</h3>
             </div>
         </div>
     )

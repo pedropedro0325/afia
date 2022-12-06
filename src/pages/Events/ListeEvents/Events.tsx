@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -8,6 +8,8 @@ import { useEvents } from '../../../hooks/Events/useEvents'
 const Events = () => {
 
     const { error, loading, data } = useEvents()
+
+    const [search, setSearch] = useState('')
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -23,7 +25,9 @@ const Events = () => {
                         <div className='nav'>
                             <h4>Evènements</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             <Link to={`/ajouter-un-evenement`}>
                                 <button className='btn-blue'>
@@ -44,7 +48,9 @@ const Events = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.events.map((event: any) => (
+                                    data.events.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                    }).map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>

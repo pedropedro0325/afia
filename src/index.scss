@@ -80,22 +80,44 @@ li {
     text-align: left;
   }
 
+  th {
+    background-color: #f2f2f2;
+  }
+
   table {
     border-collapse: collapse;
     width: 100%;
   }
 
   td {
-    padding: 12px;
-    font-size: 14px;
+    padding: 10px 13px;
+    font-size: 13px;
     font-weight: 600;
-    color: rgb(158, 137, 177);
+    color: rgb(135, 122, 146);
   }
 
   th {
-    padding: 15px;
-    font-size: 16px;
+    padding: 13px;
+    font-size: 14px;
     font-weight: bold;
     color: black;
   }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: rgba(184, 178, 178, 0.514);
+  }
+}
+
+.btn-statut {
+  background-color: rgb(223, 154, 52);
+  box-shadow: .2rem .2rem .3rem rgba(0, 0, 0, 0.315);
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: .3rem .6rem;
+  border-radius: .4rem;
 }

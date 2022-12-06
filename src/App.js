@@ -17,6 +17,7 @@ import AjouterSpeciality from './pages/Specialities/AjouterSpeciality/AjouterSpe
 import ListeChambres from './pages/Chambres/ListeChambres/ListeChambres';
 import ListeFacturations from './pages/Facturations/ListeFacturations/ListeFacturations';
 import Medicaments from './pages/Pharmacie/Medicaments/Medicaments';
+import Departements from './pages/Departements/ListeDepartements/Departements';
 
 const App = () => {
   return (
@@ -29,7 +30,7 @@ const App = () => {
           <Route path='/medecin' element={<Medecin />} />
           <Route path='/personnels' element={<ListePersonnel />} />
           <Route path='/agenda' element={<Agenda />} />
-          <Route path='/detail-patient/:patientId' element={<DetailPatient />} />
+          <Route path='/patient/detail/:patientId' element={<DetailPatient />} />
           <Route path='/ajouter-un-patient' element={<AjouterPatient />} />
           <Route path='/detail-medecin/:id' element={<DetailMedecin />} />
           <Route path='/ajouter-un-personnel' element={<AjouterPersonnel />} />
@@ -41,6 +42,7 @@ const App = () => {
           <Route path='/chambre' element={<ListeChambres />} />
           <Route path='/facturation' element={<ListeFacturations />} />
           <Route path='/medicament' element={<Medicaments />} />
+          <Route path='/departement' element={<Departements />} />
         </Route>
       </Routes>
     </div>
