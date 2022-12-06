@@ -8,8 +8,13 @@ import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
+import { usePatients } from '../../hooks/Patients/usePatients'
+import { useState } from 'react'
 
 const Home = () => {
+
+    const { error, loading, data } = usePatients()
+
     return (
         <div>
             <div className='home-container'>
@@ -20,7 +25,7 @@ const Home = () => {
                         <div className='box'>
                             <div className='box-top'>
                                 <div>
-                                    <h3>34</h3>
+                                    <h3>12</h3>
                                     <h4>Patients</h4>
                                 </div>
                                 <div>
@@ -64,42 +69,6 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className='box-bot4'>.</div>
-                        </div>
-                        <div className='box'>
-                            <div className='box-top'>
-                                <div>
-                                    <h3>30</h3>
-                                    <h4>Chambres</h4>
-                                </div>
-                                <div>
-                                    <FontAwesomeIcon icon={faBed} className="i-user" />
-                                </div>
-                            </div>
-                            <div className='box-bot6'>.</div>
-                        </div>
-                        <div className='box'>
-                            <div className='box-top'>
-                                <div>
-                                    <h3>8</h3>
-                                    <h4>Opérations</h4>
-                                </div>
-                                <div>
-                                    <FontAwesomeIcon icon={faSquarePlus} className="i-user" />
-                                </div>
-                            </div>
-                            <div className='box-bot7'>.</div>
-                        </div>
-                        <div className='box'>
-                            <div className='box-top'>
-                                <div>
-                                    <h3>+50</h3>
-                                    <h4>Médicaments</h4>
-                                </div>
-                                <div>
-                                    <FontAwesomeIcon icon={faKitMedical} className="i-user" />
-                                </div>
-                            </div>
-                            <div className='box-bot9'>.</div>
                         </div>
                     </div>
                 </div>

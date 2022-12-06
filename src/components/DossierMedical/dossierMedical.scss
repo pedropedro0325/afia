@@ -50,6 +50,53 @@ button {
 
 .content-tabs {
     flex-grow: 1;
+
+    .desc {
+
+
+        li {
+            margin-bottom: 1rem;
+
+            h5 {
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        table,
+        td,
+        th {
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            padding: 10px 13px;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgb(135, 122, 146);
+        }
+
+        th {
+            padding: 13px;
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+        }
+
+        tr:hover {
+            background-color: rgba(184, 178, 178, 0.514);
+        }
+    }
 }
 
 .content {

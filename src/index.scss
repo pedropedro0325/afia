@@ -24,3 +24,100 @@ a {
 li {
   list-style: none;
 }
+
+.top {
+  background-color: white;
+  padding: .1rem;
+
+  .nav {
+    background-color: whitesmoke;
+    margin: 1rem;
+    padding: 1rem .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    h4 {
+      font-weight: 600;
+    }
+
+    .search {
+      background-color: white;
+      padding: .1rem;
+      border-radius: .4rem;
+
+      input {
+        border: none;
+        padding: .8rem .8rem;
+      }
+    }
+
+    .btn-blue {
+      background-color: #17202A;
+      padding: .8rem .9rem;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      cursor: pointer;
+
+      .i-plus {
+        font-size: larger;
+      }
+    }
+
+  }
+}
+
+.table-patient {
+
+  padding: 1rem;
+  background-color: #fff;
+
+  table,
+  td,
+  th {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td {
+    padding: 10px 13px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(135, 122, 146);
+  }
+
+  th {
+    padding: 13px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: rgba(184, 178, 178, 0.514);
+  }
+}
+
+.btn-statut {
+  background-color: rgb(223, 154, 52);
+  box-shadow: .2rem .2rem .3rem rgba(0, 0, 0, 0.315);
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: .3rem .6rem;
+  border-radius: .4rem;
+}

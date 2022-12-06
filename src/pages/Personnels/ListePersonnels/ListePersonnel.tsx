@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,8 @@ import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
 const ListePersonnel = () => {
 
     const { error, loading, data } = usePersonnels()
+
+    const [search, setSearch] = useState('')
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -23,7 +25,9 @@ const ListePersonnel = () => {
                         <div className='nav'>
                             <h4>Personnels</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             <Link to={`/ajouter-un-personnel`}>
                                 <button className='btn-blue'>
@@ -46,7 +50,9 @@ const ListePersonnel = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.partakers.map((el: any) => (
+                                    data.partakers.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
+                                    }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>

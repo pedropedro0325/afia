@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import './patient.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,6 +8,8 @@ import { usePatients } from '../../../hooks/Patients/usePatients'
 const Patient = () => {
 
     const { error, loading, data } = usePatients()
+
+    const [search, setSearch] = useState('')
 
     console.log({ data });
 
@@ -24,7 +27,9 @@ const Patient = () => {
                         <div className='nav'>
                             <h4>Patients</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             <Link to={`/ajouter-un-patient`}>
                                 <button className='btn-blue'>
@@ -47,14 +52,16 @@ const Patient = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.patients.map((patient: any) => (
+                                    data.patients.filter((patient: any) => {
+                                        return search.toLocaleLowerCase() === '' ? patient : patient.name.toLowerCase().includes(search)
+                                    }).map((patient: any) => (
                                         <tr key={patient.id}>
                                             <td>{patient.name}</td>
                                             <td>{patient.lastName}</td>
                                             <td>{patient.email}</td>
                                             <td>{patient.adressId}</td>
                                             <td>{patient.description}</td>
-                                            <td><Link to={`/detail-patient/${patient.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                            <td><Link to={`/patient/detail/${patient.id}`}><button className='btn-blue'>Voir</button></Link></td>
                                         </tr>
                                     ))
                                 }

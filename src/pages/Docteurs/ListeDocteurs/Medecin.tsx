@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import './medecin.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,8 @@ import { useMedecins } from '../../../hooks/medecins/useMedecins'
 const Medecin = () => {
 
     const { error, loading, data } = useMedecins()
+
+    const [search, setSearch] = useState<string>('')
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -22,7 +24,9 @@ const Medecin = () => {
                         <div className='nav'>
                             <h4>Médecin</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche' />
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </div>
                             <Link to={`/ajouter-un-personnel`}>
                                 <button className='btn-blue'>
@@ -35,6 +39,7 @@ const Medecin = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>email</th>
                                     <th>Adresse</th>
@@ -43,9 +48,14 @@ const Medecin = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.partakers.map((medecin: any) => (
+                                    data.partakers.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
+                                    }).filter((curDate: any) => {
+                                        return curDate.speciality.description === "Médecin"
+                                    }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
+                                            <td>{medecin.lastName}</td>
                                             <td>{medecin.email}</td>
                                             <td>{medecin.adressId}</td>
                                             <td><Link to={`/detail-medecin/${medecin.id}`}><button className='btn-blue'>voir</button></Link></td>
