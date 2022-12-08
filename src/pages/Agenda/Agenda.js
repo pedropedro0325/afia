@@ -101,10 +101,9 @@ const Agenda = () => {
 
     const { error, loading, data } = useEvents()
 
-
     const [allEvents, setAllEvents] = useState(data.events)
 
-    console.log(allEvents);
+    console.log('next',allEvents);
 
     const [culture, setCulture] = useState('fr')
     const [rightToLeft, setRightToLeft] = useState(false)
@@ -140,7 +139,8 @@ const Agenda = () => {
                     </div>
                 </div>
                 <div className='calendrier'>
-                    <Calendar localizer={localizer} events={allEvents}
+                    <Calendar localizer={localizer} 
+                        events={allEvents}
                         culture={culture}
                         messages={messages}
                         defaultView={Views.MONTH}
