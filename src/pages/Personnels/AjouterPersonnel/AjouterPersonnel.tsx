@@ -8,19 +8,28 @@ import { useForm } from '../../../utils/hooks'
 
 
 const CREATE_PERSONNEL = gql`
-mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: Int, $email: String, $typeId: String, $specialityId: String, $description: String) {
-  createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, typeId: $typeId, specialityId: $specialityId, description: $description) {
-    id
-    name
-    lastName
-    birthDate
-    birthCityId
-    adressId
-    phoneNumber
-    email
-    typeId
-    specialityId
-    description
+mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $typeId: String, $email: String, $adressId: String,
+ $phoneNumber: String, $specialityId: String, $description: String) {
+    createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId,
+        typeId: $typeId, email: $email, adressId: $adressId, phoneNumber: $phoneNumber, specialityId: $specialityId,
+        description: $description){
+            id
+            name
+            lastName
+            birthDate
+            birthCityId
+            adressId
+            phoneNumber
+            email
+            partakerType {
+                description
+                id
+            }
+            speciality {
+                description
+                id
+            }
+            description
   }
 }
 `
@@ -31,7 +40,7 @@ const AjouterPersonnel = () => {
 
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
-
+console.log("=========Mutation",error)
 
     const [initialState, setReportValues] = useState({
         name: "",

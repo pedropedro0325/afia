@@ -12,11 +12,9 @@ query {
     phoneNumber
     email
     partakerType {
-      id
       description
     }
     speciality {
-      id
       description
     }
     description
@@ -26,7 +24,7 @@ query {
 
 export const useMedecins = () => {
     const { error, loading, data } = useQuery(GET_MEDECINS)
-
+console.log(error, data)
     return {
         error,
         data,

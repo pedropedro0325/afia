@@ -51,7 +51,7 @@ const Medecin = () => {
                                     data.partakers.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
                                     }).filter((curDate: any) => {
-                                        return curDate.partakerType.description === "Médecin"
+                                        return curDate.partakerType?.id === '0'
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
