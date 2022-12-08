@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import './events.scss'
-import { useEvents } from '../../../hooks/Events/useEvents'
+import './types.scss'
+import { useTypes } from '../../../hooks/Types/useTypes'
 
-const Events = () => {
+const Types = () => {
 
-    const { error, loading, data } = useEvents()
+    const { data, loading, error } = useTypes()
 
     const [search, setSearch] = useState('')
+
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -19,18 +19,18 @@ const Events = () => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='event-container'>
-                    <h2>La liste des évènements</h2>
+                <div className='types-container'>
+                    <h2>La liste des types</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Evènements</h4>
+                            <h4>Types</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter-un-evenement`}>
+                            <Link to={`/ajouter/type`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -41,24 +41,18 @@ const Events = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>N°</th>
                                     <th>Description</th>
-                                    <th>Date de début</th>
-                                    <th>Date de fin</th>
-                                    <th>Statut</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    data.events.filter((el: any) => {
+                                    data.partakerTypes.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
-                                    }).map((event: any) => (
-                                        <tr key={event.id}>
-                                            <td>{event.description}</td>
-                                            <td>{event.startDate}</td>
-                                            <td>{event.endDate}</td>
-                                            <td>{event.statusId}</td>
-                                            <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
+                                    }).map((type: any) => (
+                                        <tr key={type.id}>
+                                            <td>{type.id}</td>
+                                            <td>{type.description}</td>
                                         </tr>
                                     ))
                                 }
@@ -71,4 +65,4 @@ const Events = () => {
     )
 }
 
-export default Events
+export default Types

@@ -9,6 +9,7 @@ const ListePersonnel = () => {
 
     const { error, loading, data } = usePersonnels()
 
+
     const [search, setSearch] = useState('')
 
     if (loading) return <div>...loading</div>
@@ -43,7 +44,7 @@ const ListePersonnel = () => {
                                     <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>Email</th>
-                                    <th>Spécialité</th>
+                                    <th>Type</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -57,9 +58,9 @@ const ListePersonnel = () => {
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el.speciality.description}</td>
+                                            <td>{el.partakerType.description}</td>
                                             <td>{el.description}</td>
-                                            <td><Link to={`/detail-personnel/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                            <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))
                                 }

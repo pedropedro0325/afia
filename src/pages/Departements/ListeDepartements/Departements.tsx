@@ -11,7 +11,7 @@ const Departements = () => {
         { id: 1, departName: "Cardiologie", description: "Fournit des soins médicaux aux", dateDepart: "12-12-2021", ChefDepart: "Dr Woo", statut: "Active" },
         { id: 2, departName: "Ressource humaine", description: "Le rôle est de fournir un professionnel", dateDepart: "03-04-2022", ChefDepart: "Dr Karim", statut: "Active" },
         { id: 3, departName: "Gynécologue", description: "Enquête sur problèmes liés...", dateDepart: "12-11-2021", ChefDepart: "Dr Steve", statut: "Active" },
-        { id: 4, departName: "Pharmacie", description: "Responsible for drugs in a hospital", dateDepart: "22-11-2021", ChefDepart: "Dr Sarah", statut: "Active" }
+        { id: 4, departName: "Pharmacie", description: "Responsable des médicaments dans l'hôpital", dateDepart: "22-11-2021", ChefDepart: "Dr Sarah", statut: "Active" }
     ])
 
     const [search, setSearch] = useState('')

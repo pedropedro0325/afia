@@ -10,10 +10,12 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
 import { usePatients } from '../../hooks/Patients/usePatients'
 import { useState } from 'react'
+import { usePersonnels } from '../../hooks/Personnels/usePersonnels'
 
 const Home = () => {
 
     const { error, loading, data } = usePatients()
+    const { error: errorP, loading: loadingP, data: dataP } = usePersonnels()
 
     return (
         <div>
@@ -122,27 +124,27 @@ const Home = () => {
                             </tr>
                             <tr>
                                 <td>Alfreds Futterkiste</td>
-                                <td>Maria Anders</td>
+                                <td>Disponible</td>
                             </tr>
                             <tr>
                                 <td>Berglunds snabbköp</td>
-                                <td>Christina Berglund</td>
+                                <td>Absent</td>
                             </tr>
                             <tr>
                                 <td>Centro comercial Moctezuma</td>
-                                <td>Francisco Chang</td>
+                                <td>Disponible</td>
                             </tr>
                             <tr>
                                 <td>Ernst Handel</td>
-                                <td>Roland Mendel</td>
+                                <td>Absent</td>
                             </tr>
                             <tr>
                                 <td>Island Trading</td>
-                                <td>Helen Bennett</td>
+                                <td>Disponible</td>
                             </tr>
                             <tr>
                                 <td>Königlich Essen</td>
-                                <td>Philip Cramer</td>
+                                <td>Disponible</td>
                             </tr>
                         </table>
                     </div>

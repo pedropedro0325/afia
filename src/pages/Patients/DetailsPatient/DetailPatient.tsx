@@ -56,17 +56,22 @@ const DetailPatient = () => {
                         >
                             <h2>Patient N° {data.patient.id}</h2>
                             <hr />
-                            <br />
                             <div className='pers'>
                                 <div className='part1'>
                                     <ul className='info'>
-                                        <li>Prénom : <h5>{data.patient.name}</h5></li>
-                                        <li>Nom : <h5>{data.patient.lastName}</h5></li>
-                                        <li>Date de naissance : <h5>{data.patient.birthDate}</h5></li>
-                                        <li>Lieu de naissance : <h5>{data.patient.birthCityId}</h5></li>
-                                        <li>Adresse : <h5>{data.patient.adressId}</h5></li>
-                                        <li>Téléphone : <h5>{data.patient.phoneNumber}</h5></li>
-                                        <li>Email : <h5>{data.patient.email}</h5></li>
+                                        <div className='class'>
+                                            <li>Prénom : <h5>{data.patient.name}</h5></li>
+                                            <li>Nom : <h5>{data.patient.lastName}</h5></li>
+                                            <li>Email : <h5>{data.patient.email}</h5></li>
+                                        </div>
+                                        <div className='class'>
+                                            <li>Date de naissance : <h5>{data.patient.birthDate}</h5></li>
+                                            <li>Lieu de naissance : <h5>{data.patient.birthCityId}</h5></li>
+                                        </div>
+                                        <div className='class'>
+                                            <li>Adresse : <h5>{data.patient.adressId}</h5></li>
+                                            <li>Téléphone : <h5>{data.patient.phoneNumber}</h5></li>
+                                        </div>
                                     </ul>
                                 </div>
                                 <div className='part2'>

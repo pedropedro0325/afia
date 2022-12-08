@@ -11,8 +11,6 @@ const Specialites = () => {
 
     const [search, setSearch] = useState('')
 
-    console.log({ data });
-
 
     if (loading) return <div>...loading</div>
     if (error) return <div>something went wrong</div>
@@ -22,11 +20,11 @@ const Specialites = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='medecin-container'>
-                    <h2>La liste des spécialités</h2>
+                    <h2>La liste des spécialités des médecins</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Spécialités</h4>
+                            <h4>Spécialités des médecins</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -44,7 +42,7 @@ const Specialites = () => {
                             <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <th>Description</th>
+                                    <th>Spécilité du médecin</th>
                                 </tr>
                             </thead>
                             <tbody>
