@@ -14,7 +14,6 @@ query Events{
 
 export const useEvents = () => {
   const { error, loading, data } = useQuery(GET_EVENTS)
-
   return {
     error,
     data,
