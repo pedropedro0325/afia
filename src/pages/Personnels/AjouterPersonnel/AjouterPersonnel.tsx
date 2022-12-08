@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterPersonnel.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
+import { useTypes } from '../../../hooks/Types/useTypes'
 import { gql, useMutation } from '@apollo/client'
 import { useForm } from '../../../utils/hooks'
 
@@ -39,13 +40,14 @@ const AjouterPersonnel = () => {
         birthCityId: "",
         adressId: "",
         email: "",
-        typeId: "",
-        specialityId: "",
         description: "",
-        phoneNumber: ""
+        phoneNumber: "",
+        typeId: "",
+        specialityId: ""
     });
 
     const { data } = useSpecialities();
+    const { data: dataT } = useTypes()
 
     const { onChange, onChangeOption, onSubmit, values } = useForm(
         formCallback,
@@ -104,7 +106,14 @@ const AjouterPersonnel = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input id="typeId" name="typeId" onChange={onChange} type="text" className='input' placeholder='Type*' />
+                                    <select id="typeId" onChange={onChangeOption} name="typeId" className='input'>
+                                        <option value="">Sélectionner le type</option>
+                                        {
+                                            dataT?.partakerTypes.map((el: any) => (
+                                                <option key={el.id} value={el.id}>{el.description}</option>
+                                            ))
+                                        }
+                                    </select>
                                 </div>
                                 <div>
                                     <input id="adressId" name="adressId" onChange={onChange} type="text" className='input' placeholder='Adresse*' />
@@ -115,7 +124,8 @@ const AjouterPersonnel = () => {
                                     <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
-                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input' placeholder='Specialité*'>
+                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input'>
+                                        <option value="">Sélectionner la spécialité du médecin</option>
                                         {
                                             data?.specialities.map((speciality: any) => (
                                                 <option key={speciality.id} value={speciality.id}>{speciality.description}</option>

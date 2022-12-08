@@ -3,21 +3,24 @@ import { useQuery, gql } from '@apollo/client'
 const GET_MEDECINS = gql`
 query {
     partakers {
-        id
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        typeId
-        speciality {
-            id
-            description
-        }
-        description
+    id
+    name
+    lastName
+    birthDate
+    birthCityId
+    adressId
+    phoneNumber
+    email
+    partakerType {
+      id
+      description
     }
+    speciality {
+      id
+      description
+    }
+    description
+  }
   }
 `
 

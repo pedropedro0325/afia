@@ -12,11 +12,11 @@
         margin: 1rem 0;
 
         select {
-            padding: .6rem 2rem;
+            padding: .4rem 2rem;
             outline: none;
             width: 20rem;
-            border-radius: .5rem;
-            border: rgb(131, 88, 172) .1px solid;
+            border-radius: .2rem;
+            border: rgb(44, 36, 53) .1px solid;
             cursor: pointer;
             font-size: 18px;
         }
@@ -26,7 +26,7 @@
         h2 {
             color: black;
             background-color: #fff;
-            padding: 1rem;
+            padding: .8rem;
             border-radius: .5rem;
         }
 
@@ -34,7 +34,7 @@
             background-color: blueviolet;
             font-size: large;
             color: #fff;
-            padding: 1rem;
+            padding: .8rem;
             border: none;
             border-radius: .2rem;
             cursor: pointer;

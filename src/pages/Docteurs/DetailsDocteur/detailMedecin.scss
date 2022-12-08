@@ -27,6 +27,11 @@
         box-sizing: content-box;
         position: relative;
         outline: none;
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
     }
 
     .tabs:not(:last-child) {
@@ -59,6 +64,101 @@
 
     .content-tabs {
         flex-grow: 1;
+
+        h2 {
+            font-size: 1rem;
+        }
+
+        .pers {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .part1 {
+                width: 60%;
+            }
+
+            .part2 {
+                width: 40%;
+                padding: 2rem;
+
+                h4 {
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-weight: 500;
+                    color: rgb(111, 104, 117);
+                }
+            }
+        }
+
+        .info {
+            li {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                font-weight: 600;
+                margin-bottom: .5rem;
+
+                h5 {
+                    color: rgb(111, 104, 117);
+                    font-size: 1rem;
+                }
+            }
+
+            .class {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+
+                li {
+                    border: rgb(111, 104, 117) .1rem solid;
+                    padding: .4rem;
+                    border-radius: .4rem;
+                }
+            }
+        }
+
+        .name {
+            color: blueviolet;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+
+            table,
+            td,
+            th {
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            td {
+                padding: 10px 13px;
+                font-size: 13px;
+                font-weight: 600;
+                color: rgb(135, 122, 146);
+            }
+
+            th {
+                padding: 13px;
+                font-size: 14px;
+                font-weight: bold;
+                color: black;
+            }
+
+            tr:hover {
+                background-color: rgba(184, 178, 178, 0.514);
+            }
+        }
     }
 
     .content {

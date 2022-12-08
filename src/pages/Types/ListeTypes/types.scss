@@ -1,0 +1,36 @@
+.types-container {
+    margin: 1rem 2rem;
+
+    h2 {
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: .4rem;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+            outline: none;
+            border: none;
+            padding: .6rem;
+            background-color: white;
+            border-radius: .4rem;
+            box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.26);
+            cursor: pointer;
+
+            &:hover {
+                background-color: #17202A;
+                color: #fff;
+                transition: all .5s;
+            }
+
+        }
+    }
+
+    .i-plus {
+        color: #fff;
+    }
+}

@@ -8,17 +8,18 @@ const GET_EVENT = gql`
     statusId
     startDate
     endDate
+    statusId
   }
 }
 `
 
 export const usePatient = (eventId: any) => {
-    const { data, error, loading } = useQuery(GET_EVENT, {
-        variables: {
-            eventId
-        }
-    })
-    return {
-        data, error, loading
+  const { data, error, loading } = useQuery(GET_EVENT, {
+    variables: {
+      eventId
     }
+  })
+  return {
+    data, error, loading
+  }
 }

@@ -1,22 +1,23 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_EVENTS = gql`
-query {
+query Events{
     events {
       id
       description
       startDate
       endDate
+      statusId
     }
   }
 `
 
 export const useEvents = () => {
-    const { error, loading, data } = useQuery(GET_EVENTS)
+  const { error, loading, data } = useQuery(GET_EVENTS)
 
-    return {
-        error,
-        data,
-        loading
-    }
+  return {
+    error,
+    data,
+    loading
+  }
 }
