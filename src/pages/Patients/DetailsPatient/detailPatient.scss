@@ -124,9 +124,12 @@
         }
 
         .gen {
+            padding: 2rem;
+            box-shadow: .1rem .2rem .3rem rgba(0, 0, 0, 0.322);
+            width: 67%;
 
             .rapport {
-                width: 75%;
+                width: 100%;
                 margin-top: 1rem;
                 margin-bottom: 2rem;
 
@@ -141,29 +144,43 @@
                     }
                 }
 
-                .stat1 {
-                    border-bottom: #222 15px solid;
-                    border-radius: .4rem;
-                    width: 85%;
+                .stat {
+                    border-bottom: rgb(228, 222, 222) 15px solid;
+                    position: relative;
+
+                    .stat1 {
+                        border-bottom: #222 15px solid;
+                        border-radius: .1rem;
+                        width: 85%;
+                        position: absolute;
+                        z-index: 1;
+                    }
+
+                    .stat2 {
+                        border-bottom: orange 15px solid;
+                        border-radius: .1rem;
+                        width: 50%;
+                        position: absolute;
+                        z-index: 1;
+                    }
+
+                    .stat3 {
+                        border-bottom: blueviolet 15px solid;
+                        border-radius: .1rem;
+                        width: 65%;
+                        position: absolute;
+                        z-index: 1;
+                    }
+
+                    .stat4 {
+                        border-bottom: red 15px solid;
+                        border-radius: .1rem;
+                        width: 78%;
+                        position: absolute;
+                        z-index: 1;
+                    }
                 }
 
-                .stat2 {
-                    border-bottom: orange 15px solid;
-                    border-radius: .4rem;
-                    width: 50%;
-                }
-
-                .stat3 {
-                    border-bottom: blueviolet 15px solid;
-                    border-radius: .4rem;
-                    width: 65%;
-                }
-
-                .stat4 {
-                    border-bottom: red 15px solid;
-                    border-radius: .4rem;
-                    width: 78%;
-                }
             }
         }
     }

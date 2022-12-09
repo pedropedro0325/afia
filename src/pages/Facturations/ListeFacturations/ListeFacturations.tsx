@@ -61,7 +61,7 @@ const ListeFacturations = () => {
                                             <td>{el.NomPatient}</td>
                                             <td>{el.admissionId}</td>
                                             <td>{el.docteurName}</td>
-                                            <td>{el.status}</td>
+                                            <td><button className='btn-statut'>{el.status}</button></td>
                                             <td>{el.Date}</td>
                                             <td>{el.tva}</td>
                                             <td>{el.total}</td>

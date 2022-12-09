@@ -10,12 +10,14 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
 import { usePatients } from '../../hooks/Patients/usePatients'
 import { useState } from 'react'
-import { usePersonnels } from '../../hooks/Personnels/usePersonnels'
+import { useMedecins } from '../../hooks/medecins/useMedecins'
 
 const Home = () => {
 
-    const { error, loading, data } = usePatients()
-    const { error: errorP, loading: loadingP, data: dataP } = usePersonnels()
+    const { error, loading, data } = useMedecins()
+
+    console.log(data);
+
 
     return (
         <div>
@@ -122,30 +124,18 @@ const Home = () => {
                                 <th>Nom</th>
                                 <th>Statut</th>
                             </tr>
-                            <tr>
-                                <td>Alfreds Futterkiste</td>
-                                <td>Disponible</td>
-                            </tr>
-                            <tr>
-                                <td>Berglunds snabbköp</td>
-                                <td>Absent</td>
-                            </tr>
-                            <tr>
-                                <td>Centro comercial Moctezuma</td>
-                                <td>Disponible</td>
-                            </tr>
-                            <tr>
-                                <td>Ernst Handel</td>
-                                <td>Absent</td>
-                            </tr>
-                            <tr>
-                                <td>Island Trading</td>
-                                <td>Disponible</td>
-                            </tr>
-                            <tr>
-                                <td>Königlich Essen</td>
-                                <td>Disponible</td>
-                            </tr>
+                            <tbody>
+                                {/* {
+                                    data.partakers.filter((curDate: any) => {
+                                        return curDate.partakerType?.description === 'Médecin'
+                                    }).map((medecin: any) => (
+                                        <tr key={medecin.id}>
+                                            <td>{medecin.name}</td>
+                                            <td>Disponible</td>
+                                        </tr>
+                                    ))
+                                } */}
+                            </tbody>
                         </table>
                     </div>
                 </div>

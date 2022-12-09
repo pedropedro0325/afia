@@ -22,8 +22,7 @@ const Sidebar = () => {
                     <NavLink to='/patient'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />Patients</li></NavLink>
                     <NavLink to='/medecin'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />Médecins</li></NavLink>
                     <NavLink to='/personnels'><li><FontAwesomeIcon icon={faUsers} className="i-plus" />Personnels</li></NavLink>
-                    <NavLink to='/specialites'><li><FontAwesomeIcon icon={faFolder} className="i-plus" />Spécialités</li></NavLink>
-                    <NavLink to='/types'><li><FontAwesomeIcon icon={faList} className="i-plus" />Types</li></NavLink>
+                    <NavLink to='/types'><li><FontAwesomeIcon icon={faList} className="i-plus" />Postes</li></NavLink>
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />Evènements</li></NavLink>
                     <NavLink to='/agenda'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />Agenda</li></NavLink>
                     <NavLink to='/chambre'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />Chambres</li></NavLink>

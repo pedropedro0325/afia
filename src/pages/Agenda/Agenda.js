@@ -95,7 +95,7 @@ const Agenda = () => {
     ])
 
     const handleSelectEvent = useCallback(
-        (event) => window.alert(event.title),
+        (events) => window.alert(events.title),
         []
     )
 
@@ -103,7 +103,7 @@ const Agenda = () => {
 
     const [allEvents, setAllEvents] = useState(data.events)
 
-    console.log('next',allEvents);
+    console.log('next', allEvents);
 
     const [culture, setCulture] = useState('fr')
     const [rightToLeft, setRightToLeft] = useState(false)
@@ -139,7 +139,7 @@ const Agenda = () => {
                     </div>
                 </div>
                 <div className='calendrier'>
-                    <Calendar localizer={localizer} 
+                    <Calendar localizer={localizer}
                         events={allEvents}
                         culture={culture}
                         messages={messages}
