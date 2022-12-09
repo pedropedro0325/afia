@@ -51,6 +51,7 @@ const DetailPatient = () => {
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
                             <h2>Personnel N° {partakerId}</h2>
+                            <li>Type : <h3>{data.partaker.partakerType.description}</h3></li>
                             <hr />
 
                             <div className='pers'>
@@ -68,7 +69,6 @@ const DetailPatient = () => {
                                         </div>
                                         <div className='class'>
                                             <li>Email : <h5>{data.partaker.email}</h5></li>
-                                            <li>Type : <h5>{data.partaker.typeId}</h5></li>
                                         </div>
                                     </ul>
                                 </div>
@@ -86,7 +86,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                         >
-                            <h3>L'agenda
+                            <h3> {data.partaker.partakerType.description}
                                 <p className='name'>{data.partaker.name} {data.partaker.lastName}</p>
                             </h3>
                             <br />

@@ -100,8 +100,8 @@ const DetailPatient = () => {
                                         <h5>Battement de coeur</h5>
                                         <h5>76</h5>
                                     </div>
-                                    <div className='stat1'>
-
+                                    <div className='stat'>
+                                        <div className='stat1'></div>
                                     </div>
                                 </div>
                                 <div className='rapport'>
@@ -109,8 +109,8 @@ const DetailPatient = () => {
                                         <h5>Sucre</h5>
                                         <h5>50</h5>
                                     </div>
-                                    <div className='stat2'>
-
+                                    <div className='stat'>
+                                        <div className='stat2'></div>
                                     </div>
                                 </div>
                                 <div className='rapport'>
@@ -118,8 +118,8 @@ const DetailPatient = () => {
                                         <h5>Pression artérielle</h5>
                                         <h5>65</h5>
                                     </div>
-                                    <div className='stat3'>
-
+                                    <div className='stat'>
+                                        <div className='stat3'></div>
                                     </div>
                                 </div>
                                 <div className='rapport'>
@@ -127,8 +127,8 @@ const DetailPatient = () => {
                                         <h5>Hémoglobine</h5>
                                         <h5>78%</h5>
                                     </div>
-                                    <div className='stat4'>
-
+                                    <div className='stat'>
+                                        <div className='stat4'></div>
                                     </div>
                                 </div>
                             </div>

@@ -43,6 +43,7 @@ const Specialites = () => {
                                 <tr>
                                     <th>N°</th>
                                     <th>Spécilité du médecin</th>
+                                    <th>Statut</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,6 +54,7 @@ const Specialites = () => {
                                         <tr key={speciality.id}>
                                             <td>{speciality.id}</td>
                                             <td>{speciality.description}</td>
+                                            <td><button className='btn-statut'>Active</button></td>
                                         </tr>
                                     ))
                                 }

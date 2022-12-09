@@ -20,11 +20,11 @@ const Types = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='types-container'>
-                    <h2>La liste des types</h2>
+                    <h2>La liste des postes</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Types</h4>
+                            <h4>Postes</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -43,6 +43,7 @@ const Types = () => {
                                 <tr>
                                     <th>N°</th>
                                     <th>Description</th>
+                                    <th>Statut</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,6 +54,7 @@ const Types = () => {
                                         <tr key={type.id}>
                                             <td>{type.id}</td>
                                             <td>{type.description}</td>
+                                            <td><button className='btn-statut'>Active</button></td>
                                         </tr>
                                     ))
                                 }
