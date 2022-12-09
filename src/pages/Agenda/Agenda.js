@@ -7,7 +7,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "react-datepicker/dist/react-datepicker.css"
 import DatePicker from 'react-datepicker'
 import { Outlet, Link } from 'react-router-dom'
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback , useEffect} from 'react'
 import './agenda.scss'
 import { useEvents } from '../../hooks/Events/useEvents';
 
@@ -99,9 +99,18 @@ const Agenda = () => {
         []
     )
 
-    const { error, loading, data } = useEvents()
+    const { error, loading, data } = useEvents();
+    
+    const [allEvents, setAllEvents] = useState([])
 
-    const [allEvents, setAllEvents] = useState(data.events)
+
+    useEffect(() => {
+        // Runs once, after mounting
+        if(data){
+            setAllEvents(data.events)
+        }
+
+      }, [data]);
 
     console.log('next', allEvents);
 
