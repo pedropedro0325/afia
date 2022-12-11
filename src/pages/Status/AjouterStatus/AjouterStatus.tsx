@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import './ajouterType.scss'
 import { gql, useMutation } from '@apollo/client'
 
-const CREATE_TYPE = gql`
-    mutation CreatePartakerType($description: String!) {
-        createPartakerType(description: $description) {
-            id
-            description
+const CREATE_STATUS = gql`
+   mutation Mutation($description: String) {
+  createStatus(description: $description) {
+    id
+    description
   }
 }
 `
 
-const AjouterType = () => {
+const AjouterStatus = () => {
+
+    const [createStatus, { loading, error }] = useMutation(CREATE_STATUS)
 
     const [description, setDescription] = useState<string>('')
-    const [createPartakerType, { data, loading, error }] = useMutation(CREATE_TYPE)
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`
@@ -24,14 +24,14 @@ const AjouterType = () => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='ajouterType-container'>
-                    <h2>Ajouter un poste</h2>
+                <div className='ajouterSpeciality-container'>
+                    <h2>Ajouter une spécialité</h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createPartakerType({ variables: { description: description } })
-                            if (!error) {
+                            createStatus({ variables: { description: description } })
+                            if (error) {
                                 setDescription('')
                             }
                         }}>
@@ -56,4 +56,4 @@ const AjouterType = () => {
     )
 }
 
-export default AjouterType
+export default AjouterStatus

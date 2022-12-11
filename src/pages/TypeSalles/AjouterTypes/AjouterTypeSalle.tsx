@@ -1,36 +1,32 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import './ajouterType.scss'
 import { gql, useMutation } from '@apollo/client'
 
-const CREATE_TYPE = gql`
-    mutation CreatePartakerType($description: String!) {
-        createPartakerType(description: $description) {
-            id
-            description
+const CREATE_TYPE_VENUE = gql`
+    mutation CreateEvent($description: String) {
+  createVenueType(description: $description) {
+    description
   }
 }
 `
 
-const AjouterType = () => {
+const AjouterTypeSalle = () => {
 
     const [description, setDescription] = useState<string>('')
-    const [createPartakerType, { data, loading, error }] = useMutation(CREATE_TYPE)
 
-    if (loading) return 'Submitting...'
-    if (error) return `Submission error! ${error.message}`
+    const [createVenueType, { data, loading, error }] = useMutation(CREATE_TYPE_VENUE)
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterType-container'>
-                    <h2>Ajouter un poste</h2>
+                    <h2>Ajouter une type de salle</h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createPartakerType({ variables: { description: description } })
+                            createVenueType({ variables: { description: description } })
                             if (!error) {
                                 setDescription('')
                             }
@@ -56,4 +52,4 @@ const AjouterType = () => {
     )
 }
 
-export default AjouterType
+export default AjouterTypeSalle

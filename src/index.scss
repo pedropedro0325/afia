@@ -121,3 +121,11 @@ li {
   padding: .3rem .6rem;
   border-radius: .4rem;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: yellowgreen;
+}

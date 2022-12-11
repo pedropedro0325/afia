@@ -40,7 +40,7 @@ const AjouterPersonnel = () => {
 
     const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
 
-console.log("=========Mutation",error)
+    console.log("=========Mutation", error)
 
     const [initialState, setReportValues] = useState({
         name: "",

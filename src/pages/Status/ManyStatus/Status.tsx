@@ -3,17 +3,16 @@ import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import './chambre.scss'
-import { useVenues } from '../../../hooks/Venues/useVenues'
+import { useStatus } from '../../../hooks/Status/useStatus'
 
-const ListeChambres = () => {
+const Status = () => {
 
-    const { data, error, loading } = useVenues()
+    const { data, error, loading } = useStatus()
 
-    const [chambres, setChambres] = useState<[]>([])
+    const [status, setStatus] = useState<[]>([])
 
     useEffect(() => {
-        setChambres(data?.venues)
+        setStatus(data?.manyStatus)
     }, [data])
 
     const [search, setSearch] = useState('')
@@ -23,17 +22,17 @@ const ListeChambres = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='chambre-container'>
-                    <h2>La liste des salles</h2>
+                    <h2>La liste des statut</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Salles</h4>
+                            <h4>Statut</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/salle`}>
+                            <Link to={`/ajouter/status`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -46,21 +45,17 @@ const ListeChambres = () => {
                                 <tr>
                                     <th>N° de salle</th>
                                     <th>Description</th>
-                                    <th>Type</th>
-                                    <th>N° de téléphone</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    chambres?.filter((el: any) => {
+                                    status?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.id}</td>
                                             <td>{el.description}</td>
-                                            <td>{el.typeId}</td>
-                                            <td>{el.phoneNumber}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
@@ -74,4 +69,4 @@ const ListeChambres = () => {
     )
 }
 
-export default ListeChambres
+export default Status

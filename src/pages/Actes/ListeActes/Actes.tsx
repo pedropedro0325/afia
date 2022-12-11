@@ -3,18 +3,18 @@ import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import './chambre.scss'
-import { useVenues } from '../../../hooks/Venues/useVenues'
+import './actes.scss'
+import { useActes } from '../../../hooks/Actes/useActes'
 
-const ListeChambres = () => {
+const Actes = () => {
 
-    const { data, error, loading } = useVenues()
+    const { data, loading, error } = useActes()
 
-    const [chambres, setChambres] = useState<[]>([])
+    const [actes, setActes] = useState<[]>([])
 
     useEffect(() => {
-        setChambres(data?.venues)
-    }, [data])
+        setActes(data?.acts)
+    })
 
     const [search, setSearch] = useState('')
 
@@ -22,18 +22,18 @@ const ListeChambres = () => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='chambre-container'>
-                    <h2>La liste des salles</h2>
+                <div className='acte-container'>
+                    <h2>La liste des actes</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Salles</h4>
+                            <h4>Actes</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/salle`}>
+                            <Link to={`/ajouter/acte`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -44,23 +44,21 @@ const ListeChambres = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>N° de salle</th>
                                     <th>Description</th>
-                                    <th>Type</th>
-                                    <th>N° de téléphone</th>
+                                    <th>Prix</th>
+                                    <th>Spécialité</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    chambres?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                    actes?.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.NomPatient.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
-                                            <td>{el.id}</td>
                                             <td>{el.description}</td>
-                                            <td>{el.typeId}</td>
-                                            <td>{el.phoneNumber}</td>
+                                            <td>{el.price}</td>
+                                            <td>{el.specialities.description}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
@@ -74,4 +72,4 @@ const ListeChambres = () => {
     )
 }
 
-export default ListeChambres
+export default Actes

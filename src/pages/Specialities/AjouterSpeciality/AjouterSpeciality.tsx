@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterSpeciality.scss'
 import { gql, useMutation } from '@apollo/client'
@@ -14,8 +14,9 @@ const CREATE_SPECIALITY = gql`
 
 const AjouterSpeciality = () => {
 
-    let description: any
     const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
+
+    const [description, setDescription] = useState<string>('')
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`
@@ -30,11 +31,14 @@ const AjouterSpeciality = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createSpeciality({ variables: { description: description.value } })
+                            createSpeciality({ variables: { description: description } })
+                            if (error) {
+                                setDescription('')
+                            }
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input ref={node => { description = node }} type="text" className='input' placeholder='Description*' />
+                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
                                 </div>
                             </div>
                             <div className='save'>
