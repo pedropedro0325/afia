@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +9,14 @@ import { useEvents } from '../../../hooks/Events/useEvents'
 const Events = () => {
 
     const { error, loading, data } = useEvents()
+
+    const [events, setEvents] = useState<[]>([])
+
+    useEffect(() => {
+        setEvents(data?.events)
+        console.log(setEvents);
+
+    }, [data])
 
     const [search, setSearch] = useState('')
 
@@ -44,20 +52,32 @@ const Events = () => {
                                     <th>Description</th>
                                     <th>Date de début</th>
                                     <th>Date de fin</th>
+                                    <th>Salles</th>
                                     <th>Statut</th>
+                                    <th>Motif</th>
+                                    <th>Maladie</th>
+                                    <th>Non du Patient</th>
+                                    <th>Médecin assigner</th>
+                                    <th>Acte</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    data.events.filter((el: any) => {
+                                    events?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
                                     }).map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
-                                            <td>{event.statusId}</td>
+                                            <td>{event.venue}</td>
+                                            <td>{event.status}</td>
+                                            <td>{event.care}</td>
+                                            <td>{event.diseaseId}</td>
+                                            <td>{event.patient}</td>
+                                            <td>{event.partakers}</td>
+                                            <td>{event.acts}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

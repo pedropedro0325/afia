@@ -3,17 +3,16 @@ import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import './chambre.scss'
-import { useVenues } from '../../../hooks/Venues/useVenues'
+import { useVenuesTypes } from '../../../hooks/TypeSalles/useTypeSalles'
 
-const ListeChambres = () => {
+const Salles = () => {
 
-    const { data, error, loading } = useVenues()
+    const { data, error, loading } = useVenuesTypes()
 
-    const [chambres, setChambres] = useState<[]>([])
+    const [salles, setSalles] = useState<[]>([])
 
     useEffect(() => {
-        setChambres(data?.venues)
+        setSalles(data?.venueTypes)
     }, [data])
 
     const [search, setSearch] = useState('')
@@ -33,7 +32,7 @@ const ListeChambres = () => {
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/salle`}>
+                            <Link to={`/ajouter/type/salle`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -46,21 +45,17 @@ const ListeChambres = () => {
                                 <tr>
                                     <th>N° de salle</th>
                                     <th>Description</th>
-                                    <th>Type</th>
-                                    <th>N° de téléphone</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    chambres?.filter((el: any) => {
+                                    salles?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.id}</td>
                                             <td>{el.description}</td>
-                                            <td>{el.typeId}</td>
-                                            <td>{el.phoneNumber}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
@@ -74,4 +69,4 @@ const ListeChambres = () => {
     )
 }
 
-export default ListeChambres
+export default Salles

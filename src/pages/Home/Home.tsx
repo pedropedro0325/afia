@@ -9,15 +9,24 @@ import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
 import { usePatients } from '../../hooks/Patients/usePatients'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMedecins } from '../../hooks/medecins/useMedecins'
 
 const Home = () => {
 
     const { error, loading, data } = useMedecins()
 
-    console.log(data);
 
+    const [medecin, setMedecin] = useState<[]>([])
+    const [patient, setPatient] = useState<[]>([])
+
+    useEffect(() => {
+        setMedecin(data?.partakers)
+    }, [data])
+
+    useEffect(() => {
+        setPatient(data?.patients)
+    }, [data])
 
     return (
         <div>
@@ -125,8 +134,8 @@ const Home = () => {
                                 <th>Statut</th>
                             </tr>
                             <tbody>
-                                {/* {
-                                    data.partakers.filter((curDate: any) => {
+                                {
+                                    medecin?.filter((curDate: any) => {
                                         return curDate.partakerType?.description === 'Médecin'
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
@@ -134,7 +143,7 @@ const Home = () => {
                                             <td>Disponible</td>
                                         </tr>
                                     ))
-                                } */}
+                                }
                             </tbody>
                         </table>
                     </div>

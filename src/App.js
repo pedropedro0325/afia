@@ -17,8 +17,15 @@ import ListeChambres from './pages/Chambres/ListeChambres/ListeChambres';
 import ListeFacturations from './pages/Facturations/ListeFacturations/ListeFacturations';
 import Medicaments from './pages/Pharmacie/Medicaments/Medicaments';
 import Departements from './pages/Departements/ListeDepartements/Departements';
-import Types from './pages/Types/ListeTypes/Types';
+import Types from './pages/Types/ListeTypes/Postes';
 import AjouterType from './pages/Types/AjouterType/AjouterType';
+import Actes from './pages/Actes/ListeActes/Actes';
+import Salles from './pages/TypeSalles/SalleTypes/Salles'
+import Status from './pages/Status/ManyStatus/Status';
+import AjouterSalle from './pages/Chambres/NouvelChambre/AjouterSalle';
+import AjouterTypeSalle from './pages/TypeSalles/AjouterTypes/AjouterTypeSalle';
+import AjouterActe from './pages/Actes/AjouterActe/AjouterActe';
+import AjouterStatus from './pages/Status/AjouterStatus/AjouterStatus';
 
 const App = () => {
   return (
@@ -38,13 +45,20 @@ const App = () => {
           <Route path='/evenements' element={<Events />} />
           <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
           <Route path='/specialites' element={<Specialites />} />
-          <Route path='/types' element={<Types />} />
+          <Route path='/postes' element={<Types />} />
           <Route path='/ajouter/specialite' element={<AjouterSpeciality />} />
           <Route path='/ajouter/type' element={<AjouterType />} />
-          <Route path='/chambre' element={<ListeChambres />} />
+          <Route path='/salles' element={<ListeChambres />} />
           <Route path='/facturation' element={<ListeFacturations />} />
           <Route path='/medicament' element={<Medicaments />} />
           <Route path='/departement' element={<Departements />} />
+          <Route path='/actes' element={<Actes />} />
+          <Route path='/salle/types' element={<Salles />} />
+          <Route path='/status' element={<Status />} />
+          <Route path='/ajouter/salle' element={<AjouterSalle />} />
+          <Route path='/ajouter/type/salle' element={<AjouterTypeSalle />} />
+          <Route path='/ajouter/acte' element={<AjouterActe />} />
+          <Route path='/ajouter/status' element={<AjouterStatus />} />
         </Route>
       </Routes>
     </div>
