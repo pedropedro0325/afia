@@ -28,10 +28,12 @@ const AjouterActe = () => {
 
     const [createAct, { data, loading, error }] = useMutation(CREATE_ACTE)
 
+    console.log("=========Mutation", error)
+
     const [initialState, setReportValues] = useState({
         description: "",
-        price: "",
-        specialityIds: ""
+        price: 0,
+        specialityIds: []
     });
 
     const { data: dataS } = useActes()
@@ -39,7 +41,6 @@ const AjouterActe = () => {
 
     useEffect(() => {
         setSpecialities(dataS?.specialities)
-        console.log(setSpecialities);
 
     }, [dataS])
 
@@ -57,7 +58,7 @@ const AjouterActe = () => {
         console.log("=================", values)
         createAct({
             variables: {
-                price: valuesCallBack.price, specialityIds: Number(valuesCallBack.specialityIds), description: valuesCallBack.description
+                price: Number(valuesCallBack.price), specialityIds: Number(valuesCallBack.specialityIds), description: valuesCallBack.description
             }
         })
         if (!error) {

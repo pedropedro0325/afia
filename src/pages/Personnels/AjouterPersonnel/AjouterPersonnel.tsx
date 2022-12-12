@@ -25,11 +25,12 @@ mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $b
     speciality {
       id
       description {
-        en
         fr
+        en
       }
     }
     description
+    creationDate
   }
 }
 `
@@ -51,8 +52,8 @@ const AjouterPersonnel = () => {
         email: "",
         description: "",
         phoneNumber: "",
-        partakerType: "",
-        speciality: ""
+        typeId: "",
+        specialityId: ""
     });
 
     const { data } = useSpecialities();
@@ -84,7 +85,7 @@ const AjouterPersonnel = () => {
             variables: {
                 name: valuesCallBack.name, lastName: valuesCallBack.lastName, birthDate: valuesCallBack.birthDate, birthCityId: valuesCallBack.birthCityId,
                 adressId: valuesCallBack.adressId, phoneNumber: valuesCallBack.phoneNumber, email: valuesCallBack.email, description: valuesCallBack.description,
-                partakerType: valuesCallBack.partakerType, speciality: valuesCallBack.speciality
+                typeId: valuesCallBack.typeId, specialityId: valuesCallBack.specialityId
             }
         })
 
@@ -126,7 +127,7 @@ const AjouterPersonnel = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <select id="partakerType" onChange={onChangeOption} name="partakerType" className='input'>
+                                    <select id="typeId" onChange={onChangeOption} name="typeId" className='input'>
                                         <option value="">Sélectionner le type</option>
                                         {
                                             types?.map((el: any) => (
@@ -144,7 +145,7 @@ const AjouterPersonnel = () => {
                                     <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
-                                    <select id="speciality" onChange={onChangeOption} name="speciality" className='input'>
+                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input'>
                                         <option value="">Sélectionner la spécialité du médecin</option>
                                         {
                                             specs?.map((speciality: any) => (

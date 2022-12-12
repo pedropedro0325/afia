@@ -7,58 +7,77 @@ query Query {
     description
     status {
       id
-      description
+      description {
+        en
+        fr
+      }
     }
     startDate
     endDate
     venue {
       id
       description
+      phoneNumber
       venueType {
-        id
-        description
+      id
+      description  
       }
     }
     care {
       id
       description
+      specialities {
+        id
+        description {
+          en
+          fr
+        }
+      }
       diseases {
         id
         description {
           en
           fr
         }
-        
-      }
-      specialities {
-      id
-      description {
-        en
-        fr
-      }  
+        diseaseLanguage {
+          id
+          description
+        }
       }
       patient {
         id
         name
-        lastName  
+        lastName
+        phoneNumber
       }
       partakers {
         id
         name
-        lastName  
+        lastName
+        partakerType {
+          id
+          description
+        }
+        speciality {
+          id
+          description {
+            en
+            fr
+          }
+        }
       }
       acts {
         id
         description {
-          fr
           en
+          fr
         }
         price
         specialities {
           id
           description {
-            en
             fr
+            en
           }
         }
       }
