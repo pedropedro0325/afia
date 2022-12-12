@@ -1,10 +1,13 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_SPECIALITIES = gql`
-query Events {
+query Specialities {
   specialities {
     id
-    description
+    description {
+      fr
+      en
+    }
   }
 }
 `

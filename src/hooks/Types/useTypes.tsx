@@ -10,11 +10,11 @@ query PartakerTypes {
 `
 
 export const useTypes = () => {
-    const { error, loading, data } = useQuery(GET_TYPES)
+  const { error, loading, data } = useQuery(GET_TYPES)
 
-    return {
-        error,
-        data,
-        loading
-    }
+  return {
+    error,
+    data,
+    loading
+  }
 }

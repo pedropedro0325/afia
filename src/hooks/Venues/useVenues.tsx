@@ -4,7 +4,10 @@ const GET_VENUES = gql`
 query Venues {
   venues {
     id
-    typeId
+    venueType {
+      id
+      description
+    }
     phoneNumber
     description
   }
@@ -12,10 +15,10 @@ query Venues {
 `
 
 export const useVenues = () => {
-    const { error, loading, data } = useQuery(GET_VENUES)
-    return {
-        error,
-        data,
-        loading
-    }
+  const { error, loading, data } = useQuery(GET_VENUES)
+  return {
+    error,
+    data,
+    loading
+  }
 }

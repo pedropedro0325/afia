@@ -1,14 +1,75 @@
 import { gql, useQuery } from "@apollo/client"
 
 const GET_EVENT = gql`
-  query Partakers($eventId: Int!) {
+  query Event($eventId: Int!) {
   event(eventId: $eventId) {
     id
     description
-    statusId
+    status {
+      id
+      description
+    }
     startDate
     endDate
-    statusId
+    venue {
+      id
+      description
+      venueType {
+        description
+        id
+      }
+    }
+    care {
+      id
+      description
+      specialities {
+        id
+        description {
+          en
+          fr
+        }
+      }
+      diseases {
+        description {
+          en
+          fr
+        }
+        diseaseLanguage {
+          description
+          id
+        }
+      }
+      patient {
+        name
+        lastName
+      }
+      partakers {
+        lastName
+        name
+        speciality {
+          id
+          description {
+            en
+            fr
+          }
+        }
+      }
+      acts {
+        id
+        description {
+          fr
+          en
+        }
+        price
+        specialities {
+          id
+          description {
+            en
+            fr
+          }
+        }
+      }
+    }
   }
 }
 `

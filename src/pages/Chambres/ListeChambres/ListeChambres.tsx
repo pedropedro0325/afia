@@ -59,7 +59,7 @@ const ListeChambres = () => {
                                         <tr key={el.id}>
                                             <td>{el.id}</td>
                                             <td>{el.description}</td>
-                                            <td>{el.typeId}</td>
+                                            <td>{el.venueType.description}</td>
                                             <td>{el.phoneNumber}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>

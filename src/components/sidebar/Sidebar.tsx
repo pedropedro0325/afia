@@ -32,7 +32,7 @@ const Sidebar = () => {
                     <NavLink to='/departement'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />Départements</li></NavLink>
                     <NavLink to='/actes'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />Actes</li></NavLink>
                     <NavLink to='/status'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />Statuts</li></NavLink>
-                    <li>loem</li>
+                    <NavLink to='/specialites'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />Spécialités</li></NavLink>
                 </div>
             </div>
             <div className='bottom'>

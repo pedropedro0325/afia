@@ -5,10 +5,13 @@ import { gql, useMutation } from '@apollo/client'
 
 const CREATE_SPECIALITY = gql`
     mutation CreateSpeciality($description: String) {
-    createSpeciality(description: $description) {
-        id
-        description
+  createSpeciality(description: $description) {
+    id
+    description {
+      fr
+      en
     }
+  }
 }
 `
 

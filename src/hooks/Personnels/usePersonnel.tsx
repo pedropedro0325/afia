@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client"
 
 const GET_PARTAKER = gql`
-  query Partaker($partakerId: Int!) {
+  query Query($partakerId: Int!) {
   partaker(partakerId: $partakerId) {
     id
     name
@@ -17,7 +17,9 @@ const GET_PARTAKER = gql`
     }
     speciality {
       id
-      description
+      description {
+        fr
+      }
     }
     description
   }

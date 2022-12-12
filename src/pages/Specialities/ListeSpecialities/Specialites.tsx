@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -8,6 +8,11 @@ import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
 const Specialites = () => {
 
     const { data, loading, error } = useSpecialities()
+    const [specs, setSpecs] = useState<[]>([])
+
+    useEffect(() => {
+        setSpecs(data?.specialities)
+    }, [data])
 
     const [search, setSearch] = useState('')
 
@@ -48,12 +53,12 @@ const Specialites = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.specialities.filter((el: any) => {
+                                    specs?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
                                     }).map((speciality: any) => (
                                         <tr key={speciality.id}>
                                             <td>{speciality.id}</td>
-                                            <td>{speciality.description}</td>
+                                            <td>{speciality.description.fr}</td>
                                             <td><button className='btn-statut'>Active</button></td>
                                         </tr>
                                     ))

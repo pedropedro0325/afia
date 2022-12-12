@@ -1,8 +1,8 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_PERSONNELS = gql`
-query {
-    partakers {
+query Partakers {
+  partakers {
     id
     name
     lastName
@@ -12,24 +12,26 @@ query {
     phoneNumber
     email
     partakerType {
-      id
       description
+      id
     }
     speciality {
       id
-      description
+      description {
+        fr
+      }
     }
     description
   }
-  }
+}
 `
 
 export const usePersonnels = () => {
-    const { error, loading, data } = useQuery(GET_PERSONNELS)
+  const { error, loading, data } = useQuery(GET_PERSONNELS)
 
-    return {
-        error,
-        data,
-        loading
-    }
+  return {
+    error,
+    data,
+    loading
+  }
 }

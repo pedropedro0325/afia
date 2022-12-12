@@ -14,7 +14,7 @@ const Actes = () => {
 
     useEffect(() => {
         setActes(data?.acts)
-    })
+    }, [data])
 
     const [search, setSearch] = useState('')
 
@@ -56,7 +56,7 @@ const Actes = () => {
                                         return search.toLocaleLowerCase() === '' ? el : el.NomPatient.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
-                                            <td>{el.description}</td>
+                                            <td>{el.description.fr}</td>
                                             <td>{el.price}</td>
                                             <td>{el.specialities.description}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
