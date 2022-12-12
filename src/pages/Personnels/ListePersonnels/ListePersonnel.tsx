@@ -13,7 +13,6 @@ const ListePersonnel = () => {
 
     useEffect(() => {
         setPersonnels(data?.partakers)
-        console.log(setPersonnels);
 
     }, [data])
 
@@ -59,14 +58,14 @@ const ListePersonnel = () => {
                             </thead>
                             <tbody>
                                 {
-                                    personnels.filter((el: any) => {
+                                    personnels?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el.partakerType.description.fr}</td>
+                                            <td>{el.partakerType.description}</td>
                                             <td>{el.description}</td>
                                             <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>

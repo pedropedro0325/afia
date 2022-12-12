@@ -14,7 +14,6 @@ const Events = () => {
 
     useEffect(() => {
         setEvents(data?.events)
-        console.log(setEvents);
 
     }, [data])
 
@@ -52,20 +51,18 @@ const Events = () => {
                                     <th>Description</th>
                                     <th>Date de début</th>
                                     <th>Date de fin</th>
-                                    <th>Statut</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    events.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                    events?.filter((el: any) => {
+                                        return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
                                     }).map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
-                                            <td>{event.statusId.description}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

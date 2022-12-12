@@ -47,20 +47,18 @@ const Actes = () => {
                                     <th>Description Fr</th>
                                     <th>Description En</th>
                                     <th>Prix</th>
-                                    <th>Spécialité</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     actes?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.NomPatient.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.description.fr?.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.description.fr}</td>
                                             <td>{el.description.en}</td>
                                             <td>{el.price}</td>
-                                            <td>{el.specialities.description}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
