@@ -8,9 +8,13 @@ import './ajouterSalle.scss'
 const CREATE_VENUE = gql`
     mutation CreateEvent($venueTypeId: Int, $phoneNumber: String, $description: String) {
   createVenue(venueTypeId: $venueTypeId, phoneNumber: $phoneNumber, description: $description) {
-    typeId
-    phoneNumber
-    description
+    venueType
+        {
+            id
+            description
+        }
+        phoneNumber
+        description
   }
 }
 `
@@ -43,13 +47,13 @@ const AjouterSalle = () => {
         console.log("=================", values)
         createVenue({
             variables: {
-                venueTypeId: valuesCallBack.venueTypeId, phoneNumber: valuesCallBack.phoneNumber, description: valuesCallBack.description
+                venueTypeId: Number(valuesCallBack.venueTypeId), phoneNumber: valuesCallBack.phoneNumber, description: valuesCallBack.description
             }
         })
         if (!error) {
-            valuesCallBack.typeId('')
-            valuesCallBack.phoneNumber('')
-            valuesCallBack.description('')
+            valuesCallBack.venueTypeId = 0
+            valuesCallBack.phoneNumber = ''
+            valuesCallBack.description = ''
         }
     }
 

@@ -1,19 +1,22 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_STATUS = gql`
-query Status {
+query Query {
   manyStatus {
     id
-    description
+    description {
+      fr
+      en
+    }
   }
 }
 `
 
 export const useStatus = () => {
-    const { error, loading, data } = useQuery(GET_STATUS)
-    return {
-        error,
-        data,
-        loading
-    }
+  const { error, loading, data } = useQuery(GET_STATUS)
+  return {
+    error,
+    data,
+    loading
+  }
 }

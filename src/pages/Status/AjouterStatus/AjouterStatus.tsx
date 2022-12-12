@@ -3,10 +3,13 @@ import { Outlet } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 
 const CREATE_STATUS = gql`
-   mutation Mutation($description: String) {
-  createStatus(description: $description) {
+   mutation Mutation($descriptionFr: String, $descriptionEn: String) {
+  createStatus(descriptionFR: $descriptionFr, descriptionEN: $descriptionEn) {
     id
-    description
+    description {
+      fr
+      en
+    }
   }
 }
 `
@@ -15,7 +18,8 @@ const AjouterStatus = () => {
 
     const [createStatus, { loading, error }] = useMutation(CREATE_STATUS)
 
-    const [description, setDescription] = useState<string>('')
+    const [descriptionFr, setDescriptionFr] = useState<string>('')
+    const [descriptionEn, setDescriptionEn] = useState<string>('')
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`
@@ -25,19 +29,23 @@ const AjouterStatus = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterSpeciality-container'>
-                    <h2>Ajouter une spécialité</h2>
+                    <h2>Ajouter une statut</h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createStatus({ variables: { description: description } })
+                            createStatus({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
                             if (error) {
-                                setDescription('')
+                                setDescriptionFr('')
+                                setDescriptionEn('')
                             }
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
+                                    <input value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description FR*' />
+                                </div><br />
+                                <div>
+                                    <input value={descriptionEn} onChange={(e) => { setDescriptionEn(e.target.value) }} type="text" className='input' placeholder='Description EN*' />
                                 </div>
                             </div>
                             <div className='save'>

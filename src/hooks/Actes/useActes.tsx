@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_ACTS = gql`
-query Acts {
+query Query {
   acts {
     id
     description {
@@ -12,8 +12,8 @@ query Acts {
     specialities {
       id
       description {
-        fr
         en
+        fr
       }
     }
   }

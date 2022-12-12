@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,14 @@ import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
 const ListePersonnel = () => {
 
     const { error, loading, data } = usePersonnels()
+
+    const [personnels, setPersonnels] = useState<[]>([])
+
+    useEffect(() => {
+        setPersonnels(data?.partakers)
+        console.log(setPersonnels);
+
+    }, [data])
 
 
     const [search, setSearch] = useState('')
@@ -51,14 +59,14 @@ const ListePersonnel = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.partakers.filter((el: any) => {
+                                    personnels.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el.partakerType.description}</td>
+                                            <td>{el.partakerType.description.fr}</td>
                                             <td>{el.description}</td>
                                             <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
