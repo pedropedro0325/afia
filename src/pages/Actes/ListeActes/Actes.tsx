@@ -44,7 +44,8 @@ const Actes = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Description</th>
+                                    <th>Description Fr</th>
+                                    <th>Description En</th>
                                     <th>Prix</th>
                                     <th>Spécialité</th>
                                     <th>Action</th>
@@ -57,6 +58,7 @@ const Actes = () => {
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.description.fr}</td>
+                                            <td>{el.description.en}</td>
                                             <td>{el.price}</td>
                                             <td>{el.specialities.description}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>

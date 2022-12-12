@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import './medecin.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,12 @@ import { useMedecins } from '../../../hooks/medecins/useMedecins'
 const Medecin = () => {
 
     const { error, loading, data } = useMedecins()
+
+    const [medecins, setMedecins] = useState<[]>([])
+
+    useEffect(() => {
+        setMedecins(data?.partakers)
+    }, [data])
 
     const [search, setSearch] = useState<string>('')
 
@@ -48,10 +54,10 @@ const Medecin = () => {
                             </thead>
                             <tbody>
                                 {
-                                    data.partakers.filter((el: any) => {
+                                    medecins.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
                                     }).filter((curDate: any) => {
-                                        return curDate.partakerType?.description === 'Doctor'
+                                        return curDate.partakerType.description === "Doctor"
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>

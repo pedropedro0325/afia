@@ -19,9 +19,11 @@ const GET_PARTAKER = gql`
       id
       description {
         fr
+        en
       }
     }
     description
+    creationDate
   }
 }
 `

@@ -8,9 +8,18 @@ const CREATE_ACTE = gql`
     mutation Mutation($description: String, $price: Float, $specialityIds: [Int]) {
   createAct(description: $description, price: $price, specialityIds: $specialityIds) {
     id
-    description
+    description {
+      fr
+      en
+    }
     price
-    specialityIds
+    specialities {
+      id
+      description {
+        en
+        fr
+      }
+    }
   }
 }
 `
@@ -48,13 +57,13 @@ const AjouterActe = () => {
         console.log("=================", values)
         createAct({
             variables: {
-                price: valuesCallBack.price, specialityIds: valuesCallBack.specialityIds, description: valuesCallBack.description
+                price: valuesCallBack.price, specialityIds: Number(valuesCallBack.specialityIds), description: valuesCallBack.description
             }
         })
         if (!error) {
-            valuesCallBack.price('')
-            valuesCallBack.specialityIds('')
-            valuesCallBack.description('')
+            valuesCallBack.price = ''
+            valuesCallBack.specialityIds = ''
+            valuesCallBack.description = ''
         }
     }
 

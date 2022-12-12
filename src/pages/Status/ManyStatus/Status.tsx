@@ -44,7 +44,8 @@ const Status = () => {
                             <thead>
                                 <tr>
                                     <th>N° de salle</th>
-                                    <th>Description</th>
+                                    <th>Description Fr</th>
+                                    <th>Description En</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -55,7 +56,8 @@ const Status = () => {
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.id}</td>
-                                            <td>{el.description}</td>
+                                            <td>{el.description.fr}</td>
+                                            <td>{el.description.en}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

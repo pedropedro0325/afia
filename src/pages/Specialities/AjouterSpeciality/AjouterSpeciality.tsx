@@ -4,8 +4,8 @@ import './ajouterSpeciality.scss'
 import { gql, useMutation } from '@apollo/client'
 
 const CREATE_SPECIALITY = gql`
-    mutation CreateSpeciality($description: String) {
-  createSpeciality(description: $description) {
+    mutation Mutation($descriptionFr: String, $descriptionEn: String) {
+  createSpeciality(descriptionFR: $descriptionFr, descriptionEN: $descriptionEn) {
     id
     description {
       fr
@@ -19,7 +19,8 @@ const AjouterSpeciality = () => {
 
     const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
 
-    const [description, setDescription] = useState<string>('')
+    const [descriptionFr, setDescriptionFr] = useState<string>('')
+    const [descriptionEn, setDescriptionEn] = useState<string>('')
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`
@@ -34,14 +35,18 @@ const AjouterSpeciality = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createSpeciality({ variables: { description: description } })
+                            createSpeciality({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
                             if (error) {
-                                setDescription('')
+                                setDescriptionFr('')
+                                setDescriptionEn('')
                             }
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' />
+                                    <input value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description Fr*' />
+                                </div><br />
+                                <div>
+                                    <input value={descriptionEn} onChange={(e) => { setDescriptionEn(e.target.value) }} type="text" className='input' placeholder='Description En*' />
                                 </div>
                             </div>
                             <div className='save'>
