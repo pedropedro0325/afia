@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import './ajouterPersonnel.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
@@ -8,28 +8,28 @@ import { useForm } from '../../../utils/hooks'
 
 
 const CREATE_PERSONNEL = gql`
-mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $typeId: String, $email: String, $adressId: String,
- $phoneNumber: String, $specialityId: String, $description: String) {
-    createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId,
-        typeId: $typeId, email: $email, adressId: $adressId, phoneNumber: $phoneNumber, specialityId: $specialityId,
-        description: $description){
-            id
-            name
-            lastName
-            birthDate
-            birthCityId
-            adressId
-            phoneNumber
-            email
-            partakerType {
-                description
-                id
-            }
-            speciality {
-                description
-                id
-            }
-            description
+mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: String, $email: String, $typeId: String, $specialityId: String, $description: String) {
+  createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, typeId: $typeId, specialityId: $specialityId, description: $description) {
+    id
+    name
+    lastName
+    birthDate
+    birthCityId
+    adressId
+    phoneNumber
+    email
+    partakerType {
+      id
+      description
+    }
+    speciality {
+      id
+      description {
+        en
+        fr
+      }
+    }
+    description
   }
 }
 `
@@ -51,12 +51,23 @@ const AjouterPersonnel = () => {
         email: "",
         description: "",
         phoneNumber: "",
-        typeId: "",
-        specialityId: ""
+        partakerType: "",
+        speciality: ""
     });
 
     const { data } = useSpecialities();
     const { data: dataT } = useTypes()
+
+    const [specs, setSpecs] = useState<[]>([])
+    const [types, setTypes] = useState<[]>([])
+
+    useEffect(() => {
+        setSpecs(data?.specialities)
+    }, [data])
+
+    useEffect(() => {
+        setTypes(dataT?.partakerTypes)
+    }, [dataT])
 
     const { onChange, onChangeOption, onSubmit, values } = useForm(
         formCallback,
@@ -73,7 +84,7 @@ const AjouterPersonnel = () => {
             variables: {
                 name: valuesCallBack.name, lastName: valuesCallBack.lastName, birthDate: valuesCallBack.birthDate, birthCityId: valuesCallBack.birthCityId,
                 adressId: valuesCallBack.adressId, phoneNumber: valuesCallBack.phoneNumber, email: valuesCallBack.email, description: valuesCallBack.description,
-                typeId: valuesCallBack.typeId, specialityId: valuesCallBack.specialityId
+                partakerType: valuesCallBack.partakerType, speciality: valuesCallBack.speciality
             }
         })
 
@@ -115,10 +126,10 @@ const AjouterPersonnel = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <select id="typeId" onChange={onChangeOption} name="typeId" className='input'>
+                                    <select id="partakerType" onChange={onChangeOption} name="partakerType" className='input'>
                                         <option value="">Sélectionner le type</option>
                                         {
-                                            dataT?.partakerTypes.map((el: any) => (
+                                            types?.map((el: any) => (
                                                 <option key={el.id} value={el.id}>{el.description}</option>
                                             ))
                                         }
@@ -133,11 +144,11 @@ const AjouterPersonnel = () => {
                                     <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
                                 </div>
                                 <div>
-                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input'>
+                                    <select id="speciality" onChange={onChangeOption} name="speciality" className='input'>
                                         <option value="">Sélectionner la spécialité du médecin</option>
                                         {
-                                            data?.specialities.map((speciality: any) => (
-                                                <option key={speciality.id} value={speciality.id}>{speciality.description}</option>
+                                            specs?.map((speciality: any) => (
+                                                <option key={speciality.id} value={speciality.id}>{speciality.description.fr}</option>
                                             ))
                                         }
                                     </select>

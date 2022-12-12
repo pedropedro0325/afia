@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_EVENTS = gql`
-query Events {
+query Query {
   events {
     id
     description
@@ -13,55 +13,53 @@ query Events {
     endDate
     venue {
       id
-      typeId
-      phoneNumber
       description
+      venueType {
+        id
+        description
+      }
     }
     care {
       id
       description
-      specialities {
+      diseases {
         id
-        description
+        description {
+          en
+          fr
+        }
+        
       }
-      diseaseId
+      specialities {
+      id
+      description {
+        en
+        fr
+      }  
+      }
       patient {
         id
         name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        description
+        lastName  
       }
       partakers {
         id
         name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        partakerType {
-          id
-          description
-        }
-        speciality {
-          id
-          description
-        }
-        description
+        lastName  
       }
       acts {
         id
-        description
+        description {
+          fr
+          en
+        }
         price
         specialities {
           id
-          description
+          description {
+            en
+            fr
+          }
         }
       }
     }

@@ -136,7 +136,7 @@ const Home = () => {
                             <tbody>
                                 {
                                     medecin?.filter((curDate: any) => {
-                                        return curDate.partakerType?.description === 'Médecin'
+                                        return curDate.partakerType?.description === 'Doctor'
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
