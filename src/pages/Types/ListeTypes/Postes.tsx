@@ -49,7 +49,7 @@ const Types = () => {
                             <tbody>
                                 {
                                     data.partakerTypes.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
                                     }).map((type: any) => (
                                         <tr key={type.id}>
                                             <td>{type.id}</td>

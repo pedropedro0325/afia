@@ -104,8 +104,8 @@ const AjouterEvent = () => {
     const [statuts, setStatuts] = useState<[]>([])
 
     useEffect(() => {
-        setStatuts(dataStatus?.status)
-        console.log(dataStatus?.status);
+        setStatuts(dataStatus?.manyStatus)
+        console.log(dataStatus?.manyStatus);
 
     }, [dataStatus])
 
@@ -195,6 +195,11 @@ const AjouterEvent = () => {
                                 <div>
                                     <select name="partakerIds" onChange={onChangeOption} id="" className='input'>
                                         <option value="">Personnel</option>
+                                        {
+                                            personnels?.map((el: any) => (
+                                                <option key={el.id} value={el.id}>{el.name}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -202,11 +207,21 @@ const AjouterEvent = () => {
                                 <div>
                                     <select name="venueId" onChange={onChangeOption} id="venueId" className='input'>
                                         <option value="">Salle</option>
+                                        {
+                                            venues?.map((el: any) => (
+                                                <option key={el.id} value={el.id}>{el.description}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                                 <div>
                                     <select name="actIds" onChange={onChangeOption} id="actIds" className='input'>
                                         <option value="">Maladie</option>
+                                        {
+                                            actes?.map((el: any) => (
+                                                <option key={el.id} value={el.id}>{el.description.fr}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -216,7 +231,7 @@ const AjouterEvent = () => {
                                         <option value="">Statut</option>
                                         {
                                             statuts?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.description}</option>
+                                                <option key={el.id} value={el.id}>{el.description.fr}</option>
                                             ))
                                         }
                                     </select>

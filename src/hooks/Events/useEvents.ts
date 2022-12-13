@@ -17,11 +17,11 @@ query Query {
     venue {
       id
       description
-      phoneNumber
       venueType {
-      id
-      description  
+        description
+        id
       }
+      phoneNumber
     }
     care {
       id
@@ -29,15 +29,15 @@ query Query {
       specialities {
         id
         description {
-          en
           fr
+          en
         }
       }
       diseases {
         id
         description {
-          en
           fr
+          en
         }
         diseaseLanguage {
           id
@@ -49,11 +49,14 @@ query Query {
         name
         lastName
         phoneNumber
+        email
       }
       partakers {
         id
         name
         lastName
+        phoneNumber
+        email
         partakerType {
           id
           description
@@ -61,16 +64,17 @@ query Query {
         speciality {
           id
           description {
-            en
             fr
+            en
           }
         }
+        description
       }
       acts {
         id
         description {
-          en
           fr
+          en
         }
         price
         specialities {
