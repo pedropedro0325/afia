@@ -14,6 +14,7 @@ const Events = () => {
 
     useEffect(() => {
         setEvents(data?.events)
+        console.log(data?.events);
 
     }, [data])
 
@@ -51,6 +52,8 @@ const Events = () => {
                                     <th>Description</th>
                                     <th>Date de début</th>
                                     <th>Date de fin</th>
+                                    <th>Chambre</th>
+                                    <th>Care</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,6 +66,8 @@ const Events = () => {
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
+                                            <td>{event.venue?.venueType?.description}</td>
+                                            <td>{event.care?.id}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

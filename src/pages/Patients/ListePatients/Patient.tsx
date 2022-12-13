@@ -53,7 +53,7 @@ const Patient = () => {
                             <tbody>
                                 {
                                     data.patients.filter((patient: any) => {
-                                        return search.toLocaleLowerCase() === '' ? patient : patient.name.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? patient : patient.name?.toLowerCase().includes(search)
                                     }).map((patient: any) => (
                                         <tr key={patient.id}>
                                             <td>{patient.name}</td>

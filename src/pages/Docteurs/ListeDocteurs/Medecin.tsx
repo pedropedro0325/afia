@@ -55,7 +55,7 @@ const Medecin = () => {
                             <tbody>
                                 {
                                     medecins?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.name?.toLowerCase().includes(search)
                                     }).filter((curDate: any) => {
                                         return curDate.partakerType.description === "Doctor"
                                     }).map((medecin: any) => (

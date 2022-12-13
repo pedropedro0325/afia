@@ -59,7 +59,7 @@ const ListePersonnel = () => {
                             <tbody>
                                 {
                                     personnels?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.name.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.name?.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.name}</td>

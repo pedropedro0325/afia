@@ -55,7 +55,7 @@ const Specialites = () => {
                             <tbody>
                                 {
                                     specs?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.description.fr?.toLowerCase().includes(search)
                                     }).map((speciality: any) => (
                                         <tr key={speciality.id}>
                                             <td>{speciality.id}</td>

@@ -54,7 +54,7 @@ const ListeChambres = () => {
                             <tbody>
                                 {
                                     chambres?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.id}</td>
