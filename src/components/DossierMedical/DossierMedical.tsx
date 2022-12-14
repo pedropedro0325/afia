@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import './dossierMedical.scss'
+import { useEvents } from '../../hooks/Events/useEvents';
 
-const DossierMedical = () => {
+const DossierMedical = ({ data }: any) => {
 
     const [toggleState, setToggleState] = useState(1);
 
     const toggleTab = (index: any) => {
         setToggleState(index);
     };
+
+    // const { eventId } = useParams()
+
+    const { data: dataE, loading, error } = useEvents()
 
     return (
         <div>
@@ -30,19 +36,15 @@ const DossierMedical = () => {
                 >
                     <h4>Antécédents</h4>
                 </button>
-                <button
-                    className={toggleState === 4 ? "tabs active-tabs" : "tabs"}
-                    onClick={() => toggleTab(4)}
-                >
-                    <h4>Opérations</h4>
-                </button>
             </div>
             <div className="content-tabs">
                 <div
                     className={toggleState === 1 ? "content  active-content" : "content"}>
-                    <hr />
                     <ul className='desc'>
                         <li>
+                            <h4>{data.patient.name} {data.patient.lastName}</h4>
+                            <hr />
+                            <br />
                             <h5>Allergie</h5>
                             <p>_ Aux arrachides</p>
                         </li>
@@ -93,38 +95,28 @@ const DossierMedical = () => {
 
                 <div
                     className={toggleState === 3 ? "content  active-content" : "content"}>
+                    <h4>{data.patient.name} {data.patient.lastName}</h4>
+                    <br />
                     <h4>Antécédents médicaux</h4>
                     <hr />
                     <br />
                     <table>
                         <tr>
                             <th>Date</th>
-                            <th>Motif</th>
-                            <th>Hopital</th>
+                            <th>Description</th>
+                            <th>Acte</th>
                         </tr>
-                        <tr>
-                            <td>12/11/2021</td>
-                            <td>Malaria</td>
-                            <td>Elona</td>
-                        </tr>
-                    </table>
-                </div>
-                <div
-                    className={toggleState === 4 ? "content  active-content" : "content"}>
-                    <h4>Les opérations médicaux</h4>
-                    <hr />
-                    <br />
-                    <table>
-                        <tr>
-                            <th>Date</th>
-                            <th>Opération</th>
-                            <th>Hopital</th>
-                        </tr>
-                        <tr>
-                            <td>12/11/2021</td>
-                            <td>Appendicite</td>
-                            <td>Elona</td>
-                        </tr>
+                        {
+                            dataE?.events?.filter((curDate: any) => {
+                                return curDate?.care.patient?.id === data?.patient.id
+                            }).map((el: any) => (
+                                <tr key={el.id}>
+                                    <td>{el.startDate}</td>
+                                    <td>{el.description}</td>
+                                    <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                </tr>
+                            ))
+                        }
                     </table>
                 </div>
             </div>

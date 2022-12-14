@@ -14,13 +14,29 @@ const Events = () => {
 
     useEffect(() => {
         setEvents(data?.events)
-        console.log(data?.events);
-
     }, [data])
+
+    const filtered = data?.events?.filter((el: any) => el.description === "rdv")
+    //console.log(filtered);
+
+    // const act = data?.events?.map((el: any) => (el.care?.acts))
+    // console.log(act); good
+
+    // const actes = act?.map((el: any) => (el.price))
+    // console.log(actes); error
+
+
+    // const map = data?.events?.map((el: any) => (el.care?.patient?.name))
+    // console.log(map); good
+
+    const map = data?.events?.map((el: any) => (el.care?.partakers))
+    console.log(map);
+
+
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div>...loading</div>
+    if (loading) return <div>loading...</div>
     if (error) return <div>something went wrong</div>
 
     return (
@@ -53,7 +69,9 @@ const Events = () => {
                                     <th>Date de début</th>
                                     <th>Date de fin</th>
                                     <th>Chambre</th>
-                                    <th>Care</th>
+                                    <th>Acte</th>
+                                    <th>Patient</th>
+                                    <th>Personnel</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -67,7 +85,9 @@ const Events = () => {
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
                                             <td>{event.venue?.venueType?.description}</td>
-                                            <td>{event.care?.id}</td>
+                                            <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                            <td>{event.care?.patient?.name}</td>
+                                            <td>{event.care?.partakers?.name}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

@@ -105,7 +105,6 @@ const AjouterEvent = () => {
 
     useEffect(() => {
         setStatuts(dataStatus?.manyStatus)
-        console.log(dataStatus?.manyStatus);
 
     }, [dataStatus])
 
@@ -114,7 +113,6 @@ const AjouterEvent = () => {
 
     useEffect(() => {
         setPatients(dataPat?.patients)
-        console.log(dataPat?.patients);
 
     }, [dataPat])
 
@@ -216,7 +214,7 @@ const AjouterEvent = () => {
                                 </div>
                                 <div>
                                     <select name="actIds" onChange={onChangeOption} id="actIds" className='input'>
-                                        <option value="">Maladie</option>
+                                        <option value="">Acte</option>
                                         {
                                             actes?.map((el: any) => (
                                                 <option key={el.id} value={el.id}>{el.description.fr}</option>

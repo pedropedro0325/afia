@@ -1,5 +1,5 @@
 import { Outlet, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './detailPatient.scss'
 import DossierMedical from '../../../components/DossierMedical/DossierMedical'
 import { usePatient } from '../../../hooks/Patients/usePatient'
@@ -88,7 +88,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 2 ? "content  active-content" : "content"}
                         >
-                            <DossierMedical />
+                            <DossierMedical data={data} />
                         </div>
 
                         <div
