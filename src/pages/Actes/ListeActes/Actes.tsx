@@ -44,6 +44,7 @@ const Actes = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>N°</th>
                                     <th>Description Fr</th>
                                     <th>Description En</th>
                                     <th>Prix</th>
@@ -56,6 +57,7 @@ const Actes = () => {
                                         return search.toLocaleLowerCase() === '' ? el : el.description.fr?.toLowerCase().includes(search)
                                     }).map((el: any) => (
                                         <tr key={el.id}>
+                                            <td>{el.id}</td>
                                             <td>{el.description.fr}</td>
                                             <td>{el.description.en}</td>
                                             <td>{el.price}</td>

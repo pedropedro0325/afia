@@ -5,7 +5,7 @@ import { useForm } from '../../../utils/hooks'
 import { useActes } from '../../../hooks/Actes/useActes'
 
 const CREATE_ACTE = gql`
-    mutation Mutation($description: String, $price: Float, $specialityIds: [Int]) {
+    mutation CreateAct($description: String, $price: Float, $specialityIds: [Int]) {
   createAct(description: $description, price: $price, specialityIds: $specialityIds) {
     id
     description {
@@ -16,8 +16,8 @@ const CREATE_ACTE = gql`
     specialities {
       id
       description {
-        en
         fr
+        en
       }
     }
   }
@@ -86,7 +86,7 @@ const AjouterActe = () => {
                                         <option>Choisir une spécialité</option>
                                         {
                                             specialities?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.description}</option>
+                                                <option key={el.id} value={el.id}>{el.description.fr}</option>
                                             ))
                                         }
                                     </select>
