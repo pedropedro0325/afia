@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 
 const CREATE_STATUS = gql`
@@ -16,13 +16,12 @@ const CREATE_STATUS = gql`
 
 const AjouterStatus = () => {
 
+    const navigate = useNavigate()
+
     const [createStatus, { loading, error }] = useMutation(CREATE_STATUS)
 
     const [descriptionFr, setDescriptionFr] = useState<string>('')
     const [descriptionEn, setDescriptionEn] = useState<string>('')
-
-    if (loading) return 'Submitting...'
-    if (error) return `Submission error! ${error.message}`
 
     return (
         <div>
@@ -39,6 +38,7 @@ const AjouterStatus = () => {
                                 setDescriptionFr('')
                                 setDescriptionEn('')
                             }
+                            navigate('/status')
                         }}>
                             <div className='controls'>
                                 <div>

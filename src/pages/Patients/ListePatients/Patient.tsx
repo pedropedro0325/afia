@@ -42,10 +42,10 @@ const Patient = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>N°</th>
                                     <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>Email</th>
-                                    <th>Adresse</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -56,10 +56,10 @@ const Patient = () => {
                                         return search.toLocaleLowerCase() === '' ? patient : patient.name?.toLowerCase().includes(search)
                                     }).map((patient: any) => (
                                         <tr key={patient.id}>
+                                            <td>{patient.id}</td>
                                             <td>{patient.name}</td>
                                             <td>{patient.lastName}</td>
                                             <td>{patient.email}</td>
-                                            <td>{patient.adressId}</td>
                                             <td>{patient.description}</td>
                                             <td><Link to={`/patient/detail/${patient.id}`}><button className='btn-blue'>Voir</button></Link></td>
                                         </tr>

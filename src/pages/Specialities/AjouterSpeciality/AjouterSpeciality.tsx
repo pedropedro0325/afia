@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import './ajouterSpeciality.scss'
 import { gql, useMutation } from '@apollo/client'
 
@@ -17,6 +17,8 @@ const CREATE_SPECIALITY = gql`
 
 const AjouterSpeciality = () => {
 
+    const navigate = useNavigate()
+
     const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
 
     const [descriptionFr, setDescriptionFr] = useState<string>('')
@@ -24,6 +26,7 @@ const AjouterSpeciality = () => {
 
     if (loading) return 'Submitting...'
     if (error) return `Submission error! ${error.message}`
+
 
     return (
         <div>
@@ -40,6 +43,7 @@ const AjouterSpeciality = () => {
                                 setDescriptionFr('')
                                 setDescriptionEn('')
                             }
+                            navigate('/specialites')
                         }}>
                             <div className='controls'>
                                 <div>
