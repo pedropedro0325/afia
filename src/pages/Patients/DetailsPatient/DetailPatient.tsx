@@ -76,11 +76,7 @@ const DetailPatient = () => {
                                 </div>
                                 <div className='part2'>
                                     <h4>A propos</h4>
-                                    <p>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium itaque sed repudiandae reiciendis
-                                    </p>
+                                    <p>{data.patient.description}</p>
                                 </div>
                             </div>
                         </div>

@@ -64,6 +64,10 @@
                 width: 1.5rem;
             }
 
+            .lang {
+                position: relative;
+            }
+
             .user {
                 border: gray 1px solid;
                 background-color: gray;
@@ -77,7 +81,6 @@
                 border-radius: .3rem;
                 box-shadow: #2c3e508e .1rem .1rem .2rem;
                 position: absolute;
-                right: 1rem;
                 padding: .8rem;
 
                 li {

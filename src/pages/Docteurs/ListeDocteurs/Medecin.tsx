@@ -48,7 +48,6 @@ const Medecin = () => {
                                     <th>Prénom</th>
                                     <th>Nom</th>
                                     <th>email</th>
-                                    <th>Adresse</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,7 +62,6 @@ const Medecin = () => {
                                             <td>{medecin.name}</td>
                                             <td>{medecin.lastName}</td>
                                             <td>{medecin.email}</td>
-                                            <td>{medecin.adressId}</td>
                                             <td><Link to={`/personnel/detail/${medecin.id}`}><button className='btn-blue'>voir</button></Link></td>
                                         </tr>
                                     ))

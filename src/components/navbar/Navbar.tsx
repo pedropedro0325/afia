@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.scss'
-import logo from '../../assets/img/fr_logo.png'
+// import logo from '../../assets/img/fr_logo.png'
 
 const Navbar = () => {
 
     const [open, setOpen] = useState(false)
 
     const Menus = ['Compte', 'Paramètre', 'Déconnexion']
+    const Langues = ['FR', 'EN']
 
     // const menuRef = useRef()
     // const userRef = useRef()
@@ -29,22 +30,24 @@ const Navbar = () => {
                     <NavLink to='/'><li>Tableau de bord</li></NavLink>
                 </div>
                 <div className='right'>
-                    <li></li>
-                    <li><img src={logo} alt="" /></li>
-                    <li >
-                        <h5 className='user' onClick={() => setOpen(!open)}></h5>
+                    <li>
+                        <h4 className='lang' onClick={() => setOpen(!open)}>Langues</h4>
                         {
                             open && (
                                 <div className='menu'>
                                     <ul>
                                         {
-                                            Menus.map((menu: any) => (
-                                                <li onClick={() => setOpen(false)} key={menu}>{menu}</li>
+                                            Langues.map((el: any) => (
+                                                <li onClick={() => setOpen(false)} key={el}>{el}</li>
                                             ))
                                         }
                                     </ul>
                                 </div>
                             )}
+                    </li>
+                    {/* <li><img src={logo} alt="" /></li> */}
+                    <li >
+                        <h5 className='user'></h5>
                     </li>
                 </div>
             </nav>

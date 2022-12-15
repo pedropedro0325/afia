@@ -26,6 +26,7 @@ import AjouterSalle from './pages/Chambres/NouvelChambre/AjouterSalle';
 import AjouterTypeSalle from './pages/TypeSalles/AjouterTypes/AjouterTypeSalle';
 import AjouterActe from './pages/Actes/AjouterActe/AjouterActe';
 import AjouterStatus from './pages/Status/AjouterStatus/AjouterStatus';
+import ErrorPage from './pages/Error/ErrorPage';
 
 const App = () => {
   return (
@@ -59,6 +60,7 @@ const App = () => {
           <Route path='/ajouter/type/salle' element={<AjouterTypeSalle />} />
           <Route path='/ajouter/acte' element={<AjouterActe />} />
           <Route path='/ajouter/status' element={<AjouterStatus />} />
+          <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>
     </div>

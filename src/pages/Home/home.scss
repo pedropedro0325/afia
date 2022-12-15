@@ -15,6 +15,7 @@
                 background-color: white;
                 border-radius: .6rem;
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.253);
+                position: relative;
 
                 h3 {
                     font-size: 24px;
@@ -41,21 +42,33 @@
                 .box-bot1 {
                     background-color: rgba(75, 13, 133, 0.507);
                     border-radius: 0 0 .6rem .6rem;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0;
                 }
 
                 .box-bot2 {
                     background-color: rgba(255, 0, 0, 0.452);
                     border-radius: 0 0 .6rem .6rem;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0;
                 }
 
                 .box-bot3 {
                     background-color: rgba(121, 121, 18, 0.705);
                     border-radius: 0 0 .6rem .6rem;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0;
                 }
 
                 .box-bot4 {
                     background-color: rgba(0, 0, 0, 0.699);
                     border-radius: 0 0 .6rem .6rem;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0;
                 }
             }
         }

@@ -30,7 +30,7 @@ const Events = () => {
     // console.log(map); good
 
     const map = data?.events?.map((el: any) => (el.care?.partakers))
-    console.log(map);
+    // console.log(map);
 
 
 
@@ -71,7 +71,6 @@ const Events = () => {
                                     <th>Chambre</th>
                                     <th>Acte</th>
                                     <th>Patient</th>
-                                    <th>Personnel</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -87,7 +86,6 @@ const Events = () => {
                                             <td>{event.venue?.venueType?.description}</td>
                                             <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
                                             <td>{event.care?.patient?.name}</td>
-                                            <td>{event.care?.partakers?.name}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))
