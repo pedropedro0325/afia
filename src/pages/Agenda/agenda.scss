@@ -1,5 +1,6 @@
 .agenda {
     margin: .1rem 1rem;
+    position: relative;
 
     // .agenda-top {
     //     display: flex;
@@ -7,6 +8,13 @@
     //     align-items: flex-start;
     //     flex-wrap: wrap;
     // }
+
+    .card {
+        width: 250px;
+        height: 250px;
+        border-radius: .4rem;
+        box-shadow: .1rem .2rem .2rem rgba(0, 0, 0, 0.26);
+    }
 
     .filtre {
         margin: 1rem 0;

@@ -10,6 +10,7 @@ import { Outlet, Link } from 'react-router-dom'
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import './agenda.scss'
 import { useEvents } from '../../hooks/Events/useEvents';
+import Modal from '../../components/Modal/Modal';
 
 
 
@@ -49,14 +50,16 @@ const localizer = dateFnsLocalizer({
 
 const Agenda = () => {
 
-    const handleSelectEvent = useCallback(
-        (events) => window.alert(events.title),
-        []
-    )
-
     const { error, loading, data } = useEvents();
 
     const [allEvents, setAllEvents] = useState([])
+
+    const [openModal, setOpenModal] = useState(false)
+
+    const handleModal = useCallback(
+        (allEvents) => setOpenModal(true, allEvents.description),
+        []
+    )
 
 
     useEffect(() => {
@@ -76,6 +79,11 @@ const Agenda = () => {
     }, [data]);
 
     console.log('next', allEvents);
+
+    const handleSelectEvent = useCallback(
+        (allEvents) => window.alert(allEvents.startDate),
+        []
+    )
 
     const [culture, setCulture] = useState('fr')
     const [rightToLeft, setRightToLeft] = useState(false)
@@ -108,15 +116,14 @@ const Agenda = () => {
                         titleAccessor="description"
                         startAccessor="startDate"
                         endAccessor="endDate"
-                        // resourceIdAccessor="resourceId"
-                        // resourceTitleAccessor="resourceTitle"
-                        onSelectEvent={handleSelectEvent}
+                        onSelectEvent={handleModal}
                         selectable
                         step={80}
                         rtl={rightToLeft}
                         style={{ height: 500, padding: "10px" }}
                     ></Calendar>
                 </div>
+                {openModal && <Modal closeModal={setOpenModal} allEvents={allEvents} />}
             </div>
         </div>
     )

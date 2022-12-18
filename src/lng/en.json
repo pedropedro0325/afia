@@ -1,0 +1,22 @@
+{
+    "ln": "Languages",
+    "fr": "French",
+    "en": "English",
+    "bord": "Dashboard",
+    "patients": "Patients",
+    "medecins": "Doctors",
+    "infirmiers": "Infirmiers",
+    "consultations": "Consultations",
+    "personnels": "Staffs",
+    "postes": "Posts",
+    "evenements": "Events",
+    "agenda": "Agenda",
+    "salles": "Rooms",
+    "tysalles": "Type of rooms",
+    "facturations": "Billings",
+    "medicaments": "Pharmacy",
+    "departements": "Departments",
+    "actes": "Acts",
+    "statuts": "Status",
+    "specialites": "Specialities"
+}
