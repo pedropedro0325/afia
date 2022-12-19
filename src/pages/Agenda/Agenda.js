@@ -56,10 +56,9 @@ const Agenda = () => {
 
     const [openModal, setOpenModal] = useState(false)
 
-    const handleModal = useCallback(
-        (allEvents) => setOpenModal(true, allEvents.description),
-        []
-    )
+    // const handleModal = () => {
+    //     setOpenModal(true)
+    // }
 
 
     useEffect(() => {
@@ -81,8 +80,12 @@ const Agenda = () => {
     console.log('next', allEvents);
 
     const handleSelectEvent = useCallback(
-        (allEvents) => window.alert(allEvents.startDate),
+        (allEvents) => window.alert(allEvents.description),
         []
+    )
+
+    const handleModal = useCallback(
+        (allEvents) => setOpenModal(true, allEvents)
     )
 
     const [culture, setCulture] = useState('fr')

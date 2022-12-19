@@ -1,5 +1,5 @@
 {
-    "ln": "Languages",
+    "ln": "En",
     "fr": "French",
     "en": "English",
     "bord": "Dashboard",
@@ -18,5 +18,22 @@
     "departements": "Departments",
     "actes": "Acts",
     "statuts": "Status",
-    "specialites": "Specialities"
+    "specialites": "Specialities",
+    "listePatient": "The patient list",
+    "patient": "Patients",
+    "listeMedecin": "The list of doctors",
+    "medecin": "Doctors",
+    "prenom": "Name",
+    "nom": "Last-name",
+    "voir": "See",
+    "ajouterPatient": "Register a patient",
+    "adresse": "Address",
+    "tel": "Phone number",
+    "dateNaiss": "Date of birth",
+    "lieu": "Place of birth",
+    "identite": "Identity",
+    "adrePers": "Personal address",
+    "etatCivil": "Civil status",
+    "infoComp": "FURTHER INFORMATION",
+    "save": "Save"
 }

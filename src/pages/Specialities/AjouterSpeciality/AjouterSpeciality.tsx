@@ -38,19 +38,24 @@ const AjouterSpeciality = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-                            createSpeciality({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
-                            if (error) {
-                                setDescriptionFr('')
-                                setDescriptionEn('')
+                            try {
+                                createSpeciality({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
+                                if (error) {
+                                    setDescriptionFr('')
+                                    setDescriptionEn('')
+                                }
+                                navigate('/specialites')
                             }
-                            navigate('/specialites')
+                            catch (error: any) {
+                                alert(error)
+                            }
                         }}>
                             <div className='controls'>
                                 <div>
-                                    <input value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description Fr*' />
+                                    <input value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description Fr*' required />
                                 </div><br />
                                 <div>
-                                    <input value={descriptionEn} onChange={(e) => { setDescriptionEn(e.target.value) }} type="text" className='input' placeholder='Description En*' />
+                                    <input value={descriptionEn} onChange={(e) => { setDescriptionEn(e.target.value) }} type="text" className='input' placeholder='Description En*' required />
                                 </div>
                             </div>
                             <div className='save'>

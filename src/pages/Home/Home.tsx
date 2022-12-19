@@ -42,7 +42,7 @@ const Home = () => {
 
     const { t } = useTranslation()
 
-    if (loadingE) return <div className='err'>...loading</div>
+    if (loadingE) return <div className='err loader'></div>
     if (error) return <div className='err'>Quelque chose s'est mal passé</div>
 
     return (

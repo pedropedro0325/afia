@@ -23,8 +23,8 @@ const Sidebar = () => {
         <div className='sidebar'>
             <div className='cate'>
                 <div className='categories'>
-                    <NavLink to='/patient'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />{t('patients')}</li></NavLink>
-                    <NavLink to='/medecin'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />{t('medecins')}</li></NavLink>
+                    <NavLink to='/patients'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />{t('patients')}</li></NavLink>
+                    <NavLink to='/medecins'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />{t('medecins')}</li></NavLink>
                     <NavLink to='/personnels'><li><FontAwesomeIcon icon={faUsers} className="i-plus" />{t('personnels')}</li></NavLink>
                     <NavLink to='/postes'><li><FontAwesomeIcon icon={faList} className="i-plus" />{t('postes')}</li></NavLink>
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />{t('evenements')}</li></NavLink>

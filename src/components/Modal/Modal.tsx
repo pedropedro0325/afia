@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import './modal.scss'
-import { useEvent } from '../../hooks/Events/useEvent'
 
 const Modal = ({ closeModal }: any, { allEvents }: any) => {
 
-    const { eventId } = useParams()
-
-    const { data, error, loading } = useEvent(Number(eventId))
-
-    const [events, setEvents] = useState<[]>([])
-
-    useEffect(() => {
-        setEvents(data?.event)
-    }, [data])
+    const [event, setEvent] = useState<[]>([])
 
     return (
         <div className='modal'>

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './navbar.scss'
 import { useTranslation } from 'react-i18next'
 import logo from '../../assets/img/fr_logo.png'
-import logoB from '../../assets/img/an_logo.jpg'
+import logoB from '../../assets/img/an_logo.png'
 
 const Navbar = () => {
     const [isLanguageActive, setIsLanguageActive] = useState(false)
@@ -51,7 +51,7 @@ const Navbar = () => {
                         <div className='options' style={{ display: isLanguageActive ? 'block' : 'none' }}>
                             <ul>
                                 <li className='ln' onClick={() => handleChangeLn("fr")}><img src={logo} alt="" />{t('fr')}</li>
-                                <li className='ln' onClick={() => handleChangeLn("en")}><img src={logoB} alt="" />{t('en')}</li>
+                                <li className='ln' onClick={() => handleChangeLn("en")}><img src={logoB} className='an' alt="" />{t('en')}</li>
                             </ul>
                         </div>
                     </div>

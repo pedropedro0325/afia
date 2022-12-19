@@ -4,8 +4,11 @@ import './medecin.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useMedecins } from '../../../hooks/medecins/useMedecins'
+import { useTranslation } from 'react-i18next'
 
 const Medecin = () => {
+
+    const { t } = useTranslation()
 
     const { error, loading, data } = useMedecins()
 
@@ -17,24 +20,24 @@ const Medecin = () => {
 
     const [search, setSearch] = useState<string>('')
 
-    if (loading) return <div>...loading</div>
-    if (error) return <div>something went wrong</div>
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='medecin-container'>
-                    <h2>La liste des médecins</h2>
+                    <h2>{t('listeMedecin')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Médecin</h4>
+                            <h4>{t('medecin')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter-un-personnel`}>
+                            <Link to={`/medecins/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -45,9 +48,9 @@ const Medecin = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>email</th>
+                                    <th>{t('prenom')}</th>
+                                    <th>{t('nom')}</th>
+                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -62,7 +65,7 @@ const Medecin = () => {
                                             <td>{medecin.name}</td>
                                             <td>{medecin.lastName}</td>
                                             <td>{medecin.email}</td>
-                                            <td><Link to={`/personnel/detail/${medecin.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                            <td><Link to={`/personnel/detail/${medecin.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }

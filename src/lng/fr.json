@@ -1,5 +1,5 @@
 {
-    "ln": "Langues",
+    "ln": "Fr",
     "fr": "Français",
     "en": "Anglais",
     "bord": "Tableau de bord",
@@ -18,5 +18,22 @@
     "departements": "Départements",
     "actes": "Actes",
     "statuts": "Statuts",
-    "specialites": "Spécialités"
+    "specialites": "Spécialités",
+    "listePatient": "La liste des patients",
+    "patient": "Patients",
+    "listeMedecin": "La liste des médecins",
+    "medecin": "Médecins",
+    "prenom": "Prénom",
+    "nom": "Nom",
+    "voir": "Voir",
+    "ajouterPatient": "Enregistrer un pateint",
+    "adresse": "Adresse",
+    "tel": "Téléphone",
+    "dateNaiss": "Date de naissance",
+    "lieu": "Lieu",
+    "identite": "Identité",
+    "adrePers": "Adresse personnelle",
+    "etatCivil": "Etat civil",
+    "infoComp": "Informations complémentaires",
+    "save": "Enregistrer"
 }
