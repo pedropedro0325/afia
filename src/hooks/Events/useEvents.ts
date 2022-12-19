@@ -76,7 +76,10 @@ query Query {
           fr
           en
         }
-        price
+        price {
+          partakerIds
+          value
+        }
         specialities {
           id
           description {
@@ -92,6 +95,7 @@ query Query {
 
 export const useEvents = () => {
   const { error, loading, data } = useQuery(GET_EVENTS)
+  console.log("=============",error)
   return {
     error,
     data,
