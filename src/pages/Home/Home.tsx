@@ -12,6 +12,7 @@ import { usePatients } from '../../hooks/Patients/usePatients'
 import { useEffect, useState } from 'react'
 import { useMedecins } from '../../hooks/medecins/useMedecins'
 import { useEvents } from '../../hooks/Events/useEvents'
+import { useTranslation } from 'react-i18next'
 
 const Home = () => {
 
@@ -39,21 +40,24 @@ const Home = () => {
         setEvent(dataE?.events)
     }, [dataE])
 
-    if (loadingE) return <div>...loading</div>
-    if (error) return <div>something went wrong</div>
+    const { t } = useTranslation()
+
+    if (loadingE) return <div className='err loader'></div>
+    if (error) return <div className='err'>Quelque chose s'est mal passé</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
+                <section>
+                </section>
                 <div className='stats'>
-
                     <div className='parents'>
                         <div className='box'>
                             <div className='box-top'>
                                 <div>
                                     <h3>{patient?.length}</h3>
-                                    <h4>Patients</h4>
+                                    <h4>{t('patients')}</h4>
                                 </div>
                                 <div>
                                     <FontAwesomeIcon icon={faUser} className="i-user" />
@@ -65,7 +69,7 @@ const Home = () => {
                             <div className='box-top'>
                                 <div>
                                     <h3>{medecins?.length}</h3>
-                                    <h4>Médecins</h4>
+                                    <h4>{t('medecins')}</h4>
                                 </div>
                                 <div>
                                     <FontAwesomeIcon icon={faUserDoctor} className="i-user" />
@@ -77,7 +81,7 @@ const Home = () => {
                             <div className='box-top'>
                                 <div>
                                     <h3>{infirmiers?.length}</h3>
-                                    <h4>Infermiers</h4>
+                                    <h4>{t('infirmiers')}</h4>
                                 </div>
                                 <div>
                                     <FontAwesomeIcon icon={faUserNurse} className="i-user" />
@@ -89,7 +93,7 @@ const Home = () => {
                             <div className='box-top'>
                                 <div>
                                     <h3>{event?.length}</h3>
-                                    <h4>Consultations</h4>
+                                    <h4>{t('consultations')}</h4>
                                 </div>
                                 <div>
                                     <FontAwesomeIcon icon={faNotesMedical} className="i-user" />

@@ -1,24 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.scss'
-// import logo from '../../assets/img/fr_logo.png'
+import { useTranslation } from 'react-i18next'
+import logo from '../../assets/img/fr_logo.png'
+import logoB from '../../assets/img/an_logo.png'
 
 const Navbar = () => {
+    const [isLanguageActive, setIsLanguageActive] = useState(false)
+    const { t, i18n } = useTranslation()
 
-    const [open, setOpen] = useState(false)
+    const handleChangeLn = (lng: any) => {
+        i18n.changeLanguage(lng)
+        localStorage.setItem("lng", lng)
+        setIsLanguageActive((prev) => !prev)
+        setIsLanguageActive(false)
+    }
 
-    const Menus = ['Compte', 'Paramètre', 'Déconnexion']
-    const Langues = ['FR', 'EN']
-
-    // const menuRef = useRef()
-    // const userRef = useRef()
-
-    // window.addEventListener("click", (e) => {
-    //     if (e.target !== menuRef.current && e.target !== userRef.current) {
-    //         setOpen(false)
-    //     }
-
-    // })
+    const handleLanguage = () => {
+        setIsLanguageActive((prev) => !prev)
+    }
 
     return (
         <>
@@ -27,25 +27,35 @@ const Navbar = () => {
                     <div className='logo'>
                         <NavLink to='/'><h2>Afia</h2></NavLink>
                     </div>
-                    <NavLink to='/'><li>Tableau de bord</li></NavLink>
+                    <NavLink to='/'><li>{t('bord')}</li></NavLink>
                 </div>
                 <div className='right'>
-                    <li>
-                        <h4 className='lang' onClick={() => setOpen(!open)}>Langues</h4>
-                        {
-                            open && (
-                                <div className='menu'>
-                                    <ul>
-                                        {
-                                            Langues.map((el: any) => (
-                                                <li onClick={() => setOpen(false)} key={el}>{el}</li>
-                                            ))
-                                        }
-                                    </ul>
-                                </div>
-                            )}
-                    </li>
-                    {/* <li><img src={logo} alt="" /></li> */}
+
+                    {/* <div className='language-wrapper'>
+                        <h4 onClick={handleLanguage}>{language.find((lang) => lang.code.includes(languageCode))?.country}</h4>
+                        <div className='options' style={{ display: isLanguageActive ? 'block' : 'none' }}>
+                            {
+                                language?.map((lang: any) => (
+                                    <li onClick={() => {
+                                        handleChangeLanguage(lang.code)
+                                        setIsLanguageActive(false)
+                                    }
+                                    }>{lang.country}</li>
+                                ))
+                            }
+                        </div>
+                    </div> */}
+
+                    <div className='language-wrapper'>
+                        <h4 onClick={handleLanguage}>{t('ln')}</h4>
+                        <div className='options' style={{ display: isLanguageActive ? 'block' : 'none' }}>
+                            <ul>
+                                <li className='ln' onClick={() => handleChangeLn("fr")}><img src={logo} alt="" />{t('fr')}</li>
+                                <li className='ln' onClick={() => handleChangeLn("en")}><img src={logoB} className='an' alt="" />{t('en')}</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <li >
                         <h5 className='user'></h5>
                     </li>

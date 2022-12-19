@@ -27,6 +27,7 @@ import AjouterTypeSalle from './pages/TypeSalles/AjouterTypes/AjouterTypeSalle';
 import AjouterActe from './pages/Actes/AjouterActe/AjouterActe';
 import AjouterStatus from './pages/Status/AjouterStatus/AjouterStatus';
 import ErrorPage from './pages/Error/ErrorPage';
+import Event from './pages/Events/DetailEvent/Event';
 
 const App = () => {
   return (
@@ -35,14 +36,15 @@ const App = () => {
         <Route path='/' element={<Navigation />} >
           <Route path='' element={<Home />} />
           <Route index element={<Home />} />
-          <Route path='/patient' element={<Patient />} />
-          <Route path='/medecin' element={<Medecin />} />
+          <Route path='/patients' element={<Patient />} />
+          <Route path='/medecins' element={<Medecin />} />
           <Route path='/personnels' element={<ListePersonnel />} />
           <Route path='/agenda' element={<Agenda />} />
+          <Route path='/agenda/detail/evenement:eventId' element={<Event />} />
           <Route path='/patient/detail/:patientId' element={<DetailPatient />} />
-          <Route path='/ajouter-un-patient' element={<AjouterPatient />} />
+          <Route path='/patients/ajouter' element={<AjouterPatient />} />
           <Route path='/personnel/detail/:partakerId' element={<DetailMedecin />} />
-          <Route path='/ajouter-un-personnel' element={<AjouterPersonnel />} />
+          <Route path='/medecin/ajouter' element={<AjouterPersonnel />} />
           <Route path='/evenements' element={<Events />} />
           <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
           <Route path='/specialites' element={<Specialites />} />

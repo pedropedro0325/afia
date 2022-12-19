@@ -60,10 +60,6 @@
                 transition: all .5s;
             }
 
-            img {
-                width: 1.5rem;
-            }
-
             .lang {
                 position: relative;
             }
@@ -94,6 +90,56 @@
                     }
                 }
             }
+        }
+
+        .language-wrapper {
+            position: relative;
+
+            .options {
+                position: absolute;
+                right: -2rem;
+                top: 2em;
+                background-color: #fff;
+                border-radius: 0.4em;
+                padding: 0.4em 0.3em;
+                box-shadow: #2c3e508e .1rem .1rem .2rem;
+
+                &>* {
+                    cursor: pointer;
+                }
+
+                .ln {
+                    display: flex;
+                }
+
+                img {
+                    width: 1.8rem;
+                }
+
+                li {
+                    color: #2C3E50;
+
+                    &:hover {
+                        background-color: #969ba0a8;
+                        border-radius: .3rem;
+                    }
+                }
+
+                .an {
+                    margin-left: .3rem;
+                    margin-right: .2rem;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        h4 {
+            border: none;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
         }
     }
 

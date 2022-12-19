@@ -1,7 +1,8 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import './ajouterPatient.scss'
 import { gql, useMutation } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 
 const CREATE_PATIENT = gql`
     mutation CreatePatient($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: String, $email: String, $description: String) {
@@ -19,71 +20,85 @@ const CREATE_PATIENT = gql`
 `
 
 const AjouterPatient = () => {
+
+    const navigate = useNavigate()
+
+    const { t } = useTranslation()
+
     let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, phoneNumber: any, email: any, description: any
     const [createPatient, { error, loading }] = useMutation(CREATE_PATIENT)
 
-    if (loading) return 'Submitting...'
-    if (error) return `Submission error! ${error.message}`
+    if (loading) return 'Soumission...'
+    if (error) return `
+    Erreur de soumission ! ${error.message}`
 
     return (
         <div className='home-container'>
             <Outlet />
             <div className='add-patient'>
-                <h2>Enrégistrer un patient</h2>
+                <h2>{t('ajouterPatient')}</h2>
                 <div className='form'>
                     <form onSubmit={e => {
                         e.preventDefault()
-                        createPatient({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: phoneNumber.value, email: email.value, description: description.value } })
+
+                        try {
+                            createPatient({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: phoneNumber.value, email: email.value, description: description.value } })
+                            navigate('/patients')
+                        }
+                        catch (error: any) {
+                            return `
+                            Erreur de soumission ! ${error.message}`
+                        }
                     }}>
                         <div className='form-top'>
                             <div className='card identite'>
-                                <h3>Identité</h3>
+                                <h3>{t('identite')}</h3>
                                 <div className='control'>
-                                    <label>Prénom</label><br />
-                                    <input ref={node => { lastName = node }} type="text" />
+                                    <label>{t('prenom')}</label><br />
+                                    <input ref={node => { lastName = node }} type="text" required />
                                 </div>
                                 <div className='control'>
-                                    <label>Nom</label><br />
-                                    <input ref={node => { name = node }} type="text" />
+                                    <label>{t('nom')}</label><br />
+                                    <input ref={node => { name = node }} type="text" required />
                                 </div>
                             </div>
                             <div className='card adresse'>
-                                <h3>Adresse personnelle</h3>
+                                <h3>{t('adrePers')}</h3>
                                 <div className='control'>
-                                    <label>Adresse</label><br />
-                                    <input ref={node => { adressId = node }} type="text" />
+                                    <label>{t('adresse')}</label><br />
+                                    <input ref={node => { adressId = node }} type="text" required />
                                 </div>
                                 <div className='control'>
-                                    <label>Téléphone</label><br />
-                                    <input ref={node => { phoneNumber = node }} type="text" />
+                                    <label>{t('tel')}</label><br />
+                                    <input ref={node => { phoneNumber = node }} type="text" required />
                                 </div>
                             </div>
                         </div>
                         <div className='form-bottom'>
                             <div className='card etat-civil'>
-                                <h3>Etat civil</h3>
+                                <h3>{t('etatCivil')}</h3>
                                 <div className='control'>
-                                    <label>Date de naissance</label><br />
-                                    <input ref={node => { birthDate = node }} type="date" />
+                                    <label>{t('dateNaiss')}</label><br />
+                                    <input ref={node => { birthDate = node }} type="date" required />
                                 </div>
                                 <div className='control'>
-                                    <label>Lieu</label><br />
-                                    <input ref={node => { birthCityId = node }} type="text" />
+                                    <label>{t('lieu')}</label><br />
+                                    <input ref={node => { birthCityId = node }} type="text" required />
                                 </div>
                             </div>
                             <div className='card complement'>
-                                <h3>Informations complémentaires</h3>
+                                <h3>{t('infoComp')}</h3>
                                 <div className='control'>
                                     <label>Email</label><br />
-                                    <input ref={node => { email = node }} type="text" />
+                                    <input ref={node => { email = node }} type="text" required />
                                 </div>
                                 <div className='control'>
                                     <label>Description</label><br />
-                                    <input ref={node => { description = node }} type="text" />
+                                    <input ref={node => { description = node }} type="text" required />
                                 </div>
                             </div>
                         </div>
-                        <button type='submit' className='btn-save'>Enrégistrer</button>
+                        <button type='submit' className='btn-save'>{t('save')}</button>
                     </form>
                 </div>
             </div>
