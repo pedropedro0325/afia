@@ -44,13 +44,13 @@ const App = () => {
           <Route path='/patient/detail/:patientId' element={<DetailPatient />} />
           <Route path='/patients/ajouter' element={<AjouterPatient />} />
           <Route path='/personnel/detail/:partakerId' element={<DetailMedecin />} />
-          <Route path='/medecin/ajouter' element={<AjouterPersonnel />} />
+          <Route path='/personnels/ajouter' element={<AjouterPersonnel />} />
           <Route path='/evenements' element={<Events />} />
-          <Route path='/ajouter-un-evenement' element={<AjouterEvent />} />
+          <Route path='/evenements/ajouter' element={<AjouterEvent />} />
           <Route path='/specialites' element={<Specialites />} />
           <Route path='/postes' element={<Types />} />
           <Route path='/ajouter/specialite' element={<AjouterSpeciality />} />
-          <Route path='/ajouter/type' element={<AjouterType />} />
+          <Route path='/postes/ajouter' element={<AjouterType />} />
           <Route path='/salles' element={<ListeChambres />} />
           <Route path='/facturation' element={<ListeFacturations />} />
           <Route path='/medicament' element={<Medicaments />} />

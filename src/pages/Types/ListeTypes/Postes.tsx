@@ -4,33 +4,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './types.scss'
 import { useTypes } from '../../../hooks/Types/useTypes'
+import { useTranslation } from 'react-i18next'
 
 const Types = () => {
+
+    const { t } = useTranslation()
 
     const { data, loading, error } = useTypes()
 
     const [search, setSearch] = useState('')
 
 
-    if (loading) return <div>...loading</div>
-    if (error) return <div>something went wrong</div>
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='types-container'>
-                    <h2>La liste des postes</h2>
+                    <h2>{t('listePoste')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Postes</h4>
+                            <h4>{t('poste')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/type`}>
+                            <Link to={`/postes/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -43,7 +46,7 @@ const Types = () => {
                                 <tr>
                                     <th>N°</th>
                                     <th>Description</th>
-                                    <th>Statut</th>
+                                    <th>{t('statut')}</th>
                                 </tr>
                             </thead>
                             <tbody>
