@@ -14,7 +14,7 @@ const Patient = () => {
 
     const [search, setSearch] = useState('')
 
-    console.log({ data });
+    console.log({ data })
 
     if (loading) return <div className='err loader'></div>
     if (error) return <div className='err'>something went wrong</div>

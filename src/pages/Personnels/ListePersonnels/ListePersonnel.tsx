@@ -4,8 +4,11 @@ import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
+import { useTranslation } from 'react-i18next'
 
 const ListePersonnel = () => {
+
+    const { t } = useTranslation()
 
     const { error, loading, data } = usePersonnels()
 
@@ -19,25 +22,25 @@ const ListePersonnel = () => {
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div>...loading</div>
-    if (error) return <div>something went wrong</div>
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='personnel-container'>
-                    <h2>La liste des personnels</h2>
+                    <h2>{t('listePers')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Personnels</h4>
+                            <h4>{t('personnel')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter-un-personnel`}>
+                            <Link to={`/personnels/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -48,10 +51,10 @@ const ListePersonnel = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
+                                    <th>{t('prenom')}</th>
+                                    <th>{t('nom')}</th>
                                     <th>Email</th>
-                                    <th>Type</th>
+                                    <th>{t('type')}</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>
@@ -67,7 +70,7 @@ const ListePersonnel = () => {
                                             <td>{el.email}</td>
                                             <td>{el.partakerType.description}</td>
                                             <td>{el.description}</td>
-                                            <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>voir</button></Link></td>
+                                            <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }

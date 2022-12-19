@@ -11,6 +11,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import './agenda.scss'
 import { useEvents } from '../../hooks/Events/useEvents';
 import Modal from '../../components/Modal/Modal';
+import { useTranslation } from 'react-i18next'
 
 
 
@@ -49,6 +50,8 @@ const localizer = dateFnsLocalizer({
 // events.unshift('clear')
 
 const Agenda = () => {
+
+    const { t } = useTranslation()
 
     const { error, loading, data } = useEvents();
 
@@ -106,15 +109,18 @@ const Agenda = () => {
         [culture]
     )
 
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
+
     return (
         <div className='home-container'>
             <Outlet />
             <div className='agenda'>
                 <div className='agenda-top'>
                     <div className='addEvent'>
-                        <h2>L'agenda</h2>
+                        <h2>{t('agendas')}</h2>
                         <br />
-                        <Link to={`/ajouter-un-evenement`}><button className='btn-add'>Ajouter un évènement</button></Link>
+                        <Link to={`/evenements/ajouter`}><button className='btn-add'>{t('ajouterEv')}</button></Link>
                     </div>
                 </div>
                 <div className='calendrier'>

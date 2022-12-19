@@ -37,7 +37,7 @@ const Medecin = () => {
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/medecins/ajouter`}>
+                            <Link to={`/personnels/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
