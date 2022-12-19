@@ -5,8 +5,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './events.scss'
 import { useEvents } from '../../../hooks/Events/useEvents'
+import { useTranslation } from 'react-i18next'
 
 const Events = () => {
+
+    const { t } = useTranslation()
 
     const { error, loading, data } = useEvents()
 
@@ -36,25 +39,25 @@ const Events = () => {
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div>loading...</div>
-    if (error) return <div>something went wrong</div>
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='event-container'>
-                    <h2>La liste des évènements</h2>
+                    <h2>{t('listeEv')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Evènements</h4>
+                            <h4>{t('event')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter-un-evenement`}>
+                            <Link to={`/evenements/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -66,10 +69,10 @@ const Events = () => {
                             <thead>
                                 <tr>
                                     <th>Description</th>
-                                    <th>Date de début</th>
-                                    <th>Date de fin</th>
-                                    <th>Chambre</th>
-                                    <th>Acte</th>
+                                    <th>{t('dateD')}</th>
+                                    <th>{t('dateF')}</th>
+                                    <th>{t('chambre')}</th>
+                                    <th>{t('acte')}</th>
                                     <th>Patient</th>
                                     <th>Action</th>
                                 </tr>

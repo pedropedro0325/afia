@@ -5,8 +5,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './chambre.scss'
 import { useVenues } from '../../../hooks/Venues/useVenues'
+import { useTranslation } from 'react-i18next'
 
 const ListeChambres = () => {
+
+    const { t } = useTranslation()
 
     const { data, error, loading } = useVenues()
 
@@ -18,16 +21,19 @@ const ListeChambres = () => {
 
     const [search, setSearch] = useState('')
 
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
+
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='chambre-container'>
-                    <h2>La liste des salles</h2>
+                    <h2>{t('listeSalle')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Salles</h4>
+                            <h4>{t('salle')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -44,7 +50,7 @@ const ListeChambres = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>N° de salle</th>
+                                    <th>{t('nSalle')}</th>
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>N° de téléphone</th>
