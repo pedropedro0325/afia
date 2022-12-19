@@ -8,7 +8,10 @@ query Acts {
       fr
       en
     }
-    price
+    price {
+      partakerIds
+      value
+    }
     specialities {
       id
       description {

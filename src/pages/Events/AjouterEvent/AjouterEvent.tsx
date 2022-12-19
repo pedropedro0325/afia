@@ -10,65 +10,49 @@ import { useActes } from '../../../hooks/Actes/useActes'
 import { useForm } from '../../../utils/hooks'
 
 const CREATE_EVENT = gql`
-    mutation CreateEvent($description: String!, $statusId: Int, $startDate: dateScalar, $endDate: dateScalar, $patientId: Int, $partakerIds: [Int], $venueId: Int, $actIds: [Int]) {
-  createEvent(description: $description, statusId: $statusId, startDate: $startDate, endDate: $endDate, patientId: $patientId, partakerIds: $partakerIds, venueId: $venueId, actIds: $actIds) {
-    id
-    description
-    status {
-      id
-      description {
-        fr
-        en
-      }
-    }
-    startDate
-    endDate
-    venue {
-      id
-      venueType {
-        id
-        description
-      }
-      phoneNumber
-      description
-    }
-    care {
+ mutation CreateEvent(
+    $description: String!
+    $statusId: Int
+    $startDate: dateScalar
+    $endDate: dateScalar
+    $patientId: Int
+    $partakerIds: [Int]
+    $venueId: Int
+    $actIds: [Int]
+  ) {
+    createEvent(
+      description: $description
+      statusId: $statusId
+      startDate: $startDate
+      endDate: $endDate
+      patientId: $patientId
+      partakerIds: $partakerIds
+      venueId: $venueId
+      actIds: $actIds
+    ) {
       id
       description
-      specialities {
+      status {
         id
         description {
           fr
           en
         }
       }
-      diseases {
+      startDate
+      endDate
+      venue {
         id
-        description {
-          fr
-          en
-        }
-        diseaseLanguage {
+        venueType {
           id
           description
         }
+        phoneNumber
+        description
       }
-      patient {
+      care {
         id
-        name
-      }
-      partakers {
-        name
-        lastName
-        id
-      }
-      acts {
-        id
-        description {
-        fr
-        en  
-        }
-        price
+        description
         specialities {
           id
           description {
@@ -76,10 +60,47 @@ const CREATE_EVENT = gql`
             en
           }
         }
+        diseases {
+          id
+          description {
+            fr
+            en
+          }
+          diseaseLanguage {
+            id
+            description
+          }
+        }
+        patient {
+          id
+          name
+        }
+        partakers {
+          name
+          lastName
+          id
+        }
+        acts {
+          id
+          description {
+            fr
+            en
+          }
+          price {
+            partakerIds
+            value
+          }
+          specialities {
+            id
+            description {
+              fr
+              en
+            }
+          }
+        }
       }
     }
-  }
-}
+  }  
 `
 
 const AjouterEvent = () => {
@@ -145,7 +166,6 @@ const AjouterEvent = () => {
     async function formCallback() {
         const valuesCallBack: any = values
         // send "values" to database
-        console.log("=================", values)
         createEvent({
             variables: {
                 description: valuesCallBack.description, startDate: valuesCallBack.startDate, endDate: valuesCallBack.endDate, statusId: Number(valuesCallBack.statusId),

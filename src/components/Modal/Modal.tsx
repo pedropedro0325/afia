@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './modal.scss'
 
-const Modal = ({ closeModal }: any, { allEvents }: any) => {
+interface ModalProps {
+    closeModal: any;
+    selectedEvent: any;
+  }
+
+  
+const Modal: React.FC<ModalProps> =  ({ closeModal , selectedEvent }) => {
 
     const [event, setEvent] = useState<[]>([])
 
@@ -12,7 +18,7 @@ const Modal = ({ closeModal }: any, { allEvents }: any) => {
                     <button onClick={() => closeModal(false)}>X</button>
                 </div>
                 <div className='title'>
-                    <h2>{allEvents?.description}</h2>
+                    <h2>{selectedEvent?.description}</h2>
                 </div>
                 <div className='body'>
                     <p>

@@ -52,9 +52,11 @@ const Agenda = () => {
 
     const { error, loading, data } = useEvents();
 
-    const [allEvents, setAllEvents] = useState([])
+    const [allEvents, setAllEvents] = useState([]);
 
-    const [openModal, setOpenModal] = useState(false)
+    const [openModal, setOpenModal] = useState(false);
+
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     // const handleModal = () => {
     //     setOpenModal(true)
@@ -84,9 +86,14 @@ const Agenda = () => {
         []
     )
 
-    const handleModal = useCallback(
-        (allEvents) => setOpenModal(true, allEvents)
-    )
+
+
+    const handleModal = ( event) =>{
+        console.log("=================selectedEvent", event)
+        setSelectedEvent(event)
+        setOpenModal(true, event)
+    }
+    
 
     const [culture, setCulture] = useState('fr')
     const [rightToLeft, setRightToLeft] = useState(false)
@@ -126,7 +133,7 @@ const Agenda = () => {
                         style={{ height: 500, padding: "10px" }}
                     ></Calendar>
                 </div>
-                {openModal && <Modal closeModal={setOpenModal} allEvents={allEvents} />}
+                {openModal && <Modal closeModal={setOpenModal} selectedEvent={selectedEvent} />}
             </div>
         </div>
     )
