@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 import { useVenuesTypes } from '../../../hooks/TypeSalles/useTypeSalles'
 import { useForm } from '../../../utils/hooks'
 import './ajouterSalle.scss'
+import { useTranslation } from 'react-i18next'
 
 const CREATE_VENUE = gql`
     mutation CreateEvent($venueTypeId: Int, $phoneNumber: String, $description: String) {
@@ -20,6 +21,10 @@ const CREATE_VENUE = gql`
 `
 
 const AjouterSalle = () => {
+
+    const navigate = useNavigate()
+
+    const { t } = useTranslation()
 
     const [createVenue, { data, loading, error }] = useMutation(CREATE_VENUE)
 
@@ -38,22 +43,27 @@ const AjouterSalle = () => {
         initialState
     );
 
-    // if (loading) return <div>...loading</div>
-    // if (error) return <div>something went wrong</div>
-
     async function formCallback() {
-        const valuesCallBack: any = values
-        // send "values" to database
-        console.log("=================", values)
-        createVenue({
-            variables: {
-                venueTypeId: Number(valuesCallBack.venueTypeId), phoneNumber: valuesCallBack.phoneNumber, description: valuesCallBack.description
+
+        try {
+            const valuesCallBack: any = values
+            // send "values" to database
+            console.log("=================", values)
+            createVenue({
+                variables: {
+                    venueTypeId: Number(valuesCallBack.venueTypeId), phoneNumber: valuesCallBack.phoneNumber, description: valuesCallBack.description
+                }
+            })
+            if (!error) {
+                valuesCallBack.venueTypeId = 0
+                valuesCallBack.phoneNumber = ''
+                valuesCallBack.description = ''
             }
-        })
-        if (!error) {
-            valuesCallBack.venueTypeId = 0
-            valuesCallBack.phoneNumber = ''
-            valuesCallBack.description = ''
+            navigate('/salles')
+        }
+        catch (error: any) {
+            if (error) return `
+            Erreur de soumission ! ${error.message}`
         }
     }
 
@@ -62,17 +72,17 @@ const AjouterSalle = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterType-container'>
-                    <h2>Ajouter une salle</h2>
+                    <h2>{t('ajouterSalle')}</h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
-                                    <input name="description" onChange={onChange} type="text" className='input' placeholder='Description*' />
+                                    <input name="description" onChange={onChange} type="text" className='input' placeholder='Description*' required />
                                 </div><br />
                                 <div>
-                                    <select name="venueTypeId" onChange={onChangeOption} className='input' placeholder='Type de salle*'>
-                                        <option>Choisir un type de salle</option>
+                                    <select name="venueTypeId" onChange={onChangeOption} className='input' placeholder='Type de salle*' required>
+                                        <option>{t('selectTypeSalle')}</option>
                                         {
                                             dataV?.venueTypes.map((el: any) => (
                                                 <option key={el.id} value={el.id}>{el.description}</option>
@@ -81,15 +91,16 @@ const AjouterSalle = () => {
                                     </select>
                                 </div><br />
                                 <div>
-                                    <input name="phoneNumber" onChange={onChange} type="text" className='input' placeholder='N° de téléphone*' />
+                                    <label htmlFor="">{t('nTel')}</label>
+                                    <input name="phoneNumber" onChange={onChange} type="text" className='input' placeholder='*' required />
                                 </div>
                             </div>
                             <div className='save'>
                                 <div>
-                                    <button type='submit' className='btn-save'>Enrégistrer</button>
+                                    <button type='submit' className='btn-save'>{t('save')}</button>
                                 </div>
                                 <div>
-                                    <button className='btn-cancel'>Annuler</button>
+                                    <button className='btn-cancel'>{t('annuler')}</button>
                                 </div>
                             </div>
                         </form>

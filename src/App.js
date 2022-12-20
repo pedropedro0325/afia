@@ -40,16 +40,16 @@ const App = () => {
           <Route path='/medecins' element={<Medecin />} />
           <Route path='/personnels' element={<ListePersonnel />} />
           <Route path='/agenda' element={<Agenda />} />
-          <Route path='/agenda/detail/evenement:eventId' element={<Event />} />
-          <Route path='/patient/detail/:patientId' element={<DetailPatient />} />
+          <Route path='/patients/detail/:patientId' element={<DetailPatient />} />
           <Route path='/patients/ajouter' element={<AjouterPatient />} />
-          <Route path='/personnel/detail/:partakerId' element={<DetailMedecin />} />
+          <Route path='/personnels/detail/:partakerId' element={<DetailMedecin />} />
           <Route path='/personnels/ajouter' element={<AjouterPersonnel />} />
           <Route path='/evenements' element={<Events />} />
           <Route path='/evenements/ajouter' element={<AjouterEvent />} />
+          <Route path='/evenements/detail/:eventId' element={<Event />} />
           <Route path='/specialites' element={<Specialites />} />
           <Route path='/postes' element={<Types />} />
-          <Route path='/ajouter/specialite' element={<AjouterSpeciality />} />
+          <Route path='/specialites/ajouter' element={<AjouterSpeciality />} />
           <Route path='/postes/ajouter' element={<AjouterType />} />
           <Route path='/salles' element={<ListeChambres />} />
           <Route path='/facturation' element={<ListeFacturations />} />
@@ -58,10 +58,10 @@ const App = () => {
           <Route path='/actes' element={<Actes />} />
           <Route path='/salle/types' element={<Salles />} />
           <Route path='/status' element={<Status />} />
-          <Route path='/ajouter/salle' element={<AjouterSalle />} />
-          <Route path='/ajouter/type/salle' element={<AjouterTypeSalle />} />
-          <Route path='/ajouter/acte' element={<AjouterActe />} />
-          <Route path='/ajouter/status' element={<AjouterStatus />} />
+          <Route path='/salles/ajouter' element={<AjouterSalle />} />
+          <Route path='/salle/types/ajouter' element={<AjouterTypeSalle />} />
+          <Route path='/actes/ajouter' element={<AjouterActe />} />
+          <Route path='/status/ajouter' element={<AjouterStatus />} />
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>

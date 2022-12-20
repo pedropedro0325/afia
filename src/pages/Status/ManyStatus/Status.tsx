@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useStatus } from '../../../hooks/Status/useStatus'
+import { useTranslation } from 'react-i18next'
 
 const Status = () => {
+
+    const { t } = useTranslation()
 
     const { data, error, loading } = useStatus()
 
@@ -17,22 +20,25 @@ const Status = () => {
 
     const [search, setSearch] = useState('')
 
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
+
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='chambre-container'>
-                    <h2>La liste des statut</h2>
+                    <h2>{t('listeStatut')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Statut</h4>
+                            <h4>{t('statut')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/status`}>
+                            <Link to={`/status/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -43,7 +49,7 @@ const Status = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>N° de salle</th>
+                                    <th>N°</th>
                                     <th>Description Fr</th>
                                     <th>Description En</th>
                                     <th>Action</th>

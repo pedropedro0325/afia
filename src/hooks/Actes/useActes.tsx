@@ -15,8 +15,8 @@ query Acts {
     specialities {
       id
       description {
-        en
         fr
+        en
       }
     }
   }

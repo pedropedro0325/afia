@@ -1,6 +1,60 @@
+.h2 {
+    margin: 1rem 3.2rem 1rem 2rem;
+    background-color: white;
+    padding: .8rem;
+    border-radius: .2rem;
+}
+
 .event {
-    width: 250px;
-    height: 250px;
-    border-radius: .4rem;
-    box-shadow: .1rem .2rem .2rem rgba(0, 0, 0, 0.26);
+    margin: 1rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+
+    h5 {
+        border: .1rem solid black;
+        width: max-content;
+        margin-bottom: .4rem;
+        border-radius: .2rem;
+        padding: .5rem;
+    }
+
+    .desc {
+        width: 55%;
+
+        .desc1 {
+            background-color: white;
+            border-radius: .3rem;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+    }
+
+    .date {
+        width: 40%;
+
+        .dte {
+            background-color: white;
+            border-radius: .3rem;
+            // border: rgb(118, 44, 187) .1rem solid;
+            border-radius: .2rem;
+            margin-bottom: .8rem;
+            padding: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .dt {
+            background-color: white;
+            border-radius: .2rem;
+            padding: 2.2rem 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+    }
 }

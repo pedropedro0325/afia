@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './dossierMedical.scss'
 import { useEvents } from '../../hooks/Events/useEvents';
+import { useTranslation } from 'react-i18next'
 
 const DossierMedical = ({ data }: any) => {
+
+    const { t } = useTranslation()
 
     const [toggleState, setToggleState] = useState(1);
 
@@ -11,9 +16,9 @@ const DossierMedical = ({ data }: any) => {
         setToggleState(index);
     };
 
-    // const { eventId } = useParams()
-
     const { data: dataE, loading, error } = useEvents()
+
+    const [search, setSearch] = useState('')
 
     return (
         <div>
@@ -22,19 +27,19 @@ const DossierMedical = ({ data }: any) => {
                     className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
                     onClick={() => toggleTab(1)}
                 >
-                    <h4>Allergies</h4>
+                    <h4>{t('allergie')}</h4>
                 </button>
                 <button
                     className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
                     onClick={() => toggleTab(2)}
                 >
-                    <h4>Informations</h4>
+                    <h4>{t('infos')}</h4>
                 </button>
                 <button
                     className={toggleState === 3 ? "tabs active-tabs" : "tabs"}
                     onClick={() => toggleTab(3)}
                 >
-                    <h4>Antécédents</h4>
+                    <h4>{t('antecedent')}</h4>
                 </button>
             </div>
             <div className="content-tabs">
@@ -45,11 +50,11 @@ const DossierMedical = ({ data }: any) => {
                             <h4>{data.patient.name} {data.patient.lastName}</h4>
                             <hr />
                             <br />
-                            <h5>Allergie</h5>
+                            <h5>{t('allergie')}</h5>
                             <p>_ Aux arrachides</p>
                         </li>
                         <li>
-                            <h5>Données cliniques</h5>
+                            <h5>{t('dClinique')}</h5>
                             <p>_ Immuno-déprimé</p>
                             <p>_ Insuffisance hépatique</p>
                             <p>_ Corps étrangers métaliques</p>
@@ -61,10 +66,10 @@ const DossierMedical = ({ data }: any) => {
                     className={toggleState === 2 ? "content  active-content" : "content"}>
                     <h4>04/06/2022</h4>
                     <hr />
-                    <h4>Evaluation des besoins</h4>
+                    <h4>{t('evalu')}</h4>
                     <ul className='desc'>
                         <li>
-                            <h5>Généralités</h5>
+                            <h5>{t('generalite')}</h5>
                             <p>_Date d'entrée dans l'unité : le 04/06/2022</p>
                             <p>_Motif d'hospitalisation : hta et depression(trouble bipolaire) depuis 15 ans</p>
                         </li>
@@ -73,7 +78,7 @@ const DossierMedical = ({ data }: any) => {
                             <p>_Vestiaire : Non</p>
                         </li>
                         <li>
-                            <h5>Respiration</h5>
+                            <h5>{t('respi')}</h5>
                             <p>_Respiration : Normal</p>
                             <p>_Oxygène : Non</p>
                             <p>_Aspiration : Non</p>
@@ -87,7 +92,7 @@ const DossierMedical = ({ data }: any) => {
                             <p>_Taille : (m) : 1,67</p>
                         </li>
                         <li>
-                            <h5>Hygiène corporelle</h5>
+                            <h5>{t('hCorps')}</h5>
                             <p>_Etat cutané : Peau saine</p>
                         </li>
                     </ul>
@@ -97,23 +102,37 @@ const DossierMedical = ({ data }: any) => {
                     className={toggleState === 3 ? "content  active-content" : "content"}>
                     <h4>{data.patient.name} {data.patient.lastName}</h4>
                     <br />
-                    <h4>Antécédents médicaux</h4>
+                    <h4>{t('antecedent')}</h4>
                     <hr />
                     <br />
+                    <div className='tops'>
+                        <div className='nav'>
+                            <h4>{t('event')}</h4>
+                            <div className='search'>
+                                <input type="search" placeholder='Recherche'
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
                     <table>
                         <tr>
                             <th>Date</th>
                             <th>Description</th>
-                            <th>Acte</th>
+                            <th>{t('acte')}</th>
+                            <th>Action</th>
                         </tr>
                         {
-                            dataE?.events?.filter((curDate: any) => {
+                            dataE?.events?.filter((el: any) => {
+                                return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
+                            }).filter((curDate: any) => {
                                 return curDate?.care.patient?.id === data?.patient.id
                             }).map((el: any) => (
                                 <tr key={el.id}>
                                     <td>{el.startDate}</td>
                                     <td>{el.description}</td>
                                     <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                    <td><Link to={`/evenements/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                 </tr>
                             ))
                         }

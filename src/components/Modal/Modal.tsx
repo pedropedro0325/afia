@@ -4,12 +4,18 @@ import './modal.scss'
 interface ModalProps {
     closeModal: any;
     selectedEvent: any;
-  }
+}
 
-  
-const Modal: React.FC<ModalProps> =  ({ closeModal , selectedEvent }) => {
+
+const Modal: React.FC<ModalProps> = ({ closeModal, selectedEvent }) => {
 
     const [event, setEvent] = useState<[]>([])
+    useEffect(() => {
+        setEvent(selectedEvent)
+        console.log(selectedEvent);
+
+    })
+
 
     return (
         <div className='modal'>
@@ -22,7 +28,7 @@ const Modal: React.FC<ModalProps> =  ({ closeModal , selectedEvent }) => {
                 </div>
                 <div className='body'>
                     <p>
-                        lorem ipsum
+
                     </p>
                 </div>
                 <div className='footer'>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './ajouterSpeciality.scss'
 import { gql, useMutation } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 
 const CREATE_SPECIALITY = gql`
     mutation Mutation($descriptionFr: String, $descriptionEn: String) {
@@ -19,6 +20,8 @@ const AjouterSpeciality = () => {
 
     const navigate = useNavigate()
 
+    const { t } = useTranslation()
+
     const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
 
     const [descriptionFr, setDescriptionFr] = useState<string>('')
@@ -33,7 +36,7 @@ const AjouterSpeciality = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterSpeciality-container'>
-                    <h2>Ajouter une spécialité</h2>
+                    <h2>{t('ajouterSpec')}</h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={e => {
@@ -60,10 +63,10 @@ const AjouterSpeciality = () => {
                             </div>
                             <div className='save'>
                                 <div>
-                                    <button type='submit' className='btn-save'>Enrégistrer</button>
+                                    <button type='submit' className='btn-save'>{t('save')}</button>
                                 </div>
                                 <div>
-                                    <button className='btn-cancel'>Annuler</button>
+                                    <button className='btn-cancel'>{t('annuler')}</button>
                                 </div>
                             </div>
                         </form>

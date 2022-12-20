@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './listeSpecialites.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
+import { useTranslation } from 'react-i18next'
 
 const Specialites = () => {
+
+    const { t } = useTranslation()
 
     const { data, loading, error } = useSpecialities()
     const [specs, setSpecs] = useState<[]>([])
@@ -17,25 +20,25 @@ const Specialites = () => {
     const [search, setSearch] = useState('')
 
 
-    if (loading) return <div>...loading</div>
-    if (error) return <div>something went wrong</div>
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='medecin-container'>
-                    <h2>La liste des spécialités des médecins</h2>
+                    <h2>{t('listeSpec')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Spécialités des médecins</h4>
+                            <h4>{t('medSpec')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/specialite`}>
+                            <Link to={`/specialites/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -47,9 +50,9 @@ const Specialites = () => {
                             <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <th>Spécilité du médecin Fr</th>
-                                    <th>Spécilité du médecin En</th>
-                                    <th>Statut</th>
+                                    <th>{t('specMed')} Fr</th>
+                                    <th>{t('specMed')} En</th>
+                                    <th>{t('statut')}</th>
                                 </tr>
                             </thead>
                             <tbody>

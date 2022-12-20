@@ -200,22 +200,22 @@ const AjouterEvent = () => {
                         <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
-                                    <input name='description' onChange={onChange} type="text" className='input' placeholder='Description*' />
+                                    <input name='description' onChange={onChange} type="text" className='input' placeholder='Description*' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">{t('dateD')}*</label><br />
-                                    <input name='startDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date du début*' />
+                                    <input name='startDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date du début*' required />
                                 </div>
                                 <div>
                                     <label htmlFor="">{t('dateF')}*</label><br />
-                                    <input name='endDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date de fin*' />
+                                    <input name='endDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date de fin*' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <select name="patientId" onChange={onChangeOption} id="" className='input'>
+                                    <select name="patientId" onChange={onChangeOption} id="" className='input' required>
                                         <option value="">Patient</option>
                                         {
                                             patients?.map((el: any) => (
@@ -225,7 +225,7 @@ const AjouterEvent = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <select name="partakerIds" onChange={onChangeOption} id="" className='input'>
+                                    <select name="partakerIds" onChange={onChangeOption} id="" className='input' required>
                                         <option value="">{t('personnel')}</option>
                                         {
                                             personnels?.map((el: any) => (
@@ -237,7 +237,7 @@ const AjouterEvent = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <select name="venueId" onChange={onChangeOption} id="venueId" className='input'>
+                                    <select name="venueId" onChange={onChangeOption} id="venueId" className='input' required>
                                         <option value="">{t('chambre')}</option>
                                         {
                                             venues?.map((el: any) => (
@@ -247,7 +247,7 @@ const AjouterEvent = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <select name="actIds" onChange={onChangeOption} id="actIds" className='input'>
+                                    <select name="actIds" onChange={onChangeOption} id="actIds" className='input' required>
                                         <option value="">{t('acte')}</option>
                                         {
                                             actes?.map((el: any) => (
@@ -259,7 +259,7 @@ const AjouterEvent = () => {
                             </div>
                             <div className='control'>
                                 <div>
-                                    <select name='statusId' onChange={onChangeOption} className='input' placeholder='Status*'>
+                                    <select name='statusId' onChange={onChangeOption} className='input' placeholder='' required>
                                         <option value="">{t('statut')}</option>
                                         {
                                             statuts?.map((el: any) => (

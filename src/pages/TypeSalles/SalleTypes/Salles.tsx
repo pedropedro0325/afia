@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useVenuesTypes } from '../../../hooks/TypeSalles/useTypeSalles'
+import { useTranslation } from 'react-i18next'
 
 const Salles = () => {
+
+    const { t } = useTranslation()
 
     const { data, error, loading } = useVenuesTypes()
 
@@ -17,22 +20,25 @@ const Salles = () => {
 
     const [search, setSearch] = useState('')
 
+    if (loading) return <div className='err loader'></div>
+    if (error) return <div className='err'>something went wrong</div>
+
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='chambre-container'>
-                    <h2>La liste des salles</h2>
+                    <h2>{t('listeTypeSalle')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Salles</h4>
+                            <h4>{t('typeSalle')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/type/salle`}>
+                            <Link to={`/salle/types/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -43,7 +49,7 @@ const Salles = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>N° de salle</th>
+                                    <th>{t('nSalle')}</th>
                                     <th>Description</th>
                                     <th>Action</th>
                                 </tr>

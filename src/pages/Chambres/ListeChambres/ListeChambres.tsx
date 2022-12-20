@@ -39,7 +39,7 @@ const ListeChambres = () => {
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
-                            <Link to={`/ajouter/salle`}>
+                            <Link to={`/salles/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
@@ -53,7 +53,7 @@ const ListeChambres = () => {
                                     <th>{t('nSalle')}</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                    <th>N° de téléphone</th>
+                                    <th>{t('nTel')}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

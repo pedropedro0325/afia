@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './facturation.scss'
+import { useTranslation } from 'react-i18next'
 
 const ListeFacturations = () => {
+
+    const { t } = useTranslation()
 
     const [facture, setFacture] = useState([
         { id: 1, NomPatient: "Jiji", admissionId: "JI1234", docteurName: "Silvy", status: "Payé", Date: "12-12-2021", tva: "12%", total: "142$" },
@@ -21,11 +24,11 @@ const ListeFacturations = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='facturation-container'>
-                    <h2>La liste des factures</h2>
+                    <h2>{t('listeFacture')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Facturations</h4>
+                            <h4>{t('facturation')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -42,10 +45,10 @@ const ListeFacturations = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Nom du patient</th>
-                                    <th>Admission ID</th>
-                                    <th>Nom du docteur</th>
-                                    <th>Statut</th>
+                                    <th>{t('nomPatient')}</th>
+                                    <th>{t('admission')}</th>
+                                    <th>{t('nomMed')}</th>
+                                    <th>{t('statut')}</th>
                                     <th>Date</th>
                                     <th>TVA</th>
                                     <th>Total</th>

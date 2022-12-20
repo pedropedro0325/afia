@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './medicament.scss'
+import { useTranslation } from 'react-i18next'
 
 const Medicaments = () => {
+
+    const { t } = useTranslation()
 
     const [medicament, setMedicament] = useState([
         { id: 1, nomMedoc: "Paracétamol", categorie: "Tablette", dateAchat: "25-11-2022", prix: "6$", dateExp: "12-12-2023", stock: "122" },
@@ -21,11 +24,11 @@ const Medicaments = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='facturation-container'>
-                    <h2>La liste des médicaments</h2>
+                    <h2>{t('listeMedoc')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Médicaments</h4>
+                            <h4>{t('medoc')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -42,11 +45,11 @@ const Medicaments = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Nom du médicament</th>
-                                    <th>Catégorie</th>
-                                    <th>Date d'achat</th>
-                                    <th>Prix</th>
-                                    <th>Date d'expiration</th>
+                                    <th>{t('nomMedoc')}</th>
+                                    <th>{t('categorie')}</th>
+                                    <th>{t('dateA')}</th>
+                                    <th>{t('prix')}</th>
+                                    <th>{t('dateEx')}</th>
                                     <th>Stock</th>
                                     <th>Action</th>
                                 </tr>

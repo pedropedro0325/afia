@@ -70,7 +70,7 @@ const ListePersonnel = () => {
                                             <td>{el.email}</td>
                                             <td>{el.partakerType.description}</td>
                                             <td>{el.description}</td>
-                                            <td><Link to={`/personnel/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
+                                            <td><Link to={`/personnels/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }

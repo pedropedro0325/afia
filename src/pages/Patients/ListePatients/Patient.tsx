@@ -14,8 +14,6 @@ const Patient = () => {
 
     const [search, setSearch] = useState('')
 
-    console.log({ data })
-
     if (loading) return <div className='err loader'></div>
     if (error) return <div className='err'>something went wrong</div>
 
@@ -64,7 +62,7 @@ const Patient = () => {
                                             <td>{patient.lastName}</td>
                                             <td>{patient.email}</td>
                                             <td>{patient.description}</td>
-                                            <td><Link to={`/patient/detail/${patient.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
+                                            <td><Link to={`/patients/detail/${patient.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }

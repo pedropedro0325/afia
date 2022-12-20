@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './departement.scss'
+import { useTranslation } from 'react-i18next'
 
 const Departements = () => {
+
+    const { t } = useTranslation()
 
     const [departement, setDepartement] = useState([
         { id: 1, departName: "Cardiologie", description: "Fournit des soins médicaux aux", dateDepart: "12-12-2021", ChefDepart: "Dr Woo", statut: "Active" },
@@ -21,11 +24,11 @@ const Departements = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='departement-container'>
-                    <h2>La liste des départements</h2>
+                    <h2>{t('listeDep')}</h2>
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>Départements</h4>
+                            <h4>{t('depart')}</h4>
                             <div className='search'>
                                 <input type="search" placeholder='Recherche'
                                     onChange={(e) => setSearch(e.target.value)}
@@ -42,11 +45,11 @@ const Departements = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Nom du département</th>
+                                    <th>{t('nomDepart')}</th>
                                     <th>Description</th>
-                                    <th>Date de département</th>
-                                    <th>Chef de département</th>
-                                    <th>Statut</th>
+                                    <th>{t('dateDepart')}</th>
+                                    <th>{t('chefDepart')}</th>
+                                    <th>{t('statut')}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import './home.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -105,12 +105,13 @@ const Home = () => {
                 </div>
                 <div className='table-stats'>
                     <div className='reserve'>
-                        <h3>Rendez-vous réserver</h3>
+                        <h3>{t('rdv')}</h3>
                         <table id="customers">
                             <tr>
                                 <th>Patient</th>
                                 <th>Médecin assigner</th>
-                                <th>Acte</th>
+                                <th>{t('acte')}</th>
+                                <th>Action</th>
                             </tr>
                             <tbody>
                                 {
@@ -119,6 +120,7 @@ const Home = () => {
                                             <td>{event.care?.patient?.name}</td>
                                             <td>{event.care?.partakers?.name}</td>
                                             <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                            <td><Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }
@@ -126,11 +128,11 @@ const Home = () => {
                         </table>
                     </div>
                     <div className='dr'>
-                        <h3>Liste de docteurs</h3>
+                        <h3>{t('listeMedecin')}</h3>
                         <table id="customers">
                             <tr>
-                                <th>Nom</th>
-                                <th>Statut</th>
+                                <th>{t('nom')}</th>
+                                <th>{t('statut')}</th>
                             </tr>
                             <tbody>
                                 {
@@ -139,7 +141,7 @@ const Home = () => {
                                     })?.slice(0, 4)?.map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
-                                            <td>Disponible</td>
+                                            <td>{t('dispo')}</td>
                                         </tr>
                                     ))
                                 }

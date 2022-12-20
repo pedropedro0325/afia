@@ -65,7 +65,7 @@ const Medecin = () => {
                                             <td>{medecin.name}</td>
                                             <td>{medecin.lastName}</td>
                                             <td>{medecin.email}</td>
-                                            <td><Link to={`/personnel/detail/${medecin.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
+                                            <td><Link to={`/personnels/detail/${medecin.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))
                                 }

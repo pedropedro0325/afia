@@ -7,6 +7,12 @@
         border-radius: .4rem;
     }
 
+    .flex {
+        display: flex;
+        gap: .4rem;
+        align-items: center;
+    }
+
     .btn-blue {
         background-color: #17202A;
         color: #fff;

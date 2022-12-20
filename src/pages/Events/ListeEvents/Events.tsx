@@ -72,7 +72,6 @@ const Events = () => {
                                     <th>{t('dateD')}</th>
                                     <th>{t('dateF')}</th>
                                     <th>{t('chambre')}</th>
-                                    <th>{t('acte')}</th>
                                     <th>Patient</th>
                                     <th>Action</th>
                                 </tr>
@@ -87,9 +86,10 @@ const Events = () => {
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
                                             <td>{event.venue?.venueType?.description}</td>
-                                            <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
                                             <td>{event.care?.patient?.name}</td>
-                                            <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
+                                            <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
+                                                <Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link>
+                                            </td>
                                         </tr>
                                     ))
                                 }
