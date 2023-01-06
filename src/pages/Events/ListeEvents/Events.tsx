@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './events.scss'
 import { useEvents } from '../../../hooks/Events/useEvents'
@@ -22,24 +23,13 @@ const Events = () => {
     const filtered = data?.events?.filter((el: any) => el.description === "rdv")
     //console.log(filtered);
 
-    // const act = data?.events?.map((el: any) => (el.care?.acts))
-    // console.log(act); good
-
-    // const actes = act?.map((el: any) => (el.price))
-    // console.log(actes); error
-
-
-    // const map = data?.events?.map((el: any) => (el.care?.patient?.name))
-    // console.log(map); good
-
-    const map = data?.events?.map((el: any) => (el.care?.partakers))
-    // console.log(map);
-
-
-
     const [search, setSearch] = useState('')
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -62,6 +52,9 @@ const Events = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -71,8 +64,6 @@ const Events = () => {
                                     <th>Description</th>
                                     <th>{t('dateD')}</th>
                                     <th>{t('dateF')}</th>
-                                    <th>{t('chambre')}</th>
-                                    <th>Patient</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -85,8 +76,6 @@ const Events = () => {
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>
                                             <td>{event.endDate}</td>
-                                            <td>{event.venue?.venueType?.description}</td>
-                                            <td>{event.care?.patient?.name}</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
                                                 <Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link>
                                             </td>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import './listeSpecialites.scss'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
 import { useTranslation } from 'react-i18next'
@@ -19,15 +20,18 @@ const Specialites = () => {
 
     const [search, setSearch] = useState('')
 
+    function refreshPage() {
+        window.location.reload();
+    }
 
-    if (loading) return <div className='err loader'></div>
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
-                <div className='medecin-container'>
+                <div className='speciality-container'>
                     <h2>{t('listeSpec')}</h2>
                     <br />
                     <div className='top'>
@@ -43,6 +47,9 @@ const Specialites = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>

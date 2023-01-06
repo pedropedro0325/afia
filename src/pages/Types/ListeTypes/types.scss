@@ -34,3 +34,17 @@
         color: #fff;
     }
 }
+
+@media (max-width: 500px) {
+    .types-container {
+        margin: 1rem .7rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .types-container {
+        h2 {
+            font-size: 1rem;
+        }
+    }
+}

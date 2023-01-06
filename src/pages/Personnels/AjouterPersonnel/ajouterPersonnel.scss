@@ -60,3 +60,85 @@
         }
     }
 }
+
+
+@media (max-width: 1200px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                .input {
+                    width: 26rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1140px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                .input {
+                    width: 24rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1062px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                .input {
+                    width: 22rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 882px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                display: block;
+
+                .input {
+                    width: 22rem;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 460px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                .input {
+                    width: 18rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 385px) {
+    .ajouterPersonnel-container {
+        margin: .1rem .6rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .ajouterPersonnel-container {
+        .form {
+            .control {
+                .input {
+                    width: 15rem;
+                }
+            }
+        }
+    }
+}

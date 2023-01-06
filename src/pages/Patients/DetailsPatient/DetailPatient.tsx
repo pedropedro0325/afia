@@ -19,7 +19,7 @@ const DetailPatient = () => {
 
     const { data, error, loading } = usePatient(Number(patientId))
 
-    if (loading) return <div className='err loader'></div>
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
 

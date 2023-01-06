@@ -10,7 +10,7 @@ const DossierMedical = ({ data }: any) => {
 
     const { t } = useTranslation()
 
-    const [toggleState, setToggleState] = useState(1);
+    const [toggleState, setToggleState] = useState(3);
 
     const toggleTab = (index: any) => {
         setToggleState(index);
@@ -105,7 +105,7 @@ const DossierMedical = ({ data }: any) => {
                     <h4>{t('antecedent')}</h4>
                     <hr />
                     <br />
-                    <div className='tops'>
+                    <div className='top'>
                         <div className='nav'>
                             <h4>{t('event')}</h4>
                             <div className='search'>
@@ -115,28 +115,30 @@ const DossierMedical = ({ data }: any) => {
                             </div>
                         </div>
                     </div>
-                    <table>
-                        <tr>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>{t('acte')}</th>
-                            <th>Action</th>
-                        </tr>
-                        {
-                            dataE?.events?.filter((el: any) => {
-                                return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
-                            }).filter((curDate: any) => {
-                                return curDate?.care.patient?.id === data?.patient.id
-                            }).map((el: any) => (
-                                <tr key={el.id}>
-                                    <td>{el.startDate}</td>
-                                    <td>{el.description}</td>
-                                    <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
-                                    <td><Link to={`/evenements/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
-                                </tr>
-                            ))
-                        }
-                    </table>
+                    <div className='table-patient'>
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>{t('acte')}</th>
+                                <th></th>
+                            </tr>
+                            {
+                                dataE?.events?.filter((el: any) => {
+                                    return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
+                                }).filter((curDate: any) => {
+                                    return curDate?.care.patient?.id === data?.patient.id
+                                })?.reverse().map((el: any) => (
+                                    <tr key={el.id}>
+                                        <td>{el.startDate}</td>
+                                        <td>{el.description}</td>
+                                        <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                        <td><Link to={`/evenements/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

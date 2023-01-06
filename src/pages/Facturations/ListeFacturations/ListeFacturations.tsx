@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './facturation.scss'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +19,10 @@ const ListeFacturations = () => {
     ])
 
     const [search, setSearch] = useState('')
+
+    function refreshPage() {
+        window.location.reload();
+    }
 
     return (
         <div>
@@ -39,6 +44,9 @@ const ListeFacturations = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link> */}
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -47,10 +55,7 @@ const ListeFacturations = () => {
                                 <tr>
                                     <th>{t('nomPatient')}</th>
                                     <th>{t('admission')}</th>
-                                    <th>{t('nomMed')}</th>
-                                    <th>{t('statut')}</th>
                                     <th>Date</th>
-                                    <th>TVA</th>
                                     <th>Total</th>
                                     <th>Action</th>
                                 </tr>
@@ -63,10 +68,7 @@ const ListeFacturations = () => {
                                         <tr key={el.id}>
                                             <td>{el.NomPatient}</td>
                                             <td>{el.admissionId}</td>
-                                            <td>{el.docteurName}</td>
-                                            <td><button className='btn-statut'>{el.status}</button></td>
                                             <td>{el.Date}</td>
-                                            <td>{el.tva}</td>
                                             <td>{el.total}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>

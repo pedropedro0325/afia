@@ -3,6 +3,35 @@
     background-color: white;
     padding: .8rem;
     border-radius: .2rem;
+    box-shadow: #2c3e508e .2rem .1rem .1rem;
+}
+
+.h {
+    background-color: white;
+    border-radius: .3rem;
+    padding: 1rem;
+    margin: 1rem 3.2rem 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: #2c3e5085 .1rem .2rem .1rem;
+
+    h5 {
+        color: blueviolet;
+        width: max-content;
+        margin-top: .3rem;
+        border-radius: .2rem;
+
+        &::after {
+            content: "]";
+            padding: .4rem;
+        }
+
+        &::before {
+            content: "[";
+            padding: .4rem;
+        }
+    }
 }
 
 .event {
@@ -12,49 +41,198 @@
     gap: 2rem;
 
     h5 {
-        border: .1rem solid black;
+        // background-color: #2c3e50bd;
+        color: blueviolet;
         width: max-content;
         margin-bottom: .4rem;
         border-radius: .2rem;
         padding: .5rem;
+
+        &::after {
+            content: "]";
+            padding: .4rem;
+        }
+
+        &::before {
+            content: "[";
+            padding: .4rem;
+        }
     }
 
     .desc {
-        width: 55%;
+        width: 54%;
 
         .desc1 {
             background-color: white;
             border-radius: .3rem;
-            padding: 2rem;
+            padding: 1rem;
             margin-bottom: 1rem;
             display: flex;
             gap: 1rem;
-            align-items: flex-start;
+            align-items: center;
+            box-shadow: #2c3e508f .1rem .2rem .1rem;
+
+            h5 {
+                margin-top: .5rem;
+
+                &::after {
+                    content: "]";
+                    padding: .4rem;
+                }
+
+                &::before {
+                    content: "[";
+                    padding: .4rem;
+                }
+            }
         }
     }
 
     .date {
-        width: 40%;
+        width: 39%;
 
         .dte {
             background-color: white;
             border-radius: .3rem;
-            // border: rgb(118, 44, 187) .1rem solid;
             border-radius: .2rem;
             margin-bottom: .8rem;
-            padding: 2rem;
+            padding: 1rem;
             display: flex;
             gap: 1rem;
-            align-items: flex-start;
+            align-items: center;
+            box-shadow: #2c3e5096 .1rem .2rem .1rem;
+
+            h5 {
+                margin-top: .5rem;
+
+                &::after {
+                    content: "]";
+                    padding: .4rem;
+                }
+
+                &::before {
+                    content: "[";
+                    padding: .4rem;
+                }
+            }
         }
 
         .dt {
             background-color: white;
             border-radius: .2rem;
-            padding: 2.2rem 2rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+            padding: 1rem;
+            box-shadow: #2c3e507c .1rem .2rem .2rem;
+        }
+    }
+}
+
+@media (max-width: 1153px) {
+    .event {
+
+        .date {
+            .dte {
+                display: block;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .event {
+        .desc {
+            .desc1 {
+                display: block;
+            }
+        }
+
+        .date {
+            .dte {
+                display: block;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .event {
+        display: block;
+
+        .desc {
+            width: 95%;
+        }
+
+        .date {
+            width: 95%;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .h {
+        h5 {
+            font-size: 14px;
+        }
+    }
+
+    .event {
+
+        .desc {
+            .desc1 {
+                h5 {
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .date {
+            .dte {
+                h5 {
+                    font-size: 13px;
+                }
+            }
+
+            .dt {
+                h5 {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .h2 {
+        font-size: 1rem;
+    }
+
+    .h {
+        h5 {
+            font-size: 12px;
+        }
+    }
+
+    .event {
+
+        .desc {
+            .desc1 {
+                h5 {
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .date {
+            .dte {
+                h5 {
+                    font-size: 11px;
+                }
+            }
+
+            .dt {
+                h5 {
+                    font-size: 11px;
+                }
+            }
         }
     }
 }

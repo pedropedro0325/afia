@@ -3,6 +3,7 @@ import { Outlet, Link } from 'react-router-dom'
 import './medecin.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { useMedecins } from '../../../hooks/medecins/useMedecins'
 import { useTranslation } from 'react-i18next'
 
@@ -20,7 +21,11 @@ const Medecin = () => {
 
     const [search, setSearch] = useState<string>('')
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
     return (
         <div>
@@ -42,6 +47,9 @@ const Medecin = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -59,7 +67,7 @@ const Medecin = () => {
                                     medecins?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name?.toLowerCase().includes(search)
                                     }).filter((curDate: any) => {
-                                        return curDate.partakerType.description === "Doctor"
+                                        return curDate.partakerType?.id === '0'
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>

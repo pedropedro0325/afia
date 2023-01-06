@@ -77,6 +77,7 @@ const AjouterActe = () => {
                 valuesCallBack.partakerIds = ''
             }
             navigate('/actes')
+            window.location.reload()
         }
         catch (error: any) {
             if (error) return `

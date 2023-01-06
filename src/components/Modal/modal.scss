@@ -2,8 +2,8 @@
     width: 50vw;
     height: 50vh;
     position: fixed;
-    position: absolute;
-    left: 14rem;
+    left: 50%;
+    transform: translate(-20%, 5%);
     top: 8rem;
     z-index: 999;
     display: flex;
@@ -11,15 +11,14 @@
     align-items: center;
 
     .modalContainer {
-        width: 500px;
-        height: 300px;
+        width: 90%;
         border-radius: 12px;
-        background-color: #2C3E50;
+        background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 8px 15px;
         display: flex;
         flex-direction: column;
-        padding: 25px;
-        color: white;
+        padding: 15px;
+        color: #2C3E50;
 
         .title {
             display: inline-block;
@@ -32,30 +31,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             text-align: left;
         }
 
         .footer {
-            margin-top: 5rem;
+            margin-top: 4rem;
             flex: 20%;
             display: flex;
             align-items: center;
 
             button {
-                width: 150px;
-                height: 45px;
+                padding: .6rem;
                 margin: 10px;
                 border: none;
                 background-color: cornflowerblue;
                 color: white;
                 border-radius: 8px;
-                font-size: 20px;
+                font-size: 15px;
                 cursor: pointer;
             }
 
             .cancelBtn {
                 background-color: crimson;
+            }
+
+            .see {
+                background-color: #2C3E50;
+                color: white;
             }
         }
 
@@ -64,11 +67,153 @@
             justify-content: flex-end;
 
             button {
-                background-color: transparent;
                 border: none;
                 font-size: 25px;
                 cursor: pointer;
-                color: white;
+                color: black;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .modal {
+        width: 50vw;
+        height: 50vh;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, 5%);
+        top: 8rem;
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 687px) {
+    .modal {
+        .modalContainer {
+            .footer {
+                margin-top: 2rem;
+
+                button {
+                    padding: .6rem;
+                    margin: 5px;
+                    font-size: 13px;
+                    cursor: pointer;
+                }
+            }
+
+            .titleCloseBtn {
+
+                button {
+                    border: none;
+                    font-size: 20px;
+                    cursor: pointer;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .modal {
+        .modalContainer {
+
+            .title {
+                font-size: .8rem;
+            }
+
+            .footer {
+                margin-top: 2rem;
+
+                button {
+                    padding: .6rem;
+                    margin: 5px;
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 524px) {
+    .modal {
+        .modalContainer {
+
+            .title {
+                font-size: .6rem;
+            }
+
+            .footer {
+                margin-top: 2rem;
+
+                button {
+                    padding: .6rem;
+                    margin: 5px;
+                    font-size: 9px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 476px) {
+    .modal {
+        .modalContainer {
+
+            .title {
+                font-size: .6rem;
+            }
+
+            .footer {
+                margin-top: 2rem;
+
+                button {
+                    padding: .6rem;
+                    margin: 5px;
+                    font-size: 7px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 428px) {
+    .modal {
+        .modalContainer {
+
+            .title {
+                font-size: .6rem;
+            }
+
+            .footer {
+                margin-top: 2rem;
+                display: block;
+
+                button {
+                    padding: .6rem;
+                    margin: 5px;
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 359px) {
+    .modal {
+        .modalContainer {
+
+            .title {
+                font-size: .5rem;
+            }
+
+            .footer {
+                margin-top: 1rem;
+                display: block;
             }
         }
     }

@@ -38,6 +38,7 @@ const AjouterTypeSalle = () => {
                                     setDescription('')
                                 }
                                 navigate('/salle/types')
+                                window.location.reload()
                             }
                             catch (error: any) {
                                 if (error) return `

@@ -16,10 +16,32 @@
     .btn-blue {
         background-color: #17202A;
         color: #fff;
-        padding: .7rem;
+        padding: .3rem;
         outline: none;
         border: none;
         border-radius: .3rem;
         cursor: pointer;
+    }
+}
+
+@media (max-width: 670px) {
+    .event-container {
+        margin: .1rem .4rem;
+
+        .flex {
+            display: flex;
+            flex-direction: column;
+        }
+
+    }
+}
+
+@media (max-width: 400px) {
+    .event-container {
+
+        h2 {
+            font-size: 1rem;
+        }
+
     }
 }

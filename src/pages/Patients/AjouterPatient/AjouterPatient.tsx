@@ -44,6 +44,7 @@ const AjouterPatient = () => {
                         try {
                             createPatient({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: phoneNumber.value, email: email.value, description: description.value } })
                             navigate('/patients')
+                            window.location.reload()
                         }
                         catch (error: any) {
                             return `

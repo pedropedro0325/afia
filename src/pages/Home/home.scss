@@ -172,3 +172,294 @@
         cursor: pointer;
     }
 }
+
+// Media Query Responsive
+
+@media (max-width: 1310px) {
+    .home-container {
+        padding: .9rem 0;
+
+        .stats {
+            .parents {
+                gap: 19px;
+
+                .box {
+                    h3 {
+                        font-size: 1rem;
+                    }
+
+                    h4 {
+                        font-size: .8rem;
+                    }
+
+                    .box-top {
+                        .i-user {
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table-stats {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 1rem;
+            margin-top: 3rem;
+
+            .reserve {
+                padding: .8rem;
+
+                h3 {
+                    font-size: 1rem;
+                    margin-bottom: .8rem;
+                }
+
+                #customers td,
+                #customers th {
+                    font-size: 13px;
+                }
+            }
+
+            .dr {
+                padding: .8rem;
+
+                h3 {
+                    font-size: 1rem;
+                    margin-bottom: .8rem;
+                }
+
+                #customers td,
+                #customers th {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+    .btn-blue {
+        padding: .4rem;
+        font-size: .6rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .home-container {
+        margin-left: 0%;
+    }
+}
+
+@media (max-width: 918px) {
+    .home-container {
+        padding: .6rem 0;
+
+        .stats {
+            .parents {
+                gap: 14px;
+
+                .box {
+                    h3 {
+                        font-size: 1rem;
+                    }
+
+                    h4 {
+                        font-size: .8rem;
+                    }
+
+                    .box-top {
+                        .i-user {
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table-stats {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin: 1rem 1rem;
+            margin-top: 3rem;
+
+            .reserve {
+                padding: .8rem;
+
+                h3 {
+                    font-size: 1rem;
+                    margin-bottom: .8rem;
+                }
+
+                #customers td,
+                #customers th {
+                    font-size: 11px;
+                }
+            }
+
+            .dr {
+                padding: .8rem;
+
+                h3 {
+                    font-size: 1rem;
+                    margin-bottom: .8rem;
+                }
+
+                #customers td,
+                #customers th {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+
+    .btn-blue {
+        padding: .4rem;
+        font-size: .6rem;
+    }
+}
+
+@media (max-width: 886px) {
+    .home-container {
+        .stats {
+            .parents {
+                .box {
+                    h4 {
+                        font-size: .7rem;
+                    }
+
+                    .box-top {
+                        .i-user {
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table-stats {
+
+            .reserve {
+
+                h3 {
+                    font-size: .7rem;
+                }
+            }
+
+            .dr {
+
+                h3 {
+                    font-size: .7rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 784px) {
+    .home-container {
+        .stats {
+            .parents {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+
+                .box {
+                    h4 {
+                        font-size: 1rem;
+                    }
+
+                    .box-top {
+                        .i-user {
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 681px) {
+    .home-container {
+        .stats {
+            .parents {
+
+
+                .box {
+
+                    .box-top {
+                        .i-user {
+                            font-size: 21px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .table-stats {
+            display: block;
+
+            .reserve {
+                width: 100%;
+                margin-bottom: 1rem;
+
+                #customers td,
+                #customers th {
+                    padding: 5px;
+                    font-size: 11px;
+                }
+
+                #customers th {
+                    padding-top: 11px;
+                    padding-bottom: 11px;
+                }
+            }
+
+            .dr {
+                width: 100%;
+
+                #customers td,
+                #customers th {
+                    border: 1px solid #ddd;
+                    padding: 7px;
+                    font-size: 11px;
+                }
+
+                #customers th {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #fff;
+                    color: black;
+                }
+            }
+        }
+
+        .btn-blue {
+            padding: .4rem;
+            font-size: .5rem;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .home-container {
+        .stats {
+            .parents {
+                display: block;
+
+                .box {
+                    margin-bottom: 1rem;
+
+                    .box-top {
+                        .i-user {
+                            font-size: 24px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

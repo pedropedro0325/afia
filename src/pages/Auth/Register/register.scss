@@ -1,0 +1,163 @@
+.register {
+    margin: 1rem;
+    background-color: white;
+
+    .container {
+        display: flex;
+        align-items: flex-start;
+        padding: 3rem 6rem;
+
+        .left {
+            background-color: rgba(42, 26, 58, 0.815);
+            padding: .7rem 1rem;
+            width: 300px;
+            height: 28rem;
+            border-radius: .4rem;
+
+            p {
+                color: white;
+                margin-top: 20rem;
+            }
+
+            a {
+                color: yellowgreen;
+            }
+
+            h1 {
+                color: white;
+            }
+        }
+
+        .right {
+            padding: 0 .6rem;
+
+            .control {
+                width: 400px;
+                margin-bottom: 1.6rem;
+
+                input {
+                    width: 100%;
+                    padding: 1rem .4rem;
+                    border: .1rem solid rgb(150, 129, 170);
+                    border-radius: .4rem;
+                }
+
+                .btn-save {
+                    padding: .8rem .9rem;
+                    background-color: rgba(42, 26, 58, 0.767);
+                    color: white;
+                    border-radius: .3rem;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .register {
+        .container {
+            .left {
+                p {
+                    font-size: 14px;
+                }
+
+                a {
+                    color: yellowgreen;
+                }
+
+                h1 {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .register {
+        .container {
+            display: block;
+
+            .left {
+                width: 100%;
+                height: 30%;
+                margin-bottom: 1rem;
+
+                p {
+                    margin-top: 2rem;
+                }
+            }
+
+            .right {
+                padding: 0 .6rem;
+
+                .control {
+                    width: 100%;
+                    margin-bottom: 1.6rem;
+
+                    input {
+                        width: 100%;
+                        padding: 1rem .4rem;
+                        border: .1rem solid rgb(150, 129, 170);
+                        border-radius: .4rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 584px) {
+    .register {
+        .container {
+            padding: 3rem 3rem;
+
+            .left {
+                p {
+                    font-size: 14px;
+                }
+
+                a {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .register {
+        margin: .4rem;
+
+        .container {
+            .left {
+
+                p {
+                    font-size: 13px;
+                }
+
+                h1 {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .register {
+        .container {
+            .left {
+
+                p {
+                    font-size: 11px;
+                }
+
+                h1 {
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
+}

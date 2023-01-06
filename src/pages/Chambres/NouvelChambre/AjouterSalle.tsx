@@ -60,6 +60,7 @@ const AjouterSalle = () => {
                 valuesCallBack.description = ''
             }
             navigate('/salles')
+            window.location.reload()
         }
         catch (error: any) {
             if (error) return `

@@ -5,13 +5,15 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import "react-datepicker/dist/react-datepicker.css"
-import DatePicker from 'react-datepicker'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { Outlet, Link } from 'react-router-dom'
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import './agenda.scss'
 import { useEvents } from '../../hooks/Events/useEvents';
 import Modal from '../../components/Modal/Modal';
 import { useTranslation } from 'react-i18next'
+import ModalAddEvent from '../../components/Modal/ModalAddEvent';
 
 
 
@@ -59,6 +61,8 @@ const Agenda = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
+    const [openModalAdd, setOpenModalAdd] = useState(false);
+
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     // const handleModal = () => {
@@ -89,14 +93,16 @@ const Agenda = () => {
         []
     )
 
-
-
-    const handleModal = ( event) =>{
+    const handleModal = (event) => {
         console.log("=================selectedEvent", event)
         setSelectedEvent(event)
         setOpenModal(true, event)
     }
-    
+
+    const handleModalAdd = () => {
+        setOpenModalAdd(true)
+    }
+
 
     const [culture, setCulture] = useState('fr')
     const [rightToLeft, setRightToLeft] = useState(false)
@@ -109,7 +115,11 @@ const Agenda = () => {
         [culture]
     )
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -120,7 +130,12 @@ const Agenda = () => {
                     <div className='addEvent'>
                         <h2>{t('agendas')}</h2>
                         <br />
-                        <Link to={`/evenements/ajouter`}><button className='btn-add'>{t('ajouterEv')}</button></Link>
+                        <div className='flex'>
+                            <button onClick={handleModalAdd} className='btn-add'>{t('ajouterEv')}</button>
+                            <button onClick={refreshPage} className='btn-add'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className='calendrier'>
@@ -140,6 +155,7 @@ const Agenda = () => {
                     ></Calendar>
                 </div>
                 {openModal && <Modal closeModal={setOpenModal} selectedEvent={selectedEvent} />}
+                {openModalAdd && <ModalAddEvent closeModalAdd={setOpenModalAdd} />}
             </div>
         </div>
     )

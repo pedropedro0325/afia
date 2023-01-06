@@ -69,3 +69,76 @@
         }
     }
 }
+
+@media (max-width: 832px) {
+    .add-patient {
+        .form {
+            .card {
+                h3 {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 741px) {
+    .add-patient {
+        .form {
+            .card {
+                h3 {
+                    font-size: .8rem;
+                }
+
+                .control {
+                    label {
+                        font-size: .7rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .add-patient {
+        .form {
+            .form-top {
+                display: block;
+            }
+
+            .form-bottom {
+                display: block;
+            }
+
+            .card {
+                margin: .1rem;
+                width: 100%;
+
+                h3 {
+                    font-size: 1rem;
+                }
+
+                label {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .add-patient {
+        h2 {
+            font-size: 1rem;
+        }
+
+        .form {
+            .card {
+                h3 {
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
+}

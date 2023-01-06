@@ -28,18 +28,22 @@ import AjouterActe from './pages/Actes/AjouterActe/AjouterActe';
 import AjouterStatus from './pages/Status/AjouterStatus/AjouterStatus';
 import ErrorPage from './pages/Error/ErrorPage';
 import Event from './pages/Events/DetailEvent/Event';
+import Register from './pages/Auth/Register/Register';
+import Login from './pages/Auth/Login/Login';
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path='/' element={<Navigation />} >
+          <Route path='/enregistrement' element={<Register />} />
+          <Route path='/connexion' element={<Login />} />
           <Route path='' element={<Home />} />
           <Route index element={<Home />} />
           <Route path='/patients' element={<Patient />} />
           <Route path='/medecins' element={<Medecin />} />
           <Route path='/personnels' element={<ListePersonnel />} />
-          <Route path='/agenda' element={<Agenda />} />
+          <Route path='/calendrier' element={<Agenda />} />
           <Route path='/patients/detail/:patientId' element={<DetailPatient />} />
           <Route path='/patients/ajouter' element={<AjouterPatient />} />
           <Route path='/personnels/detail/:partakerId' element={<DetailMedecin />} />

@@ -36,7 +36,6 @@ const AjouterStatus = () => {
                     <div className='form'>
                         <form onSubmit={e => {
                             e.preventDefault()
-
                             try {
                                 createStatus({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
                                 if (error) {
@@ -44,10 +43,11 @@ const AjouterStatus = () => {
                                     setDescriptionEn('')
                                 }
                                 navigate('/status')
+                                window.location.reload()
                             }
                             catch (error: any) {
                                 if (error) return `
-                                Erreur de soumission ! ${error.message}`
+                                    Erreur de soumission ! ${error.message}`
                             }
                         }}>
                             <div className='controls'>

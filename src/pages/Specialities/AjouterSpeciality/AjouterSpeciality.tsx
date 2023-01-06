@@ -48,6 +48,7 @@ const AjouterSpeciality = () => {
                                     setDescriptionEn('')
                                 }
                                 navigate('/specialites')
+                                window.location.reload()
                             }
                             catch (error: any) {
                                 alert(error)

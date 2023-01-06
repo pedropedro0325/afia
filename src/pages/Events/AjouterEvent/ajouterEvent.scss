@@ -71,3 +71,120 @@
         }
     }
 }
+
+@media (max-width: 1300px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 28rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1276px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 26rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1212px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 24rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1130px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 20rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 864px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                display: block;
+
+                .input {
+                    width: 26rem;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 556px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 20rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 456px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 16rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 388px) {
+    .ajouterEvent-container {
+        margin: .1rem .6rem;
+    }
+}
+
+@media (max-width: 456px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 14rem;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 336px) {
+    .ajouterEvent-container {
+        .form {
+            .control {
+                .input {
+                    width: 13rem;
+                }
+            }
+        }
+    }
+}

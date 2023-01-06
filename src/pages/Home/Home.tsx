@@ -9,28 +9,36 @@ import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
 import { usePatients } from '../../hooks/Patients/usePatients'
+import { usePersonnels } from '../../hooks/Personnels/usePersonnels'
 import { useEffect, useState } from 'react'
 import { useMedecins } from '../../hooks/medecins/useMedecins'
 import { useEvents } from '../../hooks/Events/useEvents'
 import { useTranslation } from 'react-i18next'
 
-const Home = () => {
+const Home = ({ closeSideBar }: any) => {
 
     const { error, loading, data } = useMedecins()
+    const { error: errorP, loading: loadingP, data: dataP } = usePersonnels()
     const { error: errorPat, loading: loadingPat, data: dataPat } = usePatients()
     const { error: errorE, loading: loadingE, data: dataE } = useEvents()
 
 
     const [medecin, setMedecin] = useState<[]>([])
     const [patient, setPatient] = useState<[]>([])
+    const [personnel, setPersonnel] = useState<[]>([])
     const [event, setEvent] = useState<[]>([])
 
     useEffect(() => {
         setMedecin(data?.partakers)
     }, [data])
 
-    const medecins = medecin?.filter((curDate: any) => curDate?.partakerType?.description === "Doctor")
-    const infirmiers = medecin?.filter((curDate: any) => curDate?.partakerType?.description === "infirmier")
+    const medecins = medecin?.filter((curDate: any) => curDate?.partakerType?.id === "0")
+
+    useEffect(() => {
+        setPersonnel(dataP?.partakers)
+    }, [dataP])
+
+    const infirmiers = personnel?.filter((curDate: any) => curDate?.partakerType?.id === "4")
 
     useEffect(() => {
         setPatient(dataPat?.patients)
@@ -42,8 +50,8 @@ const Home = () => {
 
     const { t } = useTranslation()
 
-    if (loadingE) return <div className='err loader'></div>
-    if (error) return <div className='err'>Quelque chose s'est mal passé</div>
+    if (loading) return <div className='err'><div className=' loader'></div></div>
+    if (error) return <div className='err'>{t('err')}</div>
 
     return (
         <div>
@@ -55,7 +63,7 @@ const Home = () => {
                     <div className='parents'>
                         <div className='box'>
                             <div className='box-top'>
-                                <div>
+                                <div onClick={closeSideBar}>
                                     <h3>{patient?.length}</h3>
                                     <h4>{t('patients')}</h4>
                                 </div>
@@ -111,14 +119,16 @@ const Home = () => {
                                 <th>Patient</th>
                                 <th>Médecin assigner</th>
                                 <th>{t('acte')}</th>
-                                <th>Action</th>
+                                <th></th>
                             </tr>
                             <tbody>
                                 {
-                                    event?.slice(0, 3)?.map((event: any) => (
+                                    event?.slice(0, 3)?.reverse()?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.care?.patient?.name}</td>
-                                            <td>{event.care?.partakers?.name}</td>
+                                            <td>{event.care?.partakers?.filter((curDate: any) => {
+                                                return curDate.partakerType?.id === '0'
+                                            })?.map((el: any) => (el?.name))}</td>
                                             <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
                                             <td><Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
@@ -137,8 +147,8 @@ const Home = () => {
                             <tbody>
                                 {
                                     medecin?.filter((curDate: any) => {
-                                        return curDate.partakerType?.description === 'Doctor'
-                                    })?.slice(0, 4)?.map((medecin: any) => (
+                                        return curDate.partakerType?.id === '0'
+                                    })?.reverse()?.slice(0, 4)?.map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
                                             <td>{t('dispo')}</td>

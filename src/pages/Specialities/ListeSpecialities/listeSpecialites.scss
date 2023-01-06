@@ -29,3 +29,17 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    .speciality-container {
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .speciality-container {
+        h2 {
+            font-size: 1rem;
+        }
+    }
+}

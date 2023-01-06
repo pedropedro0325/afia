@@ -12,10 +12,16 @@
     .btn-blue {
         background-color: #17202A;
         color: #fff;
-        padding: .7rem;
+        padding: .4rem;
         outline: none;
         border: none;
         border-radius: .3rem;
         cursor: pointer;
+    }
+}
+
+@media (max-width: 670px) {
+    .patient-container {
+        margin: .1rem .4rem;
     }
 }

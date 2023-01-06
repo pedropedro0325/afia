@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './medicament.scss'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +19,10 @@ const Medicaments = () => {
     ])
 
     const [search, setSearch] = useState('')
+
+    function refreshPage() {
+        window.location.reload();
+    }
 
     return (
         <div>
@@ -39,6 +44,9 @@ const Medicaments = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link> */}
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -47,9 +55,7 @@ const Medicaments = () => {
                                 <tr>
                                     <th>{t('nomMedoc')}</th>
                                     <th>{t('categorie')}</th>
-                                    <th>{t('dateA')}</th>
                                     <th>{t('prix')}</th>
-                                    <th>{t('dateEx')}</th>
                                     <th>Stock</th>
                                     <th>Action</th>
                                 </tr>
@@ -62,9 +68,7 @@ const Medicaments = () => {
                                         <tr key={el.id}>
                                             <td>{el.nomMedoc}</td>
                                             <td>{el.categorie}</td>
-                                            <td>{el.dateAchat}</td>
                                             <td>{el.prix}</td>
-                                            <td>{el.dateExp}</td>
                                             <td>{el.stock}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>

@@ -3,6 +3,7 @@ import { Outlet, Link } from 'react-router-dom'
 import './patient.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { usePatients } from '../../../hooks/Patients/usePatients'
 import { useTranslation } from 'react-i18next'
 
@@ -14,7 +15,11 @@ const Patient = () => {
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -37,6 +42,9 @@ const Patient = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -47,7 +55,6 @@ const Patient = () => {
                                     <th>{t('prenom')}</th>
                                     <th>{t('nom')}</th>
                                     <th>Email</th>
-                                    <th>Description</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,7 +68,6 @@ const Patient = () => {
                                             <td>{patient.name}</td>
                                             <td>{patient.lastName}</td>
                                             <td>{patient.email}</td>
-                                            <td>{patient.description}</td>
                                             <td><Link to={`/patients/detail/${patient.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))

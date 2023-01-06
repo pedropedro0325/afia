@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import './types.scss'
 import { useTypes } from '../../../hooks/Types/useTypes'
 import { useTranslation } from 'react-i18next'
@@ -14,8 +15,11 @@ const Types = () => {
 
     const [search, setSearch] = useState('')
 
+    function refreshPage() {
+        window.location.reload();
+    }
 
-    if (loading) return <div className='err loader'></div>
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -38,6 +42,9 @@ const Types = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>

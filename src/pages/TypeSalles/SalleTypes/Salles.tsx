@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useVenuesTypes } from '../../../hooks/TypeSalles/useTypeSalles'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +21,11 @@ const Salles = () => {
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -43,6 +48,9 @@ const Salles = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>

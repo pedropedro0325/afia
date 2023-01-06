@@ -16,19 +16,20 @@ import { faSignal } from '@fortawesome/free-solid-svg-icons'
 import './sidebar.scss'
 import { useTranslation } from 'react-i18next'
 
-const Sidebar = () => {
+const Sidebar = ({ sidebar }: any) => {
 
     const { t } = useTranslation()
     return (
-        <div className='sidebar'>
+        <div className={sidebar ? "sidebar sidebar--open" : "sidebar"}>
             <div className='cate'>
                 <div className='categories'>
+
                     <NavLink to='/patients'><li><FontAwesomeIcon icon={faHospitalUser} className="i-plus" />{t('patients')}</li></NavLink>
                     <NavLink to='/medecins'><li><FontAwesomeIcon icon={faUserDoctor} className="i-plus" />{t('medecins')}</li></NavLink>
                     <NavLink to='/personnels'><li><FontAwesomeIcon icon={faUsers} className="i-plus" />{t('personnels')}</li></NavLink>
                     <NavLink to='/postes'><li><FontAwesomeIcon icon={faList} className="i-plus" />{t('postes')}</li></NavLink>
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />{t('evenements')}</li></NavLink>
-                    <NavLink to='/agenda'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />{t('agenda')}</li></NavLink>
+                    <NavLink to='/calendrier'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />{t('agenda')}</li></NavLink>
                     <NavLink to='/salles'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />{t('salles')}</li></NavLink>
                     <NavLink to='/salle/types'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />{t('tysalles')}</li></NavLink>
                     <NavLink to='/facturation'><li><FontAwesomeIcon icon={faMoneyBill} className="i-plus" />{t('facturations')}</li></NavLink>

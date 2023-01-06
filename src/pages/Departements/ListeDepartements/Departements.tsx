@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './departement.scss'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +19,10 @@ const Departements = () => {
     ])
 
     const [search, setSearch] = useState('')
+
+    function refreshPage() {
+        window.location.reload();
+    }
 
     return (
         <div>
@@ -39,6 +44,9 @@ const Departements = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link> */}
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -46,8 +54,6 @@ const Departements = () => {
                             <thead>
                                 <tr>
                                     <th>{t('nomDepart')}</th>
-                                    <th>Description</th>
-                                    <th>{t('dateDepart')}</th>
                                     <th>{t('chefDepart')}</th>
                                     <th>{t('statut')}</th>
                                     <th>Action</th>
@@ -60,8 +66,6 @@ const Departements = () => {
                                     }).map((el: any) => (
                                         <tr key={el.id}>
                                             <td>{el.departName}</td>
-                                            <td>{el.description}</td>
-                                            <td>{el.dateDepart}</td>
                                             <td>{el.ChefDepart}</td>
                                             <td><button className='btn-statut'>{el.statut}</button></td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>

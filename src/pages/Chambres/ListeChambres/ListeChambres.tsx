@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './chambre.scss'
 import { useVenues } from '../../../hooks/Venues/useVenues'
@@ -21,7 +22,11 @@ const ListeChambres = () => {
 
     const [search, setSearch] = useState('')
 
-    if (loading) return <div className='err loader'></div>
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -44,6 +49,9 @@ const ListeChambres = () => {
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
                                 </button>
                             </Link>
+                            <button onClick={refreshPage} className='btn-blue'>
+                                <FontAwesomeIcon icon={faRefresh} className="i-plus" />
+                            </button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -53,7 +61,6 @@ const ListeChambres = () => {
                                     <th>{t('nSalle')}</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                    <th>{t('nTel')}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -66,7 +73,6 @@ const ListeChambres = () => {
                                             <td>{el.id}</td>
                                             <td>{el.description}</td>
                                             <td>{el.venueType.description}</td>
-                                            <td>{el.phoneNumber}</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

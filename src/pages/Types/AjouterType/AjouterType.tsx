@@ -40,6 +40,7 @@ const AjouterType = () => {
                                     setDescription('')
                                 }
                                 navigate('/postes')
+                                window.location.reload()
                             }
                             catch (error: any) {
                                 if (error) return `Submission error! ${error.message}`

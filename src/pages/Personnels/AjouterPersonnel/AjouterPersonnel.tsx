@@ -94,6 +94,7 @@ const AjouterPersonnel = () => {
                 }
             })
             navigate('/personnels')
+            window.location.reload()
         }
         catch (error: any) {
             if (error) return `

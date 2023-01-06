@@ -181,6 +181,7 @@ const AjouterEvent = () => {
                 }
             })
             navigate('/evenements')
+            window.location.reload()
         }
         catch (error: any) {
             if (error) return `
