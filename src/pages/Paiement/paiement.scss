@@ -1,0 +1,117 @@
+.paiement {
+    margin: 1rem 1rem;
+
+    h2 {
+        background-color: #fff;
+        padding: .8rem;
+        border-radius: .4rem;
+    }
+
+    .info {
+        background-color: #fff;
+        margin: 1rem 0;
+        padding: .8rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        .acte {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            h3 {
+                &::after {
+                    content: ':';
+                    padding: 0 .4rem;
+                }
+            }
+
+            h4 {
+                color: blue;
+            }
+        }
+
+        .prix {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            h3 {
+                &::after {
+                    content: ':';
+                    padding: 0 .4rem;
+                }
+            }
+
+            h4 {
+                color: blue;
+            }
+        }
+    }
+
+    .regle {
+        background-color: #fff;
+        margin: 1rem 0;
+        padding: .8rem;
+
+        .montant {
+            display: flex;
+            align-items: center;
+            gap: 6rem;
+            flex-wrap: wrap;
+            margin: 0 0 3rem 0;
+
+            h3 {
+                &::after {
+                    content: ':';
+                    padding: 0 .4rem;
+                }
+            }
+
+            h4 {
+                color: blue;
+            }
+        }
+
+        .methode {
+            margin-bottom: 1rem;
+
+            .select-methode {
+                margin-bottom: 1rem;
+            }
+
+            h4 {
+                margin-bottom: .5rem;
+            }
+
+            select {
+                width: 30%;
+                margin-bottom: 1rem;
+                padding: .5rem;
+            }
+
+            .partiel {
+                input {
+                    width: 30%;
+                    padding: .5rem;
+                    border: rgb(179, 165, 192) .1px solid;
+                    outline: none;
+                    border-radius: .4rem;
+                    margin-bottom: 1rem;
+                }
+
+                .payeur {
+                    margin-top: 1rem;
+                }
+            }
+
+            .submit {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

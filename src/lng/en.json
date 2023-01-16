@@ -128,5 +128,8 @@
     "compte": "If you already have an account",
     "connecte": "Login",
     "noCompte": "You don't have an account",
-    "noConnecte": "Create an account"
+    "noConnecte": "Create an account",
+    "suivi": "Monitoring",
+    "paiement": "Payment",
+    "suiviMed": "Medical monitoring"
 }

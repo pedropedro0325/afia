@@ -7,7 +7,7 @@ import { useActes } from '../../../hooks/Actes/useActes'
 import { useTranslation } from 'react-i18next'
 
 const CREATE_ACTE = gql`
-    mutation Mutation($description: String, $value: Float, $specialityIds: [Int], $partakerIds: [Int]) {
+    mutation CreateAct($description: String, $value: Float, $specialityIds: [Int], $partakerIds: [Int]) {
   createAct(description: $description, value: $value, specialityIds: $specialityIds, partakerIds: $partakerIds) {
     id
     description {
@@ -25,6 +25,29 @@ const CREATE_ACTE = gql`
         en
       }
     }
+    instanceActAllPrices {
+      actId
+      amountPaid
+      amountDue
+      amountRejected
+      payWho
+      careId
+      dateAmount
+      seqNumber
+      userId
+    }
+    lastInstanceActPrices {
+      actId
+      amountPaid
+      amountDue
+      amountRejected
+      payWho
+      careId
+      dateAmount
+      seqNumber
+      userId
+    }
+    careId
   }
 }
 `

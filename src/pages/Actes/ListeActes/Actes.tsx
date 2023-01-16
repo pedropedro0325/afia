@@ -52,6 +52,7 @@ const Actes = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
+                            <button className='back'><Link to='/'>Retour</Link></button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -73,8 +74,8 @@ const Actes = () => {
                                         <tr key={el.id}>
                                             <td>{el.description.fr}</td>
                                             <td>{el.specialities?.map((el: any) => (el?.description?.fr))}</td>
-                                            <td>{el.price?.map((el: any) => (el.value))}</td>
-                                            <td>{el.price?.map((el: any) => (el.partakerIds))}</td>
+                                            <td>{el.price?.map((el: any) => (el.value))} $</td>
+                                            <td>{el.price?.map((el: any) => (el.partakerIds))} $</td>
                                             <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
                                         </tr>
                                     ))

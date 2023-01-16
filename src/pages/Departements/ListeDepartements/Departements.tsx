@@ -47,6 +47,7 @@ const Departements = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
+                            <button className='back'><Link to='/'>Retour</Link></button>
                         </div>
                     </div>
                     <div className='table-patient'>

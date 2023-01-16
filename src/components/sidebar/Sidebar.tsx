@@ -31,7 +31,7 @@ const Sidebar = ({ sidebar }: any) => {
                     <NavLink to='/evenements'><li><FontAwesomeIcon icon={faCalendarDay} className="i-plus" />{t('evenements')}</li></NavLink>
                     <NavLink to='/calendrier'><li><FontAwesomeIcon icon={faCalendarDays} className="i-plus" />{t('agenda')}</li></NavLink>
                     <NavLink to='/salles'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />{t('salles')}</li></NavLink>
-                    <NavLink to='/salle/types'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />{t('tysalles')}</li></NavLink>
+                    {/* <NavLink to='/salle/types'><li><FontAwesomeIcon icon={faPersonBooth} className="i-plus" />{t('tysalles')}</li></NavLink> */}
                     <NavLink to='/facturation'><li><FontAwesomeIcon icon={faMoneyBill} className="i-plus" />{t('facturations')}</li></NavLink>
                     <NavLink to='/medicament'><li><FontAwesomeIcon icon={faPills} className="i-plus" />{t('medicaments')}</li></NavLink>
                     <NavLink to='/departement'><li><FontAwesomeIcon icon={faCodeBranch} className="i-plus" />{t('departements')}</li></NavLink>

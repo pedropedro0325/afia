@@ -36,6 +36,23 @@
         .flex {
             display: flex;
             gap: 2rem;
+
+            .back {
+                background-color: #17202A;
+                color: #fff;
+                padding: .4rem;
+                outline: none;
+                border: none;
+                border-radius: .3rem;
+                cursor: pointer;
+                position: absolute;
+                right: 2rem;
+                margin-top: .1rem;
+
+                a {
+                    color: #fff;
+                }
+            }
         }
 
         h2 {
@@ -46,7 +63,7 @@
         }
 
         .btn-add {
-            background-color: blueviolet;
+            background-color: #17202A;
             font-size: large;
             color: #fff;
             padding: .8rem;
@@ -54,6 +71,7 @@
             border-radius: .2rem;
             cursor: pointer;
         }
+
     }
 
     .calendrier {

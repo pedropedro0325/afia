@@ -13,12 +13,35 @@ query Acts {
       value
     }
     specialities {
-      id
       description {
         fr
         en
       }
+      id
     }
+    instanceActAllPrices {
+      amountDue
+      actId
+      amountPaid
+      amountRejected
+      careId
+      dateAmount
+      payWho
+      seqNumber
+      userId
+    }
+    lastInstanceActPrices {
+      actId
+      amountPaid
+      amountDue
+      amountRejected
+      payWho
+      careId
+      dateAmount
+      seqNumber
+      userId
+    }
+    careId
   }
 }
 `

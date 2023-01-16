@@ -1,15 +1,22 @@
 import { gql, useQuery } from "@apollo/client"
 
 const GET_EVENT = gql`
-query Query($eventId: Int!) {
+query Event($eventId: Int!) {
   event(eventId: $eventId) {
     id
     description
     status {
       id
       description {
-        en
         fr
+        en
+      }
+      type {
+        id
+        description {
+          fr
+          en
+        }
       }
     }
     startDate
@@ -27,14 +34,13 @@ query Query($eventId: Int!) {
       id
       description
       specialities {
-        id
         description {
-          en
           fr
+          en
         }
+        id
       }
       diseases {
-        id
         description {
           fr
           en
@@ -43,11 +49,15 @@ query Query($eventId: Int!) {
           id
           description
         }
+        id
       }
       patient {
         id
         name
         lastName
+        birthDate
+        birthCityId
+        adressId
         phoneNumber
         email
         description
@@ -56,8 +66,15 @@ query Query($eventId: Int!) {
         id
         name
         lastName
+        birthDate
+        birthCityId
+        adressId
         phoneNumber
         email
+        partakerType {
+          id
+          description
+        }
         speciality {
           id
           description {
@@ -65,6 +82,8 @@ query Query($eventId: Int!) {
             en
           }
         }
+        description
+        creationDate
       }
       acts {
         id
@@ -77,6 +96,43 @@ query Query($eventId: Int!) {
           value
         }
         specialities {
+          id
+          description {
+            fr
+            en
+          }
+        }
+        instanceActAllPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        lastInstanceActPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        careId
+      }
+      status {
+        id
+        description {
+          fr
+          en
+        }
+        type {
           id
           description {
             fr

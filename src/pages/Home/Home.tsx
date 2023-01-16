@@ -148,7 +148,7 @@ const Home = ({ closeSideBar }: any) => {
                                 {
                                     medecin?.filter((curDate: any) => {
                                         return curDate.partakerType?.id === '0'
-                                    })?.reverse()?.slice(0, 4)?.map((medecin: any) => (
+                                    })?.reverse()?.slice(0, 3)?.map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
                                             <td>{t('dispo')}</td>

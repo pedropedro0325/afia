@@ -102,6 +102,16 @@
                 border: 1px solid #ddd;
                 padding: 7px;
                 font-size: 15px;
+
+                .btn-blue {
+                    background-color: #17202A;
+                    color: #fff;
+                    padding: .4rem;
+                    outline: none;
+                    border: none;
+                    border-radius: .3rem;
+                    cursor: pointer;
+                }
             }
 
             #customers tr:nth-child(even) {

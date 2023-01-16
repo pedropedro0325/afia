@@ -11,49 +11,71 @@ import { useForm } from '../../../utils/hooks'
 import { useTranslation } from 'react-i18next'
 
 const CREATE_EVENT = gql`
- mutation CreateEvent(
-    $description: String!
-    $statusId: Int
-    $startDate: dateScalar
-    $endDate: dateScalar
-    $patientId: Int
-    $partakerIds: [Int]
-    $venueId: Int
-    $actIds: [Int]
-  ) {
-    createEvent(
-      description: $description
-      statusId: $statusId
-      startDate: $startDate
-      endDate: $endDate
-      patientId: $patientId
-      partakerIds: $partakerIds
-      venueId: $venueId
-      actIds: $actIds
-    ) {
+ mutation CreateEvent($description: String!, $endDate: dateScalar, $patientId: Int, $partakerIds: [Int], $venueId: Int, $actIds: [Int], $startDate: dateScalar, $statusId: Int) {
+  createEvent(description: $description, endDate: $endDate, patientId: $patientId, partakerIds: $partakerIds, venueId: $venueId, actIds: $actIds, startDate: $startDate, statusId: $statusId) {
+    description
+    endDate
+    id
+    startDate
+    status {
       id
-      description
-      status {
+      description {
+        fr
+        en
+      }
+      type {
         id
         description {
           fr
           en
         }
       }
-      startDate
-      endDate
-      venue {
+    }
+    venue {
+      id
+      venueType {
         id
-        venueType {
-          id
-          description
-        }
-        phoneNumber
         description
       }
-      care {
+      phoneNumber
+      description
+    }
+    care {
+      description
+      id
+      acts {
+        careId
+        description {
+          fr
+          en
+        }
         id
-        description
+        instanceActAllPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        lastInstanceActPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        price {
+          partakerIds
+          value
+        }
         specialities {
           id
           description {
@@ -61,47 +83,76 @@ const CREATE_EVENT = gql`
             en
           }
         }
-        diseases {
+      }
+      diseases {
+        id
+        description {
+          fr
+          en
+        }
+        diseaseLanguage {
+          id
+          description
+        }
+      }
+      patient {
+        id
+        name
+        lastName
+        birthDate
+        birthCityId
+        adressId
+        phoneNumber
+        email
+        description
+      }
+      specialities {
+        description {
+          fr
+          en
+        }
+        id
+      }
+      status {
+        id
+        description {
+          fr
+          en
+        }
+        type {
           id
           description {
             fr
             en
-          }
-          diseaseLanguage {
-            id
-            description
-          }
-        }
-        patient {
-          id
-          name
-        }
-        partakers {
-          name
-          lastName
-          id
-        }
-        acts {
-          id
-          description {
-            fr
-            en
-          }
-          price {
-            partakerIds
-            value
-          }
-          specialities {
-            id
-            description {
-              fr
-              en
-            }
           }
         }
       }
+      partakers {
+        id
+        name
+        lastName
+        birthDate
+        birthCityId
+        adressId
+        phoneNumber
+        email
+        partakerType {
+          id
+          description
+        }
+        speciality {
+          id
+          description {
+            fr
+            en
+          }
+        }
+        description
+        creationDate
+      }
     }
-  }  
+  }
+} 
 `
 
 const AjouterEvent = () => {

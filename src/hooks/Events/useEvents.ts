@@ -1,60 +1,84 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_EVENTS = gql`
-query Query {
+query Events {
   events {
-    id
-    description
-    status {
-      id
-      description {
-        en
-        fr
-      }
-    }
-    startDate
-    endDate
-    venue {
-      id
-      description
-      venueType {
-        description
-        id
-      }
-      phoneNumber
-    }
     care {
-      id
-      description
-      specialities {
-        id
+      status {
         description {
-          fr
           en
+          fr
+        }
+        id
+        type {
+          description {
+            fr
+            en
+          }
+          id
         }
       }
-      diseases {
-        id
+      acts {
+        careId
         description {
           fr
           en
         }
+        id
+        price {
+          value
+          partakerIds
+        }
+        specialities {
+          id
+          description {
+            fr
+            en
+          }
+        }
+        instanceActAllPrices {
+          actId
+          amountDue
+          amountPaid
+          amountRejected
+          careId
+          dateAmount
+          payWho
+          seqNumber
+          userId
+        }
+        lastInstanceActPrices {
+          actId
+          amountDue
+          amountPaid
+          amountRejected
+          careId
+          dateAmount
+          payWho
+          seqNumber
+          userId
+        }
+      }
+      description
+      diseases {
         diseaseLanguage {
           id
           description
         }
-      }
-      patient {
         id
-        name
-        lastName
-        phoneNumber
-        email
+        description {
+          fr
+          en
+        }
       }
+      id
       partakers {
         id
         name
         lastName
+        birthDate
+        birthCityId
+        adressId
         phoneNumber
         email
         partakerType {
@@ -69,25 +93,53 @@ query Query {
           }
         }
         description
+        creationDate
       }
-      acts {
+      patient {
+        id
+        name
+        lastName
+        birthDate
+        birthCityId
+        adressId
+        phoneNumber
+        email
+        description
+      }
+      specialities {
         id
         description {
           fr
           en
         }
-        price {
-          partakerIds
-          value
-        }
-        specialities {
-          id
-          description {
-            fr
-            en
-          }
+      }
+    }
+    description
+    endDate
+    id
+    startDate
+    status {
+      id
+      description {
+        fr
+        en
+      }
+      type {
+        id
+        description {
+          fr
+          en
         }
       }
+    }
+    venue {
+      id
+      venueType {
+        id
+        description
+      }
+      phoneNumber
+      description
     }
   }
 }
@@ -95,7 +147,7 @@ query Query {
 
 export const useEvents = () => {
   const { error, loading, data } = useQuery(GET_EVENTS)
-  console.log("=============",error)
+  console.log("=============", error)
   return {
     error,
     data,

@@ -1,4 +1,4 @@
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet, useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './detailPatient.scss'
 import DossierMedical from '../../../components/DossierMedical/DossierMedical'
@@ -53,6 +53,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
+                            <button className='back'><Link to='/patients'>Retour</Link></button>
                             <h2>Patient N° {data.patient.id}</h2>
                             <hr />
                             <div className='pers'>

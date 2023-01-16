@@ -128,5 +128,8 @@
     "compte": "Si vous avez déjà un compte",
     "connecte": "Connectez-vous",
     "noCompte": "Vous n' avez pas un compte",
-    "noConnecte": "Créez un compte"
+    "noConnecte": "Créez un compte",
+    "suivi": "Suivi",
+    "paiement": "Paiement",
+    "suiviMed": "Suivi médical"
 }

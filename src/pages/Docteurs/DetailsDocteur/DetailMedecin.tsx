@@ -23,7 +23,7 @@ const DetailPatient = () => {
 
     const { data: dataE, loading: loadingE, error: errorE } = usePersonnel(Number(partakerId))
 
-    if (loading) return <div className='err'><div className=' loader'></div><h4>{t('load')}</h4></div>
+    if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>something went wrong</div>
 
     return (
@@ -50,6 +50,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
+                            <button className='back'><Link to='/personnels'>Retour</Link></button>
                             <h2>{t('personne')} N° {partakerId}</h2>
                             <li>Type : <h3>{dataE?.partaker?.partakerType?.description}</h3></li>
                             <hr />

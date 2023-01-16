@@ -30,6 +30,8 @@ import ErrorPage from './pages/Error/ErrorPage';
 import Event from './pages/Events/DetailEvent/Event';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
+import Paiement from './pages/Paiement/Paiement';
+import Suivi from './pages/Suivi/Suivi';
 
 const App = () => {
   return (
@@ -66,6 +68,8 @@ const App = () => {
           <Route path='/salle/types/ajouter' element={<AjouterTypeSalle />} />
           <Route path='/actes/ajouter' element={<AjouterActe />} />
           <Route path='/status/ajouter' element={<AjouterStatus />} />
+          <Route path='/paiement/:eventId' element={<Paiement />} />
+          <Route path='/suivi-medical' element={<Suivi />} />
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>
