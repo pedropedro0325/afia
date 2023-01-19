@@ -5,10 +5,10 @@ import { gql, useMutation } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 
 const CREATE_TYPE = gql`
-    mutation CreatePartakerType($description: String!) {
-        createPartakerType(description: $description) {
-            id
-            description
+    mutation CreatePartakerType($description: String) {
+  createPartakerType(description: $description) {
+    id
+    description
   }
 }
 `

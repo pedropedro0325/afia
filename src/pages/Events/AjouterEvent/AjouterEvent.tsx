@@ -11,12 +11,10 @@ import { useForm } from '../../../utils/hooks'
 import { useTranslation } from 'react-i18next'
 
 const CREATE_EVENT = gql`
- mutation CreateEvent($description: String!, $endDate: dateScalar, $patientId: Int, $partakerIds: [Int], $venueId: Int, $actIds: [Int], $startDate: dateScalar, $statusId: Int) {
-  createEvent(description: $description, endDate: $endDate, patientId: $patientId, partakerIds: $partakerIds, venueId: $venueId, actIds: $actIds, startDate: $startDate, statusId: $statusId) {
-    description
-    endDate
+ mutation CreateEvent($description: String!, $statusId: Int, $careDescription: String, $startDate: dateScalar, $endDate: dateScalar, $patientId: Int, $partakerIds: [Int], $venueId: Int, $actIds: [Int]) {
+  createEvent(description: $description, statusId: $statusId, careDescription: $careDescription, startDate: $startDate, endDate: $endDate, patientId: $patientId, partakerIds: $partakerIds, venueId: $venueId, actIds: $actIds) {
     id
-    startDate
+    description
     status {
       id
       description {
@@ -31,6 +29,8 @@ const CREATE_EVENT = gql`
         }
       }
     }
+    startDate
+    endDate
     venue {
       id
       venueType {
@@ -41,47 +41,13 @@ const CREATE_EVENT = gql`
       description
     }
     care {
-      description
       id
-      acts {
-        careId
+      description
+      specialities {
+        id
         description {
           fr
           en
-        }
-        id
-        instanceActAllPrices {
-          actId
-          amountPaid
-          amountDue
-          amountRejected
-          payWho
-          careId
-          dateAmount
-          seqNumber
-          userId
-        }
-        lastInstanceActPrices {
-          actId
-          amountPaid
-          amountDue
-          amountRejected
-          payWho
-          careId
-          dateAmount
-          seqNumber
-          userId
-        }
-        price {
-          partakerIds
-          value
-        }
-        specialities {
-          id
-          description {
-            fr
-            en
-          }
         }
       }
       diseases {
@@ -106,12 +72,70 @@ const CREATE_EVENT = gql`
         email
         description
       }
-      specialities {
+      partakers {
+        id
+        name
+        lastName
+        birthDate
+        birthCityId
+        adressId
+        phoneNumber
+        email
+        partakerTypes {
+          id
+          description
+        }
+        speciality {
+          id
+          description {
+            fr
+            en
+          }
+        }
+        description
+        creationDate
+        createdBy
+      }
+      acts {
+        id
         description {
           fr
           en
         }
-        id
+        price {
+          partakerIds
+          value
+        }
+        specialities {
+          id
+          description {
+            fr
+            en
+          }
+        }
+        instanceActAllPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        lastInstanceActPrices {
+          actId
+          amountPaid
+          amountDue
+          amountRejected
+          payWho
+          careId
+          dateAmount
+          seqNumber
+          userId
+        }
+        careId
       }
       status {
         id
@@ -127,29 +151,6 @@ const CREATE_EVENT = gql`
           }
         }
       }
-      partakers {
-        id
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        partakerType {
-          id
-          description
-        }
-        speciality {
-          id
-          description {
-            fr
-            en
-          }
-        }
-        description
-        creationDate
-      }
     }
   }
 } 
@@ -157,184 +158,191 @@ const CREATE_EVENT = gql`
 
 const AjouterEvent = () => {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const { t } = useTranslation()
+  const { t } = useTranslation()
 
-    const [createEvent, { loading, error }] = useMutation(CREATE_EVENT)
+  const [createEvent, { loading, error }] = useMutation(CREATE_EVENT)
 
 
-    console.log("=========Mutation", error)
+  console.log("=========Mutation", error)
 
-    const [initialState, setReportValues] = useState({
-        description: "",
-        startDate: Date,
-        endDate: Date,
-        statusId: "",
-        patientId: "",
-        partakerIds: [],
-        venueId: "",
-        actIds: []
-    });
+  const [initialState, setReportValues] = useState({
+    description: "",
+    startDate: Date,
+    endDate: Date,
+    careDescription: "",
+    statusId: "",
+    patientId: "",
+    partakerIds: [],
+    venueId: "",
+    actIds: []
+  });
 
-    const { data: dataStatus } = useStatus()
-    const [statuts, setStatuts] = useState<[]>([])
+  const { data: dataStatus } = useStatus()
+  const [statuts, setStatuts] = useState<[]>([])
 
-    useEffect(() => {
-        setStatuts(dataStatus?.manyStatus)
+  useEffect(() => {
+    setStatuts(dataStatus?.manyStatus)
 
-    }, [dataStatus])
+  }, [dataStatus])
 
-    const { data: dataPat } = usePatients()
-    const [patients, setPatients] = useState<[]>([])
+  const { data: dataPat } = usePatients()
+  const [patients, setPatients] = useState<[]>([])
 
-    useEffect(() => {
-        setPatients(dataPat?.patients)
+  useEffect(() => {
+    setPatients(dataPat?.patients)
 
-    }, [dataPat])
+  }, [dataPat])
 
-    const { data: dataPer } = usePersonnels()
-    const [personnels, setPersonnels] = useState<[]>([])
+  const { data: dataPer } = usePersonnels()
+  const [personnels, setPersonnels] = useState<[]>([])
 
-    useEffect(() => {
-        setPersonnels(dataPer?.partakers)
-    }, [dataPer])
+  useEffect(() => {
+    setPersonnels(dataPer?.partakers)
+  }, [dataPer])
 
-    const { data: dataA } = useActes()
-    const [actes, setActes] = useState<[]>([])
+  const { data: dataA } = useActes()
+  const [actes, setActes] = useState<[]>([])
 
-    useEffect(() => {
-        setActes(dataA?.acts)
-    }, [dataA])
+  useEffect(() => {
+    setActes(dataA?.acts)
+  }, [dataA])
 
-    const { data: dataV } = useVenues()
-    const [venues, setVenues] = useState<[]>([])
+  const { data: dataV } = useVenues()
+  const [venues, setVenues] = useState<[]>([])
 
-    useEffect(() => {
-        setVenues(dataV?.venues)
-    }, [dataV])
+  useEffect(() => {
+    setVenues(dataV?.venues)
+  }, [dataV])
 
-    const { onChange, onChangeOption, onSubmit, values } = useForm(
-        formCallback,
-        initialState
-    );
+  const { onChange, onChangeOption, onSubmit, values } = useForm(
+    formCallback,
+    initialState
+  );
 
-    async function formCallback() {
+  async function formCallback() {
 
-        try {
-            const valuesCallBack: any = values
-            // send "values" to database
-            console.log("=================", values)
-            createEvent({
-                variables: {
-                    description: valuesCallBack.description, startDate: valuesCallBack.startDate, endDate: valuesCallBack.endDate, statusId: Number(valuesCallBack.statusId),
-                    patientId: Number(valuesCallBack.patientId), partakerIds: Number(valuesCallBack.partakerIds), venueId: Number(valuesCallBack.venueId), actIds: Number(valuesCallBack.actIds)
-                }
-            })
-            navigate('/evenements')
-            window.location.reload()
+    try {
+      const valuesCallBack: any = values
+      // send "values" to database
+      console.log("=================", values)
+      createEvent({
+        variables: {
+          description: valuesCallBack.description, startDate: valuesCallBack.startDate, endDate: valuesCallBack.endDate, statusId: Number(valuesCallBack.statusId),
+          patientId: Number(valuesCallBack.patientId), partakerIds: Number(valuesCallBack.partakerIds), venueId: Number(valuesCallBack.venueId), actIds: Number(valuesCallBack.actIds),
+          careDescription: valuesCallBack.careDescription
         }
-        catch (error: any) {
-            if (error) return `
-            Erreur de soumission ! ${error.message}`
-        }
+      })
+      navigate('/evenements')
+      window.location.reload()
     }
+    catch (error: any) {
+      if (error) return `
+            Erreur de soumission ! ${error.message}`
+    }
+  }
 
 
-    return (
-        <div>
-            <div className='home-container'>
-                <Outlet />
-                <div className='ajouterEvent-container'>
-                    <h2>{t('ajouterEv')}</h2>
-                    <br />
-                    <div className='form'>
-                        <form onSubmit={onSubmit}>
-                            <div className='controls'>
-                                <div>
-                                    <input name='description' onChange={onChange} type="text" className='input' placeholder='Description*' required />
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <label htmlFor="">{t('dateD')}*</label><br />
-                                    <input name='startDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date du début*' required />
-                                </div>
-                                <div>
-                                    <label htmlFor="">{t('dateF')}*</label><br />
-                                    <input name='endDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date de fin*' required />
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <select name="patientId" onChange={onChangeOption} id="" className='input' required>
-                                        <option value="">Patient</option>
-                                        {
-                                            patients?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <select name="partakerIds" onChange={onChangeOption} id="" className='input' required>
-                                        <option value="">{t('personnel')}</option>
-                                        {
-                                            personnels?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <select name="venueId" onChange={onChangeOption} id="venueId" className='input' required>
-                                        <option value="">{t('chambre')}</option>
-                                        {
-                                            venues?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.description}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <select name="actIds" onChange={onChangeOption} id="actIds" className='input' required>
-                                        <option value="">{t('acte')}</option>
-                                        {
-                                            actes?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.description.fr}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='control'>
-                                <div>
-                                    <select name='statusId' onChange={onChangeOption} className='input' placeholder='' required>
-                                        <option value="">{t('statut')}</option>
-                                        {
-                                            statuts?.map((el: any) => (
-                                                <option key={el.id} value={el.id}>{el.description.fr}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='save'>
-                                <div>
-                                    <button type='submit' className='btn-save'>{t('save')}</button>
-                                </div>
-                                <div>
-                                    <button className='btn-cancel'>{t('annuler')}</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+  return (
+    <div>
+      <div className='home-container'>
+        <Outlet />
+        <div className='ajouterEvent-container'>
+          <h2>{t('ajouterEv')}</h2>
+          <br />
+          <div className='form'>
+            <form onSubmit={onSubmit}>
+              <div className='controls'>
+                <div>
+                  <input name='description' onChange={onChange} type="text" className='input' placeholder='Description*' required />
                 </div>
-            </div>
+              </div>
+              <div className='controls'>
+                <div>
+                  <input name='careDescription' onChange={onChange} type="text" className='input' placeholder='Description de la maladie' required />
+                </div>
+              </div>
+              <div className='control'>
+                <div>
+                  <label htmlFor="">{t('dateD')}*</label><br />
+                  <input name='startDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date du début*' required />
+                </div>
+                <div>
+                  <label htmlFor="">{t('dateF')}*</label><br />
+                  <input name='endDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date de fin*' required />
+                </div>
+              </div>
+              <div className='control'>
+                <div>
+                  <select name="patientId" onChange={onChangeOption} id="" className='input' required>
+                    <option value="">Patient</option>
+                    {
+                      patients?.map((el: any) => (
+                        <option key={el.id} value={el.id}>{el.name}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div>
+                  <select name="partakerIds" onChange={onChangeOption} id="" className='input' required>
+                    <option value="">{t('personnel')}</option>
+                    {
+                      personnels?.map((el: any) => (
+                        <option key={el.id} value={el.id}>{el.name}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className='control'>
+                <div>
+                  <select name="venueId" onChange={onChangeOption} id="venueId" className='input' required>
+                    <option value="">{t('chambre')}</option>
+                    {
+                      venues?.map((el: any) => (
+                        <option key={el.id} value={el.id}>{el.description} ( {el.venueType.description} )</option>
+                      ))
+                    }
+                  </select>
+                </div>
+                <div>
+                  <select name="actIds" onChange={onChangeOption} id="actIds" className='input' required>
+                    <option value="">{t('acte')}</option>
+                    {
+                      actes?.map((el: any) => (
+                        <option key={el.id} value={el.id}>{el.description.fr}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className='control'>
+                <div>
+                  <select name='statusId' onChange={onChangeOption} className='input' placeholder='' required>
+                    <option value="">{t('statut')}</option>
+                    {
+                      statuts?.map((el: any) => (
+                        <option key={el.id} value={el.id}>{el.description.fr}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+              </div>
+              <div className='save'>
+                <div>
+                  <button type='submit' className='btn-save'>{t('save')}</button>
+                </div>
+                <div>
+                  <button className='btn-cancel'>{t('annuler')}</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default AjouterEvent

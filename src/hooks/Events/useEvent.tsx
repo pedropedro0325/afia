@@ -6,16 +6,16 @@ query Event($eventId: Int!) {
     id
     description
     status {
-      id
       description {
-        fr
         en
+        fr
       }
+      id
       type {
         id
         description {
-          fr
           en
+          fr
         }
       }
     }
@@ -34,13 +34,14 @@ query Event($eventId: Int!) {
       id
       description
       specialities {
+        id
         description {
           fr
           en
         }
-        id
       }
       diseases {
+        id
         description {
           fr
           en
@@ -49,7 +50,6 @@ query Event($eventId: Int!) {
           id
           description
         }
-        id
       }
       patient {
         id
@@ -71,7 +71,7 @@ query Event($eventId: Int!) {
         adressId
         phoneNumber
         email
-        partakerType {
+        partakerTypes {
           id
           description
         }
@@ -84,6 +84,7 @@ query Event($eventId: Int!) {
         }
         description
         creationDate
+        createdBy
       }
       acts {
         id

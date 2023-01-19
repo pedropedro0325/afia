@@ -95,8 +95,18 @@
             }
 
             .partiel {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                width: 100%;
+
+                .partiel1 {
+                    width: 45%;
+                }
+
                 input {
-                    width: 30%;
+                    width: 90%;
                     padding: .5rem;
                     border: rgb(179, 165, 192) .1px solid;
                     outline: none;
@@ -111,6 +121,11 @@
 
             .submit {
                 margin-top: 1rem;
+
+                .btn-blue {
+                    padding: 1rem 1.4rem;
+                    font-size: large;
+                }
             }
         }
     }

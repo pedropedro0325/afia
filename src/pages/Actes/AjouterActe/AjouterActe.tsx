@@ -3,28 +3,17 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { gql, useMutation } from '@apollo/client'
 import { useForm } from '../../../utils/hooks'
 import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
-import { useActes } from '../../../hooks/Actes/useActes'
 import { useTranslation } from 'react-i18next'
 
 const CREATE_ACTE = gql`
-    mutation CreateAct($description: String, $value: Float, $specialityIds: [Int], $partakerIds: [Int]) {
-  createAct(description: $description, value: $value, specialityIds: $specialityIds, partakerIds: $partakerIds) {
-    id
+    mutation reateAct($specialityIds: [Int]!, $partakerIds: [Int]!, $descriptionFr: String, $descriptionEn: String, $value: Float) {
+  createAct(specialityIds: $specialityIds, partakerIds: $partakerIds, descriptionFR: $descriptionFr, descriptionEN: $descriptionEn, value: $value) {
+    careId
     description {
       fr
       en
     }
-    price {
-      partakerIds
-      value
-    }
-    specialities {
-      id
-      description {
-        fr
-        en
-      }
-    }
+    id
     instanceActAllPrices {
       actId
       amountPaid
@@ -47,7 +36,17 @@ const CREATE_ACTE = gql`
       seqNumber
       userId
     }
-    careId
+    price {
+      partakerIds
+      value
+    }
+    specialities {
+      id
+      description {
+        fr
+        en
+      }
+    }
   }
 }
 `
@@ -65,7 +64,8 @@ const AjouterActe = () => {
     console.log("=========Mutation", error)
 
     const [initialState, setReportValues] = useState({
-        description: "",
+        descriptionFr: "",
+        descriptionEn: "",
         value: 0,
         specialityIds: [],
         partakerIds: 0
@@ -90,13 +90,15 @@ const AjouterActe = () => {
             console.log("=================", values)
             createAct({
                 variables: {
-                    value: Number(valuesCallBack.value), specialityIds: Number(valuesCallBack.specialityIds), partakerIds: Number(valuesCallBack.partakerIds), description: valuesCallBack.description,
+                    value: Number(valuesCallBack.value), specialityIds: Number(valuesCallBack.specialityIds), partakerIds: Number(valuesCallBack.partakerIds), descriptionFr: valuesCallBack.descriptionFr,
+                    descriptionEn: valuesCallBack.descriptionEn
                 }
             })
             if (!error) {
                 valuesCallBack.value = ''
                 valuesCallBack.specialityIds = ''
-                valuesCallBack.description = ''
+                valuesCallBack.descriptionFr = ''
+                valuesCallBack.descriptionEn = ''
                 valuesCallBack.partakerIds = ''
             }
             navigate('/actes')
@@ -119,7 +121,10 @@ const AjouterActe = () => {
                         <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
-                                    <input id='description' name="description" onChange={onChange} type="text" className='input' placeholder='Description*' required />
+                                    <input id='descriptionFr' name="descriptionFr" onChange={onChange} type="text" className='input' placeholder='Description fr *' required />
+                                </div><br />
+                                <div>
+                                    <input id='descriptionEn' name="descriptionEn" onChange={onChange} type="text" className='input' placeholder='Description en *' required />
                                 </div><br />
                                 <div>
                                     <select id='specialityIds' name="specialityIds" onChange={onChangeOption} className='input' placeholder='*' required>

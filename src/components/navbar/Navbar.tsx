@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faList } from '@fortawesome/free-solid-svg-icons'
 import './navbar.scss'
 import { useTranslation } from 'react-i18next'
 import logo from '../../assets/img/fr_logo.png'
 import logoB from '../../assets/img/an_logo.png'
 
-const Navbar = ({ openSidebar }: any) => {
+const Navbar = ({ openSidebar, closeNav }: any) => {
     const [isLanguageActive, setIsLanguageActive] = useState(false)
     const { t, i18n } = useTranslation()
 
@@ -70,13 +71,13 @@ const Navbar = ({ openSidebar }: any) => {
                     {/* <li >
                         <h5 className='user'></h5>
                     </li> */}
-                    <h5 onClick={toggleAuth}><FontAwesomeIcon icon={faBars} className="i-plus" /></h5>
+                    <h5 onClick={toggleAuth}><FontAwesomeIcon icon={faList} className="i-plus" /></h5>
                     <div className={auth ? "auth auth--open" : "auth"}>
 
-                        <NavLink to='/enregistrement'><li>{t('register')}</li></NavLink>
+                        <NavLink onClick={toggleAuth} to='/enregistrement'><li>{t('register')}</li></NavLink>
 
 
-                        <NavLink to='/connexion'><li>{t('login')}</li></NavLink>
+                        <NavLink onClick={toggleAuth} to='/connexion'><li>{t('login')}</li></NavLink>
 
                     </div>
 

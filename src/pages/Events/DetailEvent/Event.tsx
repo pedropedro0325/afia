@@ -50,6 +50,10 @@ const Event = () => {
                 </div>
                 <div className='date'>
                     <div className='dte'>
+                        <h4>{t('motif')} </h4>
+                        <h5>{data?.event?.care?.description}</h5>
+                    </div>
+                    <div className='dte'>
                         <h4>{t('dateD')} </h4>
                         <h5>{data?.event?.startDate}</h5>
                     </div>

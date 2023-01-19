@@ -54,7 +54,6 @@ const Types = () => {
                                 <tr>
                                     <th>N°</th>
                                     <th>Description</th>
-                                    <th>{t('statut')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,7 +64,6 @@ const Types = () => {
                                         <tr key={type.id}>
                                             <td>{type.id}</td>
                                             <td>{type.description}</td>
-                                            <td><button className='btn-statut'>Active</button></td>
                                         </tr>
                                     ))
                                 }

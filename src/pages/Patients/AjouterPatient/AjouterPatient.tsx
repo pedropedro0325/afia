@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './ajouterPatient.scss'
 import { gql, useMutation } from '@apollo/client'
@@ -6,17 +6,18 @@ import { useTranslation } from 'react-i18next'
 
 const CREATE_PATIENT = gql`
     mutation CreatePatient($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: String, $email: String, $description: String) {
-    createPatient(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, description: $description) {
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        description
-    }
-    }
+  createPatient(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, description: $description) {
+    id
+    name
+    lastName
+    birthDate
+    birthCityId
+    adressId
+    phoneNumber
+    email
+    description
+  }
+}
 `
 
 const AjouterPatient = () => {

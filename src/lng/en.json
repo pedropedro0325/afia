@@ -131,5 +131,10 @@
     "noConnecte": "Create an account",
     "suivi": "Monitoring",
     "paiement": "Payment",
-    "suiviMed": "Medical monitoring"
+    "suiviMed": "Medical monitoring",
+    "motif": "Pattern",
+    "status": "Status",
+    "datePay": "Payment date",
+    "billFor": "Bill for",
+    "bill": "Bill"
 }

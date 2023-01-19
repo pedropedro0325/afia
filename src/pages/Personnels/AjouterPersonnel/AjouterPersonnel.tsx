@@ -19,7 +19,7 @@ mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $b
     adressId
     phoneNumber
     email
-    partakerType {
+    partakerTypes {
       id
       description
     }
@@ -32,6 +32,7 @@ mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $b
     }
     description
     creationDate
+    createdBy
   }
 }
 `

@@ -32,6 +32,7 @@ import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
 import Paiement from './pages/Paiement/Paiement';
 import Suivi from './pages/Suivi/Suivi';
+import DetailsFacture from './pages/Facturations/DetailsFacture/DetailsFacture';
 
 const App = () => {
   return (
@@ -70,6 +71,7 @@ const App = () => {
           <Route path='/status/ajouter' element={<AjouterStatus />} />
           <Route path='/paiement/:eventId' element={<Paiement />} />
           <Route path='/suivi-medical' element={<Suivi />} />
+          <Route path='/facturation/detail/:careId' element={<DetailsFacture />} />
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>

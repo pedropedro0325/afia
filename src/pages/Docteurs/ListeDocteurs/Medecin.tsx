@@ -68,7 +68,7 @@ const Medecin = () => {
                                     medecins?.filter((el: any) => {
                                         return search.toLocaleLowerCase() === '' ? el : el.name?.toLowerCase().includes(search)
                                     }).filter((curDate: any) => {
-                                        return curDate.partakerType?.id === '0'
+                                        return curDate.partakerType?.description === 'Docteur'
                                     }).map((medecin: any) => (
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>

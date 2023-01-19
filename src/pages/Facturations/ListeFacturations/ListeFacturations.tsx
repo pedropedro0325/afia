@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useCares } from '../../../hooks/Cares/useCares'
 import './facturation.scss'
 import { useTranslation } from 'react-i18next'
 
@@ -11,18 +12,23 @@ const ListeFacturations = () => {
 
     const { t } = useTranslation()
 
-    const [facture, setFacture] = useState([
-        { id: 1, NomPatient: "Jiji", admissionId: "JI1234", docteurName: "Silvy", status: "Payé", Date: "12-12-2021", tva: "12%", total: "142$" },
-        { id: 2, NomPatient: "Jhon", admissionId: "H123I3", docteurName: "Selvig", status: "Non payé", Date: "03-04-2022", tva: "12%", total: "124$" },
-        { id: 3, NomPatient: "Jean", admissionId: "M7685D", docteurName: "Sarah", status: "Payé", Date: "12-11-2021", tva: "12%", total: "200$" },
-        { id: 4, NomPatient: "Jane", admissionId: "FAZ345", docteurName: "Jack", status: "Non payé", Date: "22-11-2021", tva: "12%", total: "100$" }
-    ])
+    const [facture, setFacture] = useState<[]>([])
+
+    const { data, error, loading } = useCares()
+
+    useEffect(() => {
+        setFacture(data?.cares)
+
+    }, [data])
 
     const [search, setSearch] = useState('')
 
     function refreshPage() {
         window.location.reload();
     }
+
+    if (loading) return <div className='err'><div className=' loader'></div></div>
+    if (error) return <div className='err'>something went wrong</div>
 
     return (
         <div>
@@ -54,8 +60,9 @@ const ListeFacturations = () => {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>{t('motif')}</th>
                                     <th>{t('nomPatient')}</th>
-                                    <th>{t('admission')}</th>
+                                    <th>{t('acte')}</th>
                                     <th>Date</th>
                                     <th>Total</th>
                                     <th>Action</th>
@@ -64,14 +71,17 @@ const ListeFacturations = () => {
                             <tbody>
                                 {
                                     facture.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.NomPatient.toLowerCase().includes(search)
+                                        return search.toLocaleLowerCase() === '' ? el : el?.description?.toLowerCase().includes(search)
                                     }).map((el: any) => (
-                                        <tr key={el.id}>
-                                            <td>{el.NomPatient}</td>
-                                            <td>{el.admissionId}</td>
-                                            <td>{el.Date}</td>
-                                            <td>{el.total}</td>
-                                            <td><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button></td>
+                                        <tr key={el?.id}>
+                                            <td>{el?.description}</td>
+                                            <td>{el?.patient?.name}</td>
+                                            <td>{el?.acts?.map((el: any) => el?.description?.fr)}</td>
+                                            <td>{el.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</td>
+                                            <td>{el.acts?.map((el: any) => el?.lastInstanceActPrices?.amountDue)} $</td>
+                                            <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
+                                                <Link to={`/facturation/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link>
+                                            </td>
                                         </tr>
                                     ))
                                 }

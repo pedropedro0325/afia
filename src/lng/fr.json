@@ -131,5 +131,10 @@
     "noConnecte": "Créez un compte",
     "suivi": "Suivi",
     "paiement": "Paiement",
-    "suiviMed": "Suivi médical"
+    "suiviMed": "Suivi médical",
+    "motif": "Motif",
+    "status": "Statut",
+    "datePay": "Date de paiement",
+    "billFor": "Facturer pour",
+    "bill": "Facture"
 }

@@ -212,6 +212,11 @@
 
             h5 {
                 display: block;
+                cursor: pointer;
+
+                &:hover {
+                    color: yellowgreen;
+                }
             }
         }
     }
@@ -268,7 +273,7 @@
 
         .right {
             li {
-                font-size: 10px;
+                font-size: 12px;
             }
         }
     }
@@ -278,13 +283,13 @@
     .navbar {
         .left {
             li {
-                font-size: 9px;
+                font-size: 12px;
             }
         }
 
         .right {
             li {
-                font-size: 9px;
+                font-size: 11px;
             }
         }
     }
@@ -298,6 +303,11 @@
                 display: block;
                 margin: 0 .8rem;
                 color: white;
+                cursor: pointer;
+
+                &:hover {
+                    color: yellowgreen;
+                }
             }
 
             .auth {

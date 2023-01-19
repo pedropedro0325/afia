@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_MEDECINS = gql`
-query Query {
+query Partakers {
   partakers {
     id
     name
@@ -11,19 +11,20 @@ query Query {
     adressId
     phoneNumber
     email
-    partakerType {
+    partakerTypes {
       id
       description
     }
     speciality {
       id
       description {
-        en
         fr
+        en
       }
     }
     description
     creationDate
+    createdBy
   }
 }
 `

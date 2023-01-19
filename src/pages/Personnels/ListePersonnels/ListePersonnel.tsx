@@ -76,7 +76,7 @@ const ListePersonnel = () => {
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el.partakerType.description}</td>
+                                            <td>{el?.partakerTypes?.map((el: any) => el?.description)}</td>
                                             <td><Link to={`/personnels/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))

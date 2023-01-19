@@ -7,15 +7,22 @@
         border-radius: .4rem;
     }
 
-    .btn-blue {
-        background-color: #17202A;
-        color: #fff;
-        padding: .4rem;
-        outline: none;
-        border: none;
-        border-radius: .3rem;
-        cursor: pointer;
+    .flex {
+        display: flex;
+        gap: .4rem;
+        align-items: center;
+
+        .btn-blue {
+            background-color: #17202A;
+            color: #fff;
+            padding: .4rem;
+            outline: none;
+            border: none;
+            border-radius: .3rem;
+            cursor: pointer;
+        }
     }
+
 }
 
 @media (max-width: 400px) {

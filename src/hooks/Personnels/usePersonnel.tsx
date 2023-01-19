@@ -11,7 +11,7 @@ const GET_PARTAKER = gql`
     adressId
     phoneNumber
     email
-    partakerType {
+    partakerTypes {
       id
       description
     }
@@ -24,6 +24,7 @@ const GET_PARTAKER = gql`
     }
     description
     creationDate
+    createdBy
   }
 }
 `
