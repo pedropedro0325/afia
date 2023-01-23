@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, useParams, Link } from 'react-router-dom'
-import './detailsFacture.scss'
-import { useCare } from '../../../hooks/Cares/useCare'
+import { Outlet, useParams } from 'react-router-dom'
+import { useCare } from '../../hooks/Cares/useCare'
 import { useTranslation } from 'react-i18next'
+import './detailsPaie.scss'
+import pdf from '../../assets/img/pdf.png'
 
-const DetailsFacture = () => {
+const DetailsPaie = () => {
 
     const { careId } = useParams()
 
@@ -12,14 +13,16 @@ const DetailsFacture = () => {
 
     const { data, error, loading } = useCare(Number(careId))
 
+    const actId = data?.event?.care?.acts?.map((el: any) => (el?.price?.map((el: any) => el?.value)))
+
     if (loading) return <div className='err'><div className=' loader'></div></div>
     if (error) return <div className='err'>{t('err')}</div>
 
     return (
         <div className='home-container'>
             <Outlet />
-            <div className='details'>
-                <h2>{t('bill')}</h2>
+            <div className='details-paiement '>
+                <h2>Détails du paiement</h2>
                 <div className='facture'>
                     <div className='num'>
                         <div className='seq'>
@@ -82,4 +85,5 @@ const DetailsFacture = () => {
     )
 }
 
-export default DetailsFacture
+export default DetailsPaie
+

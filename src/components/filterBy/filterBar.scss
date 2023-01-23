@@ -1,0 +1,21 @@
+.filter {
+
+    margin: 1rem 1rem;
+
+    .filterby {
+        display: flex;
+        gap: .4rem;
+        margin: 0 1rem;
+    }
+
+    .control {
+        width: 100%;
+
+        input {
+            padding: .5rem;
+            width: 100%;
+            border: .1px solid rgb(182, 159, 212);
+            border-radius: .4rem;
+        }
+    }
+}

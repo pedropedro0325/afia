@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import dayjs from 'dayjs'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -7,6 +8,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './events.scss'
 import { useEvents } from '../../../hooks/Events/useEvents'
 import { useTranslation } from 'react-i18next'
+import FilterBarEvent from '../../../components/filterBy/FilterBarEvent'
+
+const isSameOrAfter = require("dayjs/plugin/isSameOrAfter")
+dayjs.extend(isSameOrAfter)
 
 const Events = () => {
 
@@ -20,10 +25,34 @@ const Events = () => {
         setEvents(data?.events)
     }, [data])
 
-    const filtered = data?.events?.filter((el: any) => el.description === "rdv")
-    //console.log(filtered);
+    const handleFilterDesc = (desc: any) => {
+        const filteredData = data?.events?.filter((el: any) => {
+            const fullDesc = `${el?.description}`
+            if (fullDesc?.toLowerCase().includes(desc?.toLowerCase())) {
+                return el
+            }
+        })
+        setEvents(filteredData)
+    }
 
-    const [search, setSearch] = useState('')
+    const handleFilterCare = (care: any) => {
+        const filteredData = data?.events?.filter((el: any) => {
+            const cares = `${el?.care?.description}`
+            if (cares?.toLowerCase().includes(care?.toLowerCase())) {
+                return el
+            }
+        })
+        setEvents(filteredData)
+    }
+
+    const handleFilterDate = (date: any, field: any) => {
+        const filteredData = data?.events?.filter((el: any) => {
+            if (field === "from" && dayjs(el?.startDate).isAfter(dayjs(date))) {
+                return el
+            }
+        })
+        setEvents(filteredData)
+    }
 
     function refreshPage() {
         window.location.reload();
@@ -42,11 +71,6 @@ const Events = () => {
                     <div className='top'>
                         <div className='nav'>
                             <h4>{t('event')}</h4>
-                            <div className='search'>
-                                <input type="search" placeholder='Recherche'
-                                    onChange={(e) => setSearch(e.target.value)}
-                                />
-                            </div>
                             <Link to={`/evenements/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
@@ -57,6 +81,9 @@ const Events = () => {
                             </button>
                             <button className='back'><Link to='/'>Retour</Link></button>
                         </div>
+                        <div>
+                            <FilterBarEvent onNameFilter={handleFilterDesc} onCareFilter={handleFilterCare} onDateFilter={handleFilterDate} />
+                        </div>
                     </div>
                     <div className='table-patient'>
                         <table>
@@ -64,19 +91,17 @@ const Events = () => {
                                 <tr>
                                     <th>Description</th>
                                     <th>{t('dateD')}</th>
-                                    <th>{t('dateF')}</th>
+                                    <th>{t('motif')}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    events?.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el.description?.toLowerCase().includes(search)
-                                    }).map((event: any) => (
+                                    events?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.description}</td>
                                             <td>{event.startDate}</td>
-                                            <td>{event.endDate}</td>
+                                            <td>{event.care?.description}</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
                                                 <Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link>
                                             </td>

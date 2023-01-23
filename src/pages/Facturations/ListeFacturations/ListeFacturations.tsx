@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import dayjs from 'dayjs'
 import { Outlet, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -7,6 +8,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useCares } from '../../../hooks/Cares/useCares'
 import './facturation.scss'
 import { useTranslation } from 'react-i18next'
+import FilterBar from '../../../components/filterBy/FilterBar'
+
+const isSameOrAfter = require("dayjs/plugin/isSameOrAfter")
+dayjs.extend(isSameOrAfter)
 
 const ListeFacturations = () => {
 
@@ -21,7 +26,44 @@ const ListeFacturations = () => {
 
     }, [data])
 
-    const [search, setSearch] = useState('')
+    const handleFilterNamne = (name: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            const fullName = `${el?.patient?.name} ${el?.patient?.lastName}`
+            if (fullName?.toLowerCase().includes(name?.toLowerCase())) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
+
+    const handleFilterCare = (care: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            if (el?.description.toLowerCase().includes(care?.toLowerCase())) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
+
+    const handleFilterAct = (act: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            const fullAct = `${el?.acts?.map((el: any) => el?.description?.fr)}`
+            if (fullAct?.toLowerCase().includes(act?.toLowerCase())) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
+
+    const handleFilterDate = (date: any, field: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            const DatePaie = el?.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)
+            if (field === "from" && dayjs(DatePaie).isAfter(dayjs(date))) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
 
     function refreshPage() {
         window.location.reload();
@@ -39,21 +81,13 @@ const ListeFacturations = () => {
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>{t('facturation')}</h4>
-                            <div className='search'>
-                                <input type="search" placeholder='Recherche'
-                                    onChange={(e) => setSearch(e.target.value)}
-                                />
-                            </div>
-                            {/* <Link to={`/ajouter-un-evenement`}>
-                                <button className='btn-blue'>
-                                    <FontAwesomeIcon icon={faPlus} className="i-plus" />
-                                </button>
-                            </Link> */}
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
                             <button className='back'><Link to='/'>Retour</Link></button>
+                        </div>
+                        <div>
+                            <FilterBar onNameFilter={handleFilterNamne} onEmailFilter={handleFilterCare} onActFilter={handleFilterAct} onDateFilter={handleFilterDate} />
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -70,15 +104,13 @@ const ListeFacturations = () => {
                             </thead>
                             <tbody>
                                 {
-                                    facture.filter((el: any) => {
-                                        return search.toLocaleLowerCase() === '' ? el : el?.description?.toLowerCase().includes(search)
-                                    }).map((el: any) => (
+                                    facture?.map((el: any) => (
                                         <tr key={el?.id}>
                                             <td>{el?.description}</td>
                                             <td>{el?.patient?.name}</td>
                                             <td>{el?.acts?.map((el: any) => el?.description?.fr)}</td>
-                                            <td>{el.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</td>
-                                            <td>{el.acts?.map((el: any) => el?.lastInstanceActPrices?.amountDue)} $</td>
+                                            <td>{el?.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</td>
+                                            <td>{el?.acts?.map((el: any) => el?.lastInstanceActPrices?.amountPaid)} $</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
                                                 <Link to={`/facturation/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link>
                                             </td>

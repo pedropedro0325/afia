@@ -126,9 +126,7 @@ const Home = ({ closeSideBar }: any) => {
                                     event?.slice(0, 3)?.reverse()?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.care?.patient?.name}</td>
-                                            <td>{event.care?.partakers?.filter((curDate: any) => {
-                                                return curDate.partakerType?.id === '0'
-                                            })?.map((el: any) => (el?.name))}</td>
+                                            <td>{event.care?.partakers?.map((el: any) => el?.name)}</td>
                                             <td>{event.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
                                             <td><Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
@@ -146,11 +144,9 @@ const Home = ({ closeSideBar }: any) => {
                             </tr>
                             <tbody>
                                 {
-                                    medecin?.filter((curDate: any) => {
-                                        return curDate.partakerType?.id === '0'
-                                    })?.reverse()?.slice(0, 3)?.map((medecin: any) => (
-                                        <tr key={medecin.id}>
-                                            <td>{medecin.name}</td>
+                                    medecin?.slice(0, 3)?.reverse()?.map((el: any) => (
+                                        <tr key={el.id}>
+                                            <td>{el.name}</td>
                                             <td>{t('dispo')}</td>
                                         </tr>
                                     ))

@@ -136,5 +136,6 @@
     "status": "Status",
     "datePay": "Payment date",
     "billFor": "Bill for",
-    "bill": "Bill"
+    "bill": "Bill",
+    "telecharger": "Download"
 }

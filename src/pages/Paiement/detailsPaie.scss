@@ -1,0 +1,122 @@
+.details-paiement {
+    margin: 1rem 1rem;
+
+    h2 {
+        background-color: #fff;
+        padding: .8rem;
+        border-radius: .4rem;
+    }
+
+    .info {
+        background-color: #fff;
+        margin: 1rem 0;
+        padding: .8rem;
+
+        .acte {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: .7rem;
+
+            h3 {
+                &::after {
+                    content: ':';
+                    padding: 0 .4rem;
+                }
+            }
+
+            h4 {
+                color: blue;
+                border: blue solid .1px;
+                padding: .3rem;
+                border-radius: .3rem
+            }
+        }
+
+        .prix {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: .7rem;
+
+            h3 {
+                &::after {
+                    content: ':';
+                    padding: 0 .4rem;
+                }
+            }
+
+            h4 {
+                color: blue;
+                border: blue solid .1px;
+                padding: .3rem;
+                border-radius: .3rem
+            }
+        }
+    }
+
+    .facture {
+        margin: 1rem 0;
+        background-color: #fff;
+        padding: 1rem;
+
+        .num {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .seq {
+                display: flex;
+                gap: .8rem;
+                flex-wrap: wrap;
+            }
+
+            .download {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                flex-wrap: wrap;
+
+                .objet {
+                    margin: .1rem .1rem;
+
+                    h5 {
+                        border: .2px solid gray;
+                        border-radius: .2rem;
+                        padding: .2rem;
+                        color: #fff;
+                        background-color: gray;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .infos {
+            .clinique {
+                h1 {
+                    color: yellowgreen;
+                }
+            }
+
+            .patient {
+                h4 {
+                    font-weight: bolder;
+                    font-size: .9rem;
+                    color: black;
+                }
+
+                h5 {
+                    color: rgb(125, 125, 145);
+                }
+
+                .pCare {
+                    margin: .6rem 0;
+                }
+            }
+        }
+    }
+}
