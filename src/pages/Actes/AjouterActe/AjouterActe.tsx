@@ -1,75 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { gql, useMutation } from '@apollo/client'
-import { useForm } from '../../../utils/hooks'
-import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_SPECIALITIES } from '../../../hooks/Specialities/useSpecialities'
 import { useTranslation } from 'react-i18next'
+import { CREATE_ACTE } from './ActeMutation'
+import { GET_ACTS } from '../../../hooks/Actes/useActes'
 
-const CREATE_ACTE = gql`
-    mutation reateAct($specialityIds: [Int]!, $partakerIds: [Int]!, $descriptionFr: String, $descriptionEn: String, $value: Float) {
-  createAct(specialityIds: $specialityIds, partakerIds: $partakerIds, descriptionFR: $descriptionFr, descriptionEN: $descriptionEn, value: $value) {
-    careId
-    description {
-      fr
-      en
-    }
-    id
-    instanceActAllPrices {
-      actId
-      amountPaid
-      amountDue
-      amountRejected
-      payWho
-      careId
-      dateAmount
-      seqNumber
-      userId
-    }
-    lastInstanceActPrices {
-      actId
-      amountPaid
-      amountDue
-      amountRejected
-      payWho
-      careId
-      dateAmount
-      seqNumber
-      userId
-    }
-    price {
-      partakerIds
-      value
-    }
-    specialities {
-      id
-      description {
-        fr
-        en
-      }
-    }
-  }
-}
-`
+
 
 const AjouterActe = () => {
 
     const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { data: dataS, loading: loadingS, error: errorS } = useSpecialities()
+    const { data: dataS, loading: loadingS, error: errorS } = useQuery(GET_SPECIALITIES)
 
-    const [createAct, { data, loading, error }] = useMutation(CREATE_ACTE)
-
-    console.log("=========Mutation", error)
-
-    const [initialState, setReportValues] = useState({
-        descriptionFr: "",
-        descriptionEn: "",
-        value: 0,
-        specialityIds: [],
-        partakerIds: 0
-    });
+    const [descriptionFr, setDescriptionFr] = useState('');
+    const [descriptionEn, setDescriptionEn] = useState('');
+    const [specialityIds, setSpecialityIds] = useState('');
+    const [partakerIds, setPartakerIds] = useState('');
+    const [value, setValue] = useState('');
     const [specialities, setSpecialities] = useState<[]>([])
 
     useEffect(() => {
@@ -77,37 +32,35 @@ const AjouterActe = () => {
 
     }, [dataS])
 
-    const { onChange, onChangeOption, onSubmit, values } = useForm(
-        formCallback,
-        initialState
-    );
+    const [createAct] = useMutation(CREATE_ACTE, {
+        variables: {
+            value: Number(value), specialityIds: Number(specialityIds), partakerIds: Number(partakerIds), descriptionFr: descriptionFr,
+            descriptionEn: descriptionEn
+        },
+        update(cache, { data: { createAct } }) {
+            const { acts }: any = cache.readQuery({ query: GET_ACTS })
 
-    async function formCallback() {
-
-        try {
-            const valuesCallBack: any = values
-            // send "values" to database
-            console.log("=================", values)
-            createAct({
-                variables: {
-                    value: Number(valuesCallBack.value), specialityIds: Number(valuesCallBack.specialityIds), partakerIds: Number(valuesCallBack.partakerIds), descriptionFr: valuesCallBack.descriptionFr,
-                    descriptionEn: valuesCallBack.descriptionEn
-                }
+            cache.writeQuery({
+                query: GET_ACTS,
+                data: { acts: [...acts, createAct] },
             })
-            if (!error) {
-                valuesCallBack.value = ''
-                valuesCallBack.specialityIds = ''
-                valuesCallBack.descriptionFr = ''
-                valuesCallBack.descriptionEn = ''
-                valuesCallBack.partakerIds = ''
-            }
-            navigate('/actes')
-            window.location.reload()
         }
-        catch (error: any) {
-            if (error) return `
-            Erreur de soumission ! ${error.message}`
+    })
+
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+
+        if (descriptionFr === '' || descriptionEn === '' || specialityIds === '' || partakerIds === '' || value === '') {
+            return alert('Merci de remplir tous les champs');
         }
+
+        createAct({ descriptionFr, descriptionEn, specialityIds, partakerIds, value } as any)
+        navigate('/actes')
+        setValue('')
+        setSpecialityIds('')
+        setDescriptionFr('')
+        setDescriptionEn('')
+        setPartakerIds('')
     }
 
     return (
@@ -115,19 +68,21 @@ const AjouterActe = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterType-container'>
-                    <h2>{t('ajouterActe')}</h2>
+                    <h2>{t('ajouterActe')}
+                        <button className='back' onClick={goBack}>Retour</button>
+                    </h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
-                                    <input id='descriptionFr' name="descriptionFr" onChange={onChange} type="text" className='input' placeholder='Description fr *' required />
+                                    <input id='descriptionFr' value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description fr *' required />
                                 </div><br />
                                 <div>
-                                    <input id='descriptionEn' name="descriptionEn" onChange={onChange} type="text" className='input' placeholder='Description en *' required />
+                                    <input id='descriptionEn' value={descriptionEn} onChange={(e) => { setDescriptionEn(e.target.value) }} type="text" className='input' placeholder='Description en *' required />
                                 </div><br />
                                 <div>
-                                    <select id='specialityIds' name="specialityIds" onChange={onChangeOption} className='input' placeholder='*' required>
+                                    <select id='specialityIds' value={specialityIds} onChange={(e) => { setSpecialityIds(e.target.value) }} className='input' placeholder='*' required>
                                         <option>{t('selectSpec')}</option>
                                         {
                                             specialities?.map((el: any) => (
@@ -138,11 +93,11 @@ const AjouterActe = () => {
                                 </div><br />
                                 <div>
                                     <label htmlFor="">{t('prix1')}</label>
-                                    <input id='value' name="value" onChange={onChange} type="text" className='input' placeholder='' />
+                                    <input id='value' value={value} onChange={(e) => { setValue(e.target.value) }} type="text" className='input' placeholder='' />
                                 </div>
                                 <div>
                                     <label htmlFor="">{t('prix2')}</label>
-                                    <input id='partakerIds' name="partakerIds" onChange={onChange} type="text" className='input' placeholder='' />
+                                    <input id='partakerIds' value={partakerIds} onChange={(e) => { setPartakerIds(e.target.value) }} type="text" className='input' placeholder='' />
                                 </div>
                             </div>
                             <div className='save'>

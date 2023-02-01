@@ -46,11 +46,6 @@ query Acts {
 }
 `
 
-export const useActes = () => {
-  const { error, loading, data } = useQuery(GET_ACTS)
-  return {
-    error,
-    data,
-    loading
-  }
+export {
+  GET_ACTS
 }

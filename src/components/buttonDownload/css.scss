@@ -1,0 +1,17 @@
+.download {
+    margin: .5rem 0;
+
+    button {
+        color: #fff;
+        background-color: #2C3E50;
+        border-radius: .4rem;
+        padding: .5rem;
+        cursor: pointer;
+        box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.466);
+
+        &:hover {
+            background-color: rgb(85, 117, 21);
+            transition: all .3s;
+        }
+    }
+}

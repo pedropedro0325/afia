@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './actes.scss'
-import { useActes } from '../../../hooks/Actes/useActes'
+import { GET_ACTS } from '../../../hooks/Actes/useActes'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 
 const Actes = () => {
 
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { data, loading, error } = useActes()
+    const { data, loading, error } = useQuery(GET_ACTS)
 
     const [actes, setActes] = useState<[]>([])
 
@@ -52,7 +59,7 @@ const Actes = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                         </div>
                     </div>
                     <div className='table-patient'>

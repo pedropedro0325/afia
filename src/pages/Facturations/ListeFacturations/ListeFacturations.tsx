@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useCares } from '../../../hooks/Cares/useCares'
+import { GET_CARES } from '../../../hooks/Cares/useCares'
 import './facturation.scss'
 import { useTranslation } from 'react-i18next'
 import FilterBar from '../../../components/filterBy/FilterBar'
+import { useQuery } from '@apollo/client'
 
-const isSameOrAfter = require("dayjs/plugin/isSameOrAfter")
-dayjs.extend(isSameOrAfter)
+const isSameOrBefore = require("dayjs/plugin/isSameOrBefore")
+dayjs.extend(isSameOrBefore)
+
+const Day = require('dayjs')
 
 const ListeFacturations = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
     const [facture, setFacture] = useState<[]>([])
 
-    const { data, error, loading } = useCares()
+    const { data, error, loading } = useQuery(GET_CARES)
 
     useEffect(() => {
         setFacture(data?.cares)
@@ -84,7 +93,7 @@ const ListeFacturations = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>{t('retour')}</button>
                         </div>
                         <div>
                             <FilterBar onNameFilter={handleFilterNamne} onEmailFilter={handleFilterCare} onActFilter={handleFilterAct} onDateFilter={handleFilterDate} />
@@ -109,7 +118,7 @@ const ListeFacturations = () => {
                                             <td>{el?.description}</td>
                                             <td>{el?.patient?.name}</td>
                                             <td>{el?.acts?.map((el: any) => el?.description?.fr)}</td>
-                                            <td>{el?.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</td>
+                                            <td>{el?.acts?.map((el: any) => Day(el?.lastInstanceActPrices?.dateAmount).format("DD / MM / YYYY"))}</td>
                                             <td>{el?.acts?.map((el: any) => el?.lastInstanceActPrices?.amountPaid)} $</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
                                                 <Link to={`/facturation/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link>

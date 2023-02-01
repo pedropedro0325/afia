@@ -1,9 +1,16 @@
-import { Outlet, useParams, Link } from 'react-router-dom'
+import { Outlet, useParams, useNavigate, Link } from 'react-router-dom'
 import './event.scss'
 import { useEvent } from '../../../hooks/Events/useEvent'
 import { useTranslation } from 'react-i18next'
+const Day = require('dayjs')
 
 const Event = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { eventId } = useParams()
 
@@ -20,7 +27,7 @@ const Event = () => {
     return (
         <div className='home-container'>
             <Outlet />
-            <h2 className='h2'>{t('detailEvent')} <button className='backs'><Link to='/evenements'>Retour</Link></button></h2>
+            <h2 className='h2'>{t('detailEvent')} <button className='backs' onClick={goBack}>Retour</button></h2>
             <h2 className='h'>{t('titre')}  <h5>{data?.event?.description}</h5></h2>
             <div className='event'>
                 <div className='desc'>
@@ -55,11 +62,11 @@ const Event = () => {
                     </div>
                     <div className='dte'>
                         <h4>{t('dateD')} </h4>
-                        <h5>{data?.event?.startDate}</h5>
+                        <h5>{Day(data?.event?.startDate).format("DD - MM - YYYY . HH : mm")}</h5>
                     </div>
                     <div className='dte'>
                         <h4>{t('dateF')} </h4>
-                        <h5>{data?.event?.endDate}</h5>
+                        <h5>{Day(data?.event?.endDate).format("DD - MM - YYYY . HH : mm")}</h5>
                     </div>
                     <div className='dte'>
                         <h4>{t('nomPatient')} </h4>

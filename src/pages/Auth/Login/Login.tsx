@@ -1,9 +1,15 @@
 import React from 'react'
 import './login.scss'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const Login = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
@@ -13,6 +19,7 @@ const Login = () => {
                 <Outlet />
                 <div className='login'>
                     <div className='container'>
+                        <button className='back' onClick={goBack}>Retour</button>
                         <div className='left'>
                             <h1>{t('login')}</h1>
                             <p>{t('noCompte')} ? <Link to='/enregistrement'>{t('noConnecte')}</Link></p>

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import logo from '../../assets/img/fr_logo.png'
 import logoB from '../../assets/img/an_logo.png'
 
-const Navbar = ({ openSidebar, closeNav }: any) => {
+const Navbar = ({ openSidebar }: any) => {
     const [isLanguageActive, setIsLanguageActive] = useState(false)
     const { t, i18n } = useTranslation()
 
@@ -42,29 +42,13 @@ const Navbar = ({ openSidebar, closeNav }: any) => {
                 </div>
                 <div className='right'>
 
-                    {/* <div className='language-wrapper'>
-                        <h4 onClick={handleLanguage}>{language.find((lang) => lang.code.includes(languageCode))?.country}</h4>
-                        <div className='options' style={{ display: isLanguageActive ? 'block' : 'none' }}>
-                            {
-                                language?.map((lang: any) => (
-                                    <li onClick={() => {
-                                        handleChangeLanguage(lang.code)
-                                        setIsLanguageActive(false)
-                                    }
-                                    }>{lang.country}</li>
-                                ))
-                            }
-                        </div>
-                    </div> */}
-
                     <div className='language-wrapper'>
                         <h4 onClick={handleLanguage}>{t('ln')}</h4>
                         <div className='options' style={{ display: isLanguageActive ? 'block' : 'none' }}>
                             <FontAwesomeIcon icon={faCaretUp} className="i-plus" />
-                            <ul>
-                                <li className='ln' onClick={() => handleChangeLn("fr")}><img src={logo} alt="" />{t('fr')}</li>
-                                <li className='ln' onClick={() => handleChangeLn("en")}><img src={logoB} className='an' alt="" />{t('en')}</li>
-                            </ul>
+
+                            <h5 className='ln' onClick={() => handleChangeLn("fr")}><img src={logo} alt="" />{t('fr')}</h5>
+                            <h5 className='ln' onClick={() => handleChangeLn("en")}><img src={logoB} className='an' alt="" />{t('en')}</h5>
                         </div>
                     </div>
 

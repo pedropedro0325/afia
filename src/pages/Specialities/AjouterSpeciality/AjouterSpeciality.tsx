@@ -1,34 +1,50 @@
 import React, { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import './ajouterSpeciality.scss'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
+import { CREATE_SPECIALITY } from './SpecialityMutation'
+import { GET_SPECIALITIES } from '../../../hooks/Specialities/useSpecialities'
 
-const CREATE_SPECIALITY = gql`
-    mutation Mutation($descriptionFr: String, $descriptionEn: String) {
-  createSpeciality(descriptionFR: $descriptionFr, descriptionEN: $descriptionEn) {
-    id
-    description {
-      fr
-      en
-    }
-  }
-}
-`
+
 
 const AjouterSpeciality = () => {
 
     const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const [createSpeciality, { loading, error }] = useMutation(CREATE_SPECIALITY)
+    const [descriptionFr, setDescriptionFr] = useState('')
+    const [descriptionEn, setDescriptionEn] = useState('')
 
-    const [descriptionFr, setDescriptionFr] = useState<string>('')
-    const [descriptionEn, setDescriptionEn] = useState<string>('')
+    const [createSpeciality] = useMutation(CREATE_SPECIALITY, {
+        variables: { descriptionFr, descriptionEn },
+        update(cache, { data: { createSpeciality } }) {
+            const { specialities }: any = cache.readQuery({ query: GET_SPECIALITIES })
 
-    if (loading) return 'Submitting...'
-    if (error) return `Submission error! ${error.message}`
+            cache.writeQuery({
+                query: GET_SPECIALITIES,
+                data: { specialities: [...specialities, createSpeciality] },
+            })
+        }
+    })
+
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+
+        if (descriptionFr === '' || descriptionEn === '') {
+            return alert('Merci de remplir tous les champs');
+        }
+
+        createSpeciality({ descriptionFr, descriptionEn } as any)
+        navigate('/specialites')
+        setDescriptionFr('')
+        setDescriptionEn('')
+    }
 
 
     return (
@@ -36,24 +52,12 @@ const AjouterSpeciality = () => {
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterSpeciality-container'>
-                    <h2>{t('ajouterSpec')}</h2>
+                    <h2>{t('ajouterSpec')}
+                        <button className='back' onClick={goBack}>Retour</button>
+                    </h2>
                     <br />
                     <div className='form'>
-                        <form onSubmit={e => {
-                            e.preventDefault()
-                            try {
-                                createSpeciality({ variables: { descriptionFr: descriptionFr, descriptionEn: descriptionEn } })
-                                if (error) {
-                                    setDescriptionFr('')
-                                    setDescriptionEn('')
-                                }
-                                navigate('/specialites')
-                                window.location.reload()
-                            }
-                            catch (error: any) {
-                                alert(error)
-                            }
-                        }}>
+                        <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
                                     <input value={descriptionFr} onChange={(e) => { setDescriptionFr(e.target.value) }} type="text" className='input' placeholder='Description Fr*' required />

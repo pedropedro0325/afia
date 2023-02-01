@@ -1,9 +1,15 @@
 import React from 'react'
 import './register.scss'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const Register = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
@@ -13,6 +19,7 @@ const Register = () => {
                 <Outlet />
                 <div className='register'>
                     <div className='container'>
+                        <button className='back' onClick={goBack}>Retour</button>
                         <div className='left'>
                             <h1>{t('register')}</h1>
                             <p>{t('compte')} ? <Link to='/connexion'>{t('connecte')}</Link></p>

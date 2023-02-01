@@ -1,11 +1,18 @@
-import { Outlet, useParams, Link } from 'react-router-dom'
+import { Outlet, useParams, Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './detailMedecin.scss'
 import { usePersonnel } from '../../../hooks/Personnels/usePersonnel'
 import { useEventByPartaker } from '../../../hooks/Events/usePartakerId'
 import { useTranslation } from 'react-i18next'
+const Day = require('dayjs')
 
 const DetailPatient = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
@@ -50,7 +57,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
-                            <button className='back'><Link to='/personnels'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                             <h2>{t('personne')} N° {partakerId}</h2>
                             <li>Type : <h3>{dataE?.partaker?.partakerType?.description}</h3></li>
                             <hr />
@@ -61,14 +68,14 @@ const DetailPatient = () => {
                                         <div className='class'>
                                             <li>{t('prenom')} : <h5>{dataE?.partaker?.name}</h5></li>
                                             <li>{t('nom')} : <h5>{dataE?.partaker?.lastName}</h5></li>
-                                            <li>{t('dateNaiss')} : <h5>{dataE?.partaker?.birthDate}</h5></li>
                                         </div>
                                         <div className='class'>
+                                            <li>{t('dateNaiss')} : <h5>{Day(dataE?.partaker?.birthDate).format("DD/MM/YYYY")}</h5></li>
                                             <li>{t('lieu')} : <h5>{dataE?.partaker?.birthCityId}</h5></li>
                                             <li>{t('adresse')} : <h5>{dataE?.partaker?.adressId}</h5></li>
-                                            <li>{t('tel')} : <h5>{dataE?.partaker?.phoneNumber}</h5></li>
                                         </div>
                                         <div className='class'>
+                                            <li>{t('tel')} : <h5>{dataE?.partaker?.phoneNumber}</h5></li>
                                             <li>Email : <h5>{dataE?.partaker?.email}</h5></li>
                                         </div>
                                     </ul>
@@ -97,6 +104,7 @@ const DetailPatient = () => {
                                             onChange={(e) => setSearch(e.target.value)}
                                         />
                                     </div>
+                                    <button className='back'><Link to='/personnels'>Retour</Link></button>
                                 </div>
                             </div>
                             <div className='table-patient'>
@@ -113,8 +121,8 @@ const DetailPatient = () => {
                                         })?.reverse().map((el: any) => (
                                             <tr key={el.id}>
                                                 <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
-                                                <td>{el.startDate}</td>
-                                                <td>{el.endDate}</td>
+                                                <td>{Day(el.startDate).format("DD-MM-YYYY . HH : mm")}</td>
+                                                <td>{Day(el.endDate).format("DD-MM-YYYY . HH : mm")}</td>
                                                 <td><Link to={`/evenements/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                             </tr>
                                         ))

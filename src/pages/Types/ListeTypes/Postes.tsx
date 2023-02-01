@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { useQuery } from '@apollo/client';
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import './types.scss'
-import { useTypes } from '../../../hooks/Types/useTypes'
+import { GET_TYPES } from '../../../hooks/Types/useTypes'
 import { useTranslation } from 'react-i18next'
 
 const Types = () => {
 
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { data, loading, error } = useTypes()
+    const { data, loading, error } = useQuery(GET_TYPES)
 
     const [search, setSearch] = useState('')
 
@@ -45,7 +52,7 @@ const Types = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                         </div>
                     </div>
                     <div className='table-patient'>

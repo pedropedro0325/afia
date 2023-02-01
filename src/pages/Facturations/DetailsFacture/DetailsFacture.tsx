@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, useParams, Link } from 'react-router-dom'
+import { Outlet, useParams, Link, useNavigate } from 'react-router-dom'
 import './detailsFacture.scss'
 import { useCare } from '../../../hooks/Cares/useCare'
 import { useTranslation } from 'react-i18next'
+import DownloadButton from '../../../components/buttonDownload/DownloadButton'
+const Day = require('dayjs')
 
 const DetailsFacture = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { careId } = useParams()
 
@@ -19,18 +27,15 @@ const DetailsFacture = () => {
         <div className='home-container'>
             <Outlet />
             <div className='details'>
-                <h2>{t('bill')}</h2>
-                <div className='facture'>
+                <h2>{t('bill')}
+                    <button className='back' onClick={goBack}>{t('retour')}</button>
+                </h2>
+                <DownloadButton rootElementId="pageDownload" downloadFileName="Facture" />
+                <div className='facture' id='pageDownload'>
                     <div className='num'>
                         <div className='seq'>
                             <h3>{t('bill')} n° :</h3>
                             <h3>{data?.care?.acts?.map((el: any) => el?.lastInstanceActPrices?.seqNumber)}</h3>
-                        </div>
-                        <div className='download'>
-                            <h4>{t('telecharger')}</h4>
-                            <div className='objet'>
-                                <h5>PDF</h5>
-                            </div>
                         </div>
                     </div><hr />
                     <div className='infos'>
@@ -46,7 +51,7 @@ const DetailsFacture = () => {
                             <h5>{data?.care?.patient?.adressId} {data?.care?.patient?.birthCityId}</h5>
                             <div className='pCare'>
                                 <h4>{t('datePay')} :</h4>
-                                <h5>{data?.care?.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</h5>
+                                <h5>{data?.care?.acts?.map((el: any) => Day(el?.lastInstanceActPrices?.dateAmount).format("DD / MM / YYYY"))}</h5>
                             </div>
                         </div>
                     </div><hr />
@@ -56,10 +61,10 @@ const DetailsFacture = () => {
                                 <tr>
                                     <th>{t('motif')}</th>
                                     <th>{t('acte')}</th>
-                                    <th>{t('prix de l\' acte')}</th>
+                                    <th>{t('prixActe')}</th>
                                     <th>{t('medecin')}</th>
-                                    <th>{t('montant dû')}</th>
-                                    <th>{t('montant payer')}</th>
+                                    <th>{t('montantDu')}</th>
+                                    <th>{t('montantPayer')}</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>

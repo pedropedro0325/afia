@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 const GET_EVENTS = gql`
 query Query {
@@ -146,12 +146,6 @@ query Query {
 }
 `
 
-export const useEvents = () => {
-  const { error, loading, data } = useQuery(GET_EVENTS)
-  console.log("=============", error)
-  return {
-    error,
-    data,
-    loading
-  }
+export {
+  GET_EVENTS
 }

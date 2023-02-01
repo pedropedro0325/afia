@@ -42,22 +42,22 @@ const FilterBar = ({ onNameFilter, onEmailFilter, onActFilter, onDateFilter }: a
 
     return (
         <div className='filter'>
-            <h2>{t('Filtrer par')}</h2>
+            <h2>{t('filtrePar')}</h2>
             <div className='filterby'>
                 <div className='control'>
-                    <label htmlFor="">Prénom du patient</label><br />
+                    <label htmlFor="">{t('nomPatient')}</label><br />
                     <input type="text" onChange={handleInput("name")} value={filters.name} />
                 </div>
                 <div className='control'>
-                    <label htmlFor="">Motif</label><br />
+                    <label htmlFor="">{t('motif')}</label><br />
                     <input type="text" onChange={handleInput("care")} />
                 </div>
                 <div className='control'>
-                    <label htmlFor="">Acte</label><br />
+                    <label htmlFor="">{t('acte')}</label><br />
                     <input type="text" onChange={handleInput("act")} />
                 </div>
                 <div className='control'>
-                    <label htmlFor="">date</label><br />
+                    <label htmlFor="">Date</label><br />
                     <input type="date" onChange={handleInput("date")} />
                 </div>
             </div>

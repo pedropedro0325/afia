@@ -64,10 +64,10 @@ const App = () => {
           <Route path='/medicament' element={<Medicaments />} />
           <Route path='/departement' element={<Departements />} />
           <Route path='/actes' element={<Actes />} />
-          <Route path='/salle/types' element={<Salles />} />
+          <Route path='/salles/types' element={<Salles />} />
           <Route path='/status' element={<Status />} />
           <Route path='/salles/ajouter' element={<AjouterSalle />} />
-          <Route path='/salle/types/ajouter' element={<AjouterTypeSalle />} />
+          <Route path='/salles/types/ajouter' element={<AjouterTypeSalle />} />
           <Route path='/actes/ajouter' element={<AjouterActe />} />
           <Route path='/status/ajouter' element={<AjouterStatus />} />
           <Route path='/paiement/:eventId' element={<Paiement />} />

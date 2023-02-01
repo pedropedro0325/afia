@@ -1,67 +1,73 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useQuery } from '@apollo/client';
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import './ajouterPersonnel.scss'
-import { useSpecialities } from '../../../hooks/Specialities/useSpecialities'
-import { useTypes } from '../../../hooks/Types/useTypes'
+import { GET_SPECIALITIES } from '../../../hooks/Specialities/useSpecialities'
+import { GET_TYPES } from '../../../hooks/Types/useTypes'
 import { gql, useMutation } from '@apollo/client'
 import { useForm } from '../../../utils/hooks'
 import { useTranslation } from 'react-i18next'
-
-
-const CREATE_PERSONNEL = gql`
-mutation CreatePartaker($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: String, $email: String, $typeId: String, $specialityId: String, $description: String) {
-  createPartaker(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, typeId: $typeId, specialityId: $specialityId, description: $description) {
-    id
-    name
-    lastName
-    birthDate
-    birthCityId
-    adressId
-    phoneNumber
-    email
-    partakerTypes {
-      id
-      description
-    }
-    speciality {
-      id
-      description {
-        fr
-        en
-      }
-    }
-    description
-    creationDate
-    createdBy
-  }
-}
-`
+import { CREATE_PERSONNEL } from './PersonnelMutation';
+import { GET_PERSONNELS } from '../../../hooks/Personnels/usePersonnels';
 
 const AjouterPersonnel = () => {
 
     const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const [createPartaker, { loading, error }] = useMutation(CREATE_PERSONNEL)
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [description, setDescription] = useState('')
+    const [adressId, setAdressId] = useState('')
+    const [birthCityId, setBirthCityId] = useState('')
+    const [birthDate, setBirthDate] = useState('')
+    const [typeId, setTypeId] = useState('')
+    const [specialityId, setSpecialityId] = useState('')
 
-    console.log("=========Mutation", error)
+    const [createPartaker] = useMutation(CREATE_PERSONNEL, {
+        variables: {
+            description, phoneNumber, email, name, lastName, adressId, birthCityId, birthDate, typeId, specialityId
+        },
+        update(cache, { data: { createPartaker } }) {
+            const { partakers }: any = cache.readQuery({ query: GET_PERSONNELS })
 
-    const [initialState, setReportValues] = useState({
-        name: "",
-        lastName: "",
-        birthDate: "",
-        birthCityId: "",
-        adressId: "",
-        email: "",
-        description: "",
-        phoneNumber: "",
-        typeId: "",
-        specialityId: ""
-    });
+            cache.writeQuery({
+                query: GET_PERSONNELS,
+                data: { partakers: [...partakers, createPartaker] },
+            })
+        }
+    })
 
-    const { data } = useSpecialities();
-    const { data: dataT } = useTypes()
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+
+        if (description === '' || adressId === '' || phoneNumber === '' || name === '' || lastName === '' || birthCityId === '' || birthDate === '' || email === '' || typeId === '' || specialityId === '') {
+            return alert('Merci de remplir tous les champs');
+        }
+
+        createPartaker({ description, name, lastName, email, birthCityId, birthDate, phoneNumber, adressId, typeId, specialityId } as any)
+        navigate('/personnels')
+        setDescription('')
+        setName('')
+        setPhoneNumber('')
+        setLastName('')
+        setEmail('')
+        setBirthCityId('')
+        setBirthDate('')
+        setAdressId('')
+        setTypeId('')
+        setSpecialityId('')
+    }
+
+    const { data } = useQuery(GET_SPECIALITIES);
+    const { data: dataT } = useQuery(GET_TYPES)
 
     const [specs, setSpecs] = useState<[]>([])
     const [types, setTypes] = useState<[]>([])
@@ -74,78 +80,51 @@ const AjouterPersonnel = () => {
         setTypes(dataT?.partakerTypes)
     }, [dataT])
 
-    const { onChange, onChangeOption, onSubmit, values } = useForm(
-        formCallback,
-        initialState
-    );
-
-    if (loading) return 'Soumission...'
-
-    async function formCallback() {
-
-        try {
-            const valuesCallBack: any = values
-            // send "values" to database
-            console.log("=================", values)
-            createPartaker({
-                variables: {
-                    name: valuesCallBack.name, lastName: valuesCallBack.lastName, birthDate: valuesCallBack.birthDate, birthCityId: valuesCallBack.birthCityId,
-                    adressId: valuesCallBack.adressId, phoneNumber: valuesCallBack.phoneNumber, email: valuesCallBack.email, description: valuesCallBack.description,
-                    typeId: valuesCallBack.typeId, specialityId: valuesCallBack.specialityId
-                }
-            })
-            navigate('/personnels')
-            window.location.reload()
-        }
-        catch (error: any) {
-            if (error) return `
-            Erreur de soumission ! ${error.message}`
-        }
-
-    }
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterPersonnel-container'>
-                    <h2>{t('ajouterPers')}</h2>
+                    <h2>{t('ajouterPers')}
+                        <button className='back' onClick={goBack}>Retour</button>
+                    </h2>
                     <br />
                     <div className='form'>
                         <form onSubmit={onSubmit}>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">{t('prenom')}</label><br />
-                                    <input id="prenom" name="name" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="prenom" value={name} onChange={(e) => setName(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                                 <div>
                                     <label htmlFor="">{t('nom')}</label><br />
-                                    <input id="lastName" name="lastName" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">{t('dateNaiss')}</label><br />
-                                    <input id="birthDate" name="birthDate" onChange={onChange} type="date" className='input' placeholder='' required />
+                                    <input id="birthDate" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className='input' placeholder='' required />
                                 </div>
                                 <div>
                                     <label htmlFor="">{t('lieu')}</label><br />
-                                    <input id="birthCityId" name="birthCityId" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="birthCityId" value={birthCityId} onChange={(e) => setBirthCityId(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
                                     <label htmlFor="">{t('tel')}</label><br />
-                                    <input id="phoneNumber" name="phoneNumber" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                                 <div>
                                     <label htmlFor="">Email</label><br />
-                                    <input id="email" name="email" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="email" value={email} onChange={(e) => setEmail(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div><br />
-                                    <select id="typeId" onChange={onChangeOption} name="typeId" className='input' required>
+                                    <select id="typeId" value={typeId} onChange={(e) => setTypeId(e.target.value)} className='input' required>
                                         <option value="">{t('selectType')}</option>
                                         {
                                             types?.map((el: any) => (
@@ -156,15 +135,15 @@ const AjouterPersonnel = () => {
                                 </div>
                                 <div>
                                     <label htmlFor="">{t('adresse')}</label><br />
-                                    <input id="adressId" name="adressId" onChange={onChange} type="text" className='input' placeholder='' required />
+                                    <input id="adressId" value={adressId} onChange={(e) => setAdressId(e.target.value)} type="text" className='input' placeholder='' required />
                                 </div>
                             </div>
                             <div className='control'>
                                 <div>
-                                    <input id="description" name="description" onChange={onChange} type="text" className='input' placeholder='Description*' required />
+                                    <input id="description" value={description} onChange={(e) => setDescription(e.target.value)} type="text" className='input' placeholder='Description*' required />
                                 </div>
                                 <div>
-                                    <select id="specialityId" onChange={onChangeOption} name="specialityId" className='input' required>
+                                    <select id="specialityId" value={specialityId} onChange={(e) => setSpecialityId(e.target.value)} className='input' required>
                                         <option value="">{t('selectSpec')}</option>
                                         {
                                             specs?.map((speciality: any) => (

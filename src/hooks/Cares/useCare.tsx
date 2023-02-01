@@ -14,14 +14,6 @@ query Care($careId: Int!) {
     }
     diseases {
       id
-      description {
-        fr
-        en
-      }
-      diseaseLanguage {
-        id
-        description
-      }
     }
     patient {
       id
@@ -35,57 +27,16 @@ query Care($careId: Int!) {
       description
     }
     partakers {
-      id
-      name
       lastName
-      birthDate
-      birthCityId
-      adressId
-      phoneNumber
-      email
-      partakerTypes {
-        id
-        description
-      }
-      speciality {
-        id
-        description {
-          fr
-          en
-        }
-      }
-      description
-      creationDate
-      createdBy
+      name
     }
     acts {
-      id
+      careId
       description {
         fr
         en
       }
-      price {
-        partakerIds
-        value
-      }
-      specialities {
-        id
-        description {
-          fr
-          en
-        }
-      }
-      instanceActAllPrices {
-        actId
-        amountPaid
-        amountDue
-        amountRejected
-        payWho
-        careId
-        dateAmount
-        seqNumber
-        userId
-      }
+      id
       lastInstanceActPrices {
         actId
         amountPaid
@@ -97,7 +48,13 @@ query Care($careId: Int!) {
         seqNumber
         userId
       }
-      careId
+      price {
+        partakerIds
+        value
+      }
+      specialities {
+        id
+      }
     }
     status {
       id
@@ -106,11 +63,11 @@ query Care($careId: Int!) {
         en
       }
       type {
-        id
         description {
           fr
           en
         }
+        id
       }
     }
   }

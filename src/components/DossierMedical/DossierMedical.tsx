@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import './dossierMedical.scss'
-import { useEvents } from '../../hooks/Events/useEvents';
+import { GET_EVENTS } from '../../hooks/Events/useEvents';
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client';
+const Day = require('dayjs')
 
 const DossierMedical = ({ data }: any) => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
@@ -16,7 +22,7 @@ const DossierMedical = ({ data }: any) => {
         setToggleState(index);
     };
 
-    const { data: dataE, loading, error } = useEvents()
+    const { data: dataE, loading, error } = useQuery(GET_EVENTS)
 
     const [search, setSearch] = useState('')
 
@@ -46,6 +52,7 @@ const DossierMedical = ({ data }: any) => {
                 <div
                     className={toggleState === 1 ? "content  active-content" : "content"}>
                     <ul className='desc'>
+                        <button className='back' onClick={goBack}>Retour</button>
                         <li>
                             <h4>{data.patient.name} {data.patient.lastName}</h4>
                             <hr />
@@ -64,6 +71,7 @@ const DossierMedical = ({ data }: any) => {
 
                 <div
                     className={toggleState === 2 ? "content  active-content" : "content"}>
+                    <button className='back' onClick={goBack}>Retour</button>
                     <h4>04/06/2022</h4>
                     <hr />
                     <h4>{t('evalu')}</h4>
@@ -101,6 +109,7 @@ const DossierMedical = ({ data }: any) => {
                 <div
                     className={toggleState === 3 ? "content  active-content" : "content"}>
                     <h4>{data.patient.name} {data.patient.lastName}</h4>
+                    <button className='back' onClick={goBack}>Retour</button>
                     <br />
                     <h4>{t('antecedent')}</h4>
                     <hr />
@@ -130,9 +139,9 @@ const DossierMedical = ({ data }: any) => {
                                     return curDate?.care.patient?.id === data?.patient.id
                                 })?.reverse().map((el: any) => (
                                     <tr key={el.id}>
-                                        <td>{el.startDate}</td>
-                                        <td>{el.description}</td>
-                                        <td>{el.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</td>
+                                        <td>{Day(el?.startDate).format("DD - MM - YYYY")}</td>
+                                        <td>{el?.care?.description}</td>
+                                        <td>{el?.care?.acts?.map((el: any) => (<p key={el.id}>{el?.description?.fr}</p>))}</td>
                                         <td><Link to={`/evenements/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                     </tr>
                                 ))

@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import './listePersonnel.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
-import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
+import { GET_PERSONNELS } from '../../../hooks/Personnels/usePersonnels'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 
 const ListePersonnel = () => {
 
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { error, loading, data } = usePersonnels()
+    const { error, loading, data } = useQuery(GET_PERSONNELS)
 
     const [personnels, setPersonnels] = useState<[]>([])
 
@@ -53,7 +60,7 @@ const ListePersonnel = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -63,7 +70,6 @@ const ListePersonnel = () => {
                                     <th>{t('prenom')}</th>
                                     <th>{t('nom')}</th>
                                     <th>Email</th>
-                                    <th>{t('type')}</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -76,7 +82,6 @@ const ListePersonnel = () => {
                                             <td>{el.name}</td>
                                             <td>{el.lastName}</td>
                                             <td>{el.email}</td>
-                                            <td>{el?.partakerTypes?.map((el: any) => el?.description)}</td>
                                             <td><Link to={`/personnels/detail/${el.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))

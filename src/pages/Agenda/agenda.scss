@@ -79,7 +79,7 @@
         background-color: white;
 
         .rbc-today {
-            background-color: rgb(193, 193, 212);
+            background-color: black;
         }
 
         .rbc-toolbar {
@@ -161,6 +161,21 @@
         .rbc-event:focus,
         .rbc-day-slot .rbc-background-event:focus {
             outline: none;
+        }
+
+        .rbc-event:focus,
+        .rbc-day-slot .rbc-background-event:focus {
+            outline: 5px auto #3b99fc;
+        }
+
+        .rbc-show-more {
+            background-color: red;
+            color: #fff;
+        }
+
+        .rbc-show-more:hover,
+        .rbc-show-more:focus {
+            color: rgb(204, 200, 200);
         }
 
         .rbc-month-view {

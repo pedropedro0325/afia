@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 const GET_VENUESTYPES = gql`
 query Venues {
@@ -9,11 +9,6 @@ query Venues {
 }
 `
 
-export const useVenuesTypes = () => {
-    const { error, loading, data } = useQuery(GET_VENUESTYPES)
-    return {
-        error,
-        data,
-        loading
-    }
+export {
+  GET_VENUESTYPES
 }

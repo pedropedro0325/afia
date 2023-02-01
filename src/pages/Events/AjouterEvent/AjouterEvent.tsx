@@ -1,185 +1,72 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import './ajouterEvent.scss'
-import { gql, useMutation } from '@apollo/client'
-import { useStatus } from '../../../hooks/Status/useStatus'
-import { usePatients } from '../../../hooks/Patients/usePatients'
-import { usePersonnels } from '../../../hooks/Personnels/usePersonnels'
-import { useVenues } from '../../../hooks/Venues/useVenues'
-import { useActes } from '../../../hooks/Actes/useActes'
+import { gql, useMutation, useQuery } from '@apollo/client'
+import { GET_STATUS } from '../../../hooks/Status/useStatus'
+import { GET_PATIENTS } from '../../../hooks/Patients/usePatients'
+import { GET_PERSONNELS } from '../../../hooks/Personnels/usePersonnels'
+import { GET_VENUES } from '../../../hooks/Venues/useVenues'
+import { GET_ACTS } from '../../../hooks/Actes/useActes'
 import { useForm } from '../../../utils/hooks'
 import { useTranslation } from 'react-i18next'
-
-const CREATE_EVENT = gql`
- mutation CreateEvent($description: String!, $statusId: Int, $careDescription: String, $startDate: dateScalar, $endDate: dateScalar, $patientId: Int, $partakerIds: [Int], $venueId: Int, $actIds: [Int]) {
-  createEvent(description: $description, statusId: $statusId, careDescription: $careDescription, startDate: $startDate, endDate: $endDate, patientId: $patientId, partakerIds: $partakerIds, venueId: $venueId, actIds: $actIds) {
-    id
-    description
-    status {
-      id
-      description {
-        fr
-        en
-      }
-      type {
-        id
-        description {
-          fr
-          en
-        }
-      }
-    }
-    startDate
-    endDate
-    venue {
-      id
-      venueType {
-        id
-        description
-      }
-      phoneNumber
-      description
-    }
-    care {
-      id
-      description
-      specialities {
-        id
-        description {
-          fr
-          en
-        }
-      }
-      diseases {
-        id
-        description {
-          fr
-          en
-        }
-        diseaseLanguage {
-          id
-          description
-        }
-      }
-      patient {
-        id
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        description
-      }
-      partakers {
-        id
-        name
-        lastName
-        birthDate
-        birthCityId
-        adressId
-        phoneNumber
-        email
-        partakerTypes {
-          id
-          description
-        }
-        speciality {
-          id
-          description {
-            fr
-            en
-          }
-        }
-        description
-        creationDate
-        createdBy
-      }
-      acts {
-        id
-        description {
-          fr
-          en
-        }
-        price {
-          partakerIds
-          value
-        }
-        specialities {
-          id
-          description {
-            fr
-            en
-          }
-        }
-        instanceActAllPrices {
-          actId
-          amountPaid
-          amountDue
-          amountRejected
-          payWho
-          careId
-          dateAmount
-          seqNumber
-          userId
-        }
-        lastInstanceActPrices {
-          actId
-          amountPaid
-          amountDue
-          amountRejected
-          payWho
-          careId
-          dateAmount
-          seqNumber
-          userId
-        }
-        careId
-      }
-      status {
-        id
-        description {
-          fr
-          en
-        }
-        type {
-          id
-          description {
-            fr
-            en
-          }
-        }
-      }
-    }
-  }
-} 
-`
+import { CREATE_EVENT } from './EventMutation'
+import { GET_EVENTS } from '../../../hooks/Events/useEvents'
 
 const AjouterEvent = () => {
 
   const navigate = useNavigate()
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const { t } = useTranslation()
 
-  const [createEvent, { loading, error }] = useMutation(CREATE_EVENT)
+  const [careDescription, setCareDescription] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [statusId, setStatusId] = useState('')
+  const [description, setDescription] = useState('')
+  const [patientId, setPatientId] = useState('')
+  const [partakerIds, setPartakerIds] = useState('')
+  const [venueId, setVenueId] = useState('')
+  const [actIds, setActIds] = useState('')
 
+  const [createEvent] = useMutation(CREATE_EVENT, {
+    variables: {
+      description, careDescription, startDate, endDate, statusId: Number(statusId), patientId: Number(patientId), partakerIds: Number([partakerIds]), venueId: Number(venueId), actIds: Number([actIds])
+    },
+    update(cache, { data: { createEvent } }) {
+      const { events }: any = cache.readQuery({ query: GET_EVENTS })
 
-  console.log("=========Mutation", error)
+      cache.writeQuery({
+        query: GET_EVENTS,
+        data: { events: [...events, createEvent] },
+      })
+    }
+  })
 
-  const [initialState, setReportValues] = useState({
-    description: "",
-    startDate: Date,
-    endDate: Date,
-    careDescription: "",
-    statusId: "",
-    patientId: "",
-    partakerIds: [],
-    venueId: "",
-    actIds: []
-  });
+  const onSubmit = (e: any) => {
+    e.preventDefault()
 
-  const { data: dataStatus } = useStatus()
+    if (description === '' || careDescription === '' || startDate === '' || endDate === '' || statusId === '' || patientId === '' || partakerIds === '' || venueId === '' || actIds === '') {
+      return alert('Merci de remplir tous les champs');
+    }
+
+    createEvent({ description, careDescription, startDate, endDate, statusId, patientId, partakerIds, venueId, actIds } as any)
+    navigate('/evenements')
+    setDescription('')
+    setStartDate('')
+    setEndDate('')
+    setStatusId('')
+    setCareDescription('')
+    setPartakerIds('')
+    setPatientId('')
+    setActIds('')
+    setVenueId('')
+  }
+
+  const { data: dataStatus } = useQuery(GET_STATUS)
   const [statuts, setStatuts] = useState<[]>([])
 
   useEffect(() => {
@@ -187,7 +74,7 @@ const AjouterEvent = () => {
 
   }, [dataStatus])
 
-  const { data: dataPat } = usePatients()
+  const { data: dataPat } = useQuery(GET_PATIENTS)
   const [patients, setPatients] = useState<[]>([])
 
   useEffect(() => {
@@ -195,53 +82,26 @@ const AjouterEvent = () => {
 
   }, [dataPat])
 
-  const { data: dataPer } = usePersonnels()
+  const { data: dataPer } = useQuery(GET_PERSONNELS)
   const [personnels, setPersonnels] = useState<[]>([])
 
   useEffect(() => {
     setPersonnels(dataPer?.partakers)
   }, [dataPer])
 
-  const { data: dataA } = useActes()
+  const { data: dataA } = useQuery(GET_ACTS)
   const [actes, setActes] = useState<[]>([])
 
   useEffect(() => {
     setActes(dataA?.acts)
   }, [dataA])
 
-  const { data: dataV } = useVenues()
+  const { data: dataV } = useQuery(GET_VENUES)
   const [venues, setVenues] = useState<[]>([])
 
   useEffect(() => {
     setVenues(dataV?.venues)
   }, [dataV])
-
-  const { onChange, onChangeOption, onSubmit, values } = useForm(
-    formCallback,
-    initialState
-  );
-
-  async function formCallback() {
-
-    try {
-      const valuesCallBack: any = values
-      // send "values" to database
-      console.log("=================", values)
-      createEvent({
-        variables: {
-          description: valuesCallBack.description, startDate: valuesCallBack.startDate, endDate: valuesCallBack.endDate, statusId: Number(valuesCallBack.statusId),
-          patientId: Number(valuesCallBack.patientId), partakerIds: Number(valuesCallBack.partakerIds), venueId: Number(valuesCallBack.venueId), actIds: Number(valuesCallBack.actIds),
-          careDescription: valuesCallBack.careDescription
-        }
-      })
-      navigate('/evenements')
-      window.location.reload()
-    }
-    catch (error: any) {
-      if (error) return `
-            Erreur de soumission ! ${error.message}`
-    }
-  }
 
 
   return (
@@ -249,33 +109,35 @@ const AjouterEvent = () => {
       <div className='home-container'>
         <Outlet />
         <div className='ajouterEvent-container'>
-          <h2>{t('ajouterEv')}</h2>
+          <h2>{t('ajouterEv')}
+            <button className='back' onClick={goBack}>Retour</button>
+          </h2>
           <br />
           <div className='form'>
             <form onSubmit={onSubmit}>
               <div className='controls'>
                 <div>
-                  <input name='description' onChange={onChange} type="text" className='input' placeholder='Description*' required />
+                  <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" className='input' placeholder='Description*' required />
                 </div>
               </div>
               <div className='controls'>
                 <div>
-                  <input name='careDescription' onChange={onChange} type="text" className='input' placeholder='Description de la maladie' required />
+                  <input value={careDescription} onChange={(e) => setCareDescription(e.target.value)} type="text" className='input' placeholder='Description du motif' required />
                 </div>
               </div>
               <div className='control'>
                 <div>
                   <label htmlFor="">{t('dateD')}*</label><br />
-                  <input name='startDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date du début*' required />
+                  <input value={startDate} onChange={(e) => setStartDate(e.target.value)} type="datetime-local" className='input' placeholder='Date du début*' required />
                 </div>
                 <div>
                   <label htmlFor="">{t('dateF')}*</label><br />
-                  <input name='endDate' onChange={onChange} type="datetime-local" className='input' placeholder='Date de fin*' required />
+                  <input value={endDate} onChange={(e) => setEndDate(e.target.value)} type="datetime-local" className='input' placeholder='Date de fin*' required />
                 </div>
               </div>
               <div className='control'>
                 <div>
-                  <select name="patientId" onChange={onChangeOption} id="" className='input' required>
+                  <select value={patientId} onChange={(e) => setPatientId(e.target.value)} id="" className='input' required>
                     <option value="">Patient</option>
                     {
                       patients?.map((el: any) => (
@@ -285,7 +147,7 @@ const AjouterEvent = () => {
                   </select>
                 </div>
                 <div>
-                  <select name="partakerIds" onChange={onChangeOption} id="" className='input' required>
+                  <select value={partakerIds} onChange={(e) => setPartakerIds(e.target.value)} id="" className='input' required>
                     <option value="">{t('personnel')}</option>
                     {
                       personnels?.map((el: any) => (
@@ -297,7 +159,7 @@ const AjouterEvent = () => {
               </div>
               <div className='control'>
                 <div>
-                  <select name="venueId" onChange={onChangeOption} id="venueId" className='input' required>
+                  <select value={venueId} onChange={(e) => setVenueId(e.target.value)} id="venueId" className='input' required>
                     <option value="">{t('chambre')}</option>
                     {
                       venues?.map((el: any) => (
@@ -307,7 +169,7 @@ const AjouterEvent = () => {
                   </select>
                 </div>
                 <div>
-                  <select name="actIds" onChange={onChangeOption} id="actIds" className='input' required>
+                  <select value={actIds} onChange={(e) => setActIds(e.target.value)} id="actIds" className='input' required>
                     <option value="">{t('acte')}</option>
                     {
                       actes?.map((el: any) => (
@@ -319,7 +181,7 @@ const AjouterEvent = () => {
               </div>
               <div className='control'>
                 <div>
-                  <select name='statusId' onChange={onChangeOption} className='input' placeholder='' required>
+                  <select value={statusId} onChange={(e) => setStatusId(e.target.value)} className='input' placeholder='' required>
                     <option value="">{t('statut')}</option>
                     {
                       statuts?.map((el: any) => (

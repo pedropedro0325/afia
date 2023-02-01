@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import './patient.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
-import { usePatients } from '../../../hooks/Patients/usePatients'
+import { GET_PATIENTS } from '../../../hooks/Patients/usePatients'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 
 const Patient = () => {
 
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { error, loading, data } = usePatients()
+    const { error, loading, data } = useQuery(GET_PATIENTS)
 
     const [search, setSearch] = useState('')
 
@@ -45,7 +52,7 @@ const Patient = () => {
                             <button onClick={refreshPage} className='btn-blue'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                         </div>
                     </div>
                     <div className='table-patient'>

@@ -8,19 +8,20 @@ import { faNotesMedical } from '@fortawesome/free-solid-svg-icons'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { faKitMedical } from '@fortawesome/free-solid-svg-icons'
-import { usePatients } from '../../hooks/Patients/usePatients'
-import { usePersonnels } from '../../hooks/Personnels/usePersonnels'
+import { GET_PATIENTS } from '../../hooks/Patients/usePatients'
+import { GET_PERSONNELS } from '../../hooks/Personnels/usePersonnels'
 import { useEffect, useState } from 'react'
-import { useMedecins } from '../../hooks/medecins/useMedecins'
-import { useEvents } from '../../hooks/Events/useEvents'
+import { GET_MEDECINS } from '../../hooks/medecins/useMedecins'
+import { GET_EVENTS } from '../../hooks/Events/useEvents'
 import { useTranslation } from 'react-i18next'
+import { useQuery } from '@apollo/client'
 
 const Home = ({ closeSideBar }: any) => {
 
-    const { error, loading, data } = useMedecins()
-    const { error: errorP, loading: loadingP, data: dataP } = usePersonnels()
-    const { error: errorPat, loading: loadingPat, data: dataPat } = usePatients()
-    const { error: errorE, loading: loadingE, data: dataE } = useEvents()
+    const { error, loading, data } = useQuery(GET_MEDECINS)
+    const { error: errorP, loading: loadingP, data: dataP } = useQuery(GET_PERSONNELS)
+    const { error: errorPat, loading: loadingPat, data: dataPat } = useQuery(GET_PATIENTS)
+    const { error: errorE, loading: loadingE, data: dataE } = useQuery(GET_EVENTS)
 
 
     const [medecin, setMedecin] = useState<[]>([])
@@ -32,13 +33,13 @@ const Home = ({ closeSideBar }: any) => {
         setMedecin(data?.partakers)
     }, [data])
 
-    const medecins = medecin?.filter((curDate: any) => curDate?.partakerType?.id === "0")
+    const medecins = medecin
 
     useEffect(() => {
         setPersonnel(dataP?.partakers)
     }, [dataP])
 
-    const infirmiers = personnel?.filter((curDate: any) => curDate?.partakerType?.id === "4")
+    const infirmiers = personnel
 
     useEffect(() => {
         setPatient(dataPat?.patients)
@@ -63,7 +64,7 @@ const Home = ({ closeSideBar }: any) => {
                     <div className='parents'>
                         <div className='box'>
                             <div className='box-top'>
-                                <div onClick={closeSideBar}>
+                                <div>
                                     <h3>{patient?.length}</h3>
                                     <h4>{t('patients')}</h4>
                                 </div>
@@ -123,7 +124,7 @@ const Home = ({ closeSideBar }: any) => {
                             </tr>
                             <tbody>
                                 {
-                                    event?.slice(0, 3)?.reverse()?.map((event: any) => (
+                                    event?.slice(2, 6)?.reverse()?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.care?.patient?.name}</td>
                                             <td>{event.care?.partakers?.map((el: any) => el?.name)}</td>

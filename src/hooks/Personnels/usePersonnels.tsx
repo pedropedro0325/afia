@@ -29,12 +29,6 @@ query Partakers {
 }
 `
 
-export const usePersonnels = () => {
-  const { error, loading, data } = useQuery(GET_PERSONNELS)
-
-  return {
-    error,
-    data,
-    loading
-  }
+export {
+  GET_PERSONNELS
 }

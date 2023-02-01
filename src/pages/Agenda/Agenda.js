@@ -7,13 +7,14 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import "react-datepicker/dist/react-datepicker.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import './agenda.scss'
-import { useEvents } from '../../hooks/Events/useEvents';
+import { GET_EVENTS } from '../../hooks/Events/useEvents';
 import Modal from '../../components/Modal/Modal';
 import { useTranslation } from 'react-i18next'
 import ModalAddEvent from '../../components/Modal/ModalAddEvent';
+import { useQuery } from '@apollo/client';
 
 
 
@@ -53,9 +54,15 @@ const localizer = dateFnsLocalizer({
 
 const Agenda = () => {
 
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    const { error, loading, data } = useEvents();
+    const { error, loading, data } = useQuery(GET_EVENTS);
 
     const [allEvents, setAllEvents] = useState([]);
 
@@ -135,7 +142,7 @@ const Agenda = () => {
                             <button onClick={refreshPage} className='btn-add'>
                                 <FontAwesomeIcon icon={faRefresh} className="i-plus" />
                             </button>
-                            <button className='back'><Link to='/'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                         </div>
                     </div>
                 </div>

@@ -16,12 +16,6 @@ query Patients {
 }
 `
 
-export const usePatients = () => {
-  const { error, loading, data } = useQuery(GET_PATIENTS)
-
-  return {
-    error,
-    data,
-    loading
-  }
+export {
+  GET_PATIENTS
 }

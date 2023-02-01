@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 const GET_TYPES = gql`
 query PartakerTypes {
@@ -9,12 +9,4 @@ query PartakerTypes {
 }
 `
 
-export const useTypes = () => {
-  const { error, loading, data } = useQuery(GET_TYPES)
-
-  return {
-    error,
-    data,
-    loading
-  }
-}
+export { GET_TYPES }

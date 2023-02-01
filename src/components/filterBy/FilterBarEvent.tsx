@@ -16,6 +16,7 @@ const FilterBarEvent = ({ onNameFilter, onCareFilter, onDateFilter }: any) => {
     const handleInput = (field: any) => (event: any) => {
         const { value } = event.target
 
+
         setFilters({
             ...filters,
             [field]: value,
@@ -29,7 +30,7 @@ const FilterBarEvent = ({ onNameFilter, onCareFilter, onDateFilter }: any) => {
                 onCareFilter(value)
                 break
             case "date":
-                onDateFilter(value, "from")
+                onDateFilter(value)
                 break
             default:
                 break
@@ -50,8 +51,8 @@ const FilterBarEvent = ({ onNameFilter, onCareFilter, onDateFilter }: any) => {
                     <input type="text" onChange={handleInput("care")} />
                 </div>
                 <div className='control'>
-                    <label htmlFor="">date</label><br />
-                    <input type="date" onChange={handleInput("date")} />
+                    <label htmlFor="">Date</label><br />
+                    <input type="date" onChange={handleInput("date")} value={filters.date} />
                 </div>
             </div>
         </div>

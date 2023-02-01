@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet, useParams, useNavigate, Link } from 'react-router-dom'
 import { useCare } from '../../hooks/Cares/useCare'
 import { useTranslation } from 'react-i18next'
 import './detailsPaie.scss'
-import pdf from '../../assets/img/pdf.png'
+import DownloadButton from '../../components/buttonDownload/DownloadButton'
+const Day = require('dayjs')
 
 const DetailsPaie = () => {
+
+    const navigate = useNavigate()
 
     const { careId } = useParams()
 
@@ -22,18 +25,15 @@ const DetailsPaie = () => {
         <div className='home-container'>
             <Outlet />
             <div className='details-paiement '>
-                <h2>Détails du paiement</h2>
-                <div className='facture'>
+                <h2>{t('detailPay')}
+                    <button className='back'><Link to='/'>{t('revenir')}</Link></button>
+                </h2>
+                <DownloadButton rootElementId="downloadPage" downloadFileName="Facture" />
+                <div className='facture' id='downloadPage'>
                     <div className='num'>
                         <div className='seq'>
                             <h3>{t('bill')} n° :</h3>
                             <h3>{data?.care?.acts?.map((el: any) => el?.lastInstanceActPrices?.seqNumber)}</h3>
-                        </div>
-                        <div className='download'>
-                            <h4>{t('telecharger')}</h4>
-                            <div className='objet'>
-                                <h5>PDF</h5>
-                            </div>
                         </div>
                     </div><hr />
                     <div className='infos'>
@@ -49,7 +49,7 @@ const DetailsPaie = () => {
                             <h5>{data?.care?.patient?.adressId} {data?.care?.patient?.birthCityId}</h5>
                             <div className='pCare'>
                                 <h4>{t('datePay')} :</h4>
-                                <h5>{data?.care?.acts?.map((el: any) => el?.lastInstanceActPrices?.dateAmount)}</h5>
+                                <h5>{data?.care?.acts?.map((el: any) => Day(el?.lastInstanceActPrices?.dateAmount).format("DD - MM - YYYY . HH : mm"))}</h5>
                             </div>
                         </div>
                     </div><hr />
@@ -59,10 +59,10 @@ const DetailsPaie = () => {
                                 <tr>
                                     <th>{t('motif')}</th>
                                     <th>{t('acte')}</th>
-                                    <th>{t('prix de l\' acte')}</th>
+                                    <th>{t('prixActe')}</th>
                                     <th>{t('medecin')}</th>
-                                    <th>{t('montant dû')}</th>
-                                    <th>{t('montant payer')}</th>
+                                    <th>{t('montantDu')}</th>
+                                    <th>{t('montantPayer')}</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>

@@ -1,50 +1,60 @@
 import React, { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { gql, useMutation } from '@apollo/client'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
+import { CREATE_TYPE_VENUE } from './TypeSalleMutation'
+import { GET_VENUESTYPES } from '../../../hooks/TypeSalles/useTypeSalles'
 
-const CREATE_TYPE_VENUE = gql`
-    mutation CreateEvent($description: String) {
-  createVenueType(description: $description) {
-    description
-  }
-}
-`
 
 const AjouterTypeSalle = () => {
 
     const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
     const [description, setDescription] = useState<string>('')
 
-    const [createVenueType, { data, loading, error }] = useMutation(CREATE_TYPE_VENUE)
+    const [createVenueType] = useMutation(CREATE_TYPE_VENUE, {
+        variables: {
+            description
+        },
+        update(cache, { data: { createVenueType } }) {
+            const { venueTypes }: any = cache.readQuery({ query: GET_VENUESTYPES })
+
+            cache.writeQuery({
+                query: GET_VENUESTYPES,
+                data: { venueTypes: [...venueTypes, createVenueType] },
+            })
+        }
+    })
+
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+
+        if (description === '') {
+            return alert('Merci de remplir tous les champs');
+        }
+
+        createVenueType({ description } as any)
+        navigate('/salles/types')
+        setDescription('')
+    }
 
     return (
         <div>
             <div className='home-container'>
                 <Outlet />
                 <div className='ajouterType-container'>
-                    <h2>{t('ajouterTypeSalle')}</h2>
+                    <h2>{t('ajouterTypeSalle')}
+                        <button className='back' onClick={goBack}>Retour</button>
+                    </h2>
                     <br />
                     <div className='form'>
-                        <form onSubmit={e => {
-                            e.preventDefault()
-
-                            try {
-                                createVenueType({ variables: { description: description } })
-                                if (!error) {
-                                    setDescription('')
-                                }
-                                navigate('/salle/types')
-                                window.location.reload()
-                            }
-                            catch (error: any) {
-                                if (error) return `
-                                Erreur de soumission ! ${error.message}`
-                            }
-                        }}>
+                        <form onSubmit={onSubmit}>
                             <div className='controls'>
                                 <div>
                                     <input value={description} onChange={(e) => { setDescription(e.target.value) }} type="text" className='input' placeholder='Description*' required />

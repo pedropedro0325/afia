@@ -6,18 +6,21 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './events.scss'
-import { useEvents } from '../../../hooks/Events/useEvents'
+import { GET_EVENTS } from '../../../hooks/Events/useEvents'
 import { useTranslation } from 'react-i18next'
 import FilterBarEvent from '../../../components/filterBy/FilterBarEvent'
+import { useQuery } from '@apollo/client'
+const Day = require('dayjs')
 
-const isSameOrAfter = require("dayjs/plugin/isSameOrAfter")
-dayjs.extend(isSameOrAfter)
+const isSameOrBefore = require("dayjs/plugin/isSameOrBefore")
+dayjs.extend(isSameOrBefore)
+console.log(dayjs('2010-10-18').isSame('2010-10-19'));
 
 const Events = () => {
 
     const { t } = useTranslation()
 
-    const { error, loading, data } = useEvents()
+    const { error, loading, data } = useQuery(GET_EVENTS)
 
     const [events, setEvents] = useState<[]>([])
 
@@ -45,9 +48,9 @@ const Events = () => {
         setEvents(filteredData)
     }
 
-    const handleFilterDate = (date: any, field: any) => {
+    const handleFilterDate = (date: any) => {
         const filteredData = data?.events?.filter((el: any) => {
-            if (field === "from" && dayjs(el?.startDate).isAfter(dayjs(date))) {
+            if (dayjs(date).isBefore(dayjs(el?.startDate))) {
                 return el
             }
         })
@@ -59,7 +62,7 @@ const Events = () => {
     }
 
     if (loading) return <div className='err'><div className=' loader'></div></div>
-    if (error) return <div className='err'>something went wrong</div>
+    if (error) return <div className='err'>{t('err')}</div>
 
     return (
         <div>
@@ -70,7 +73,6 @@ const Events = () => {
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>{t('event')}</h4>
                             <Link to={`/evenements/ajouter`}>
                                 <button className='btn-blue'>
                                     <FontAwesomeIcon icon={faPlus} className="i-plus" />
@@ -100,7 +102,7 @@ const Events = () => {
                                     events?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.description}</td>
-                                            <td>{event.startDate}</td>
+                                            <td>{Day(event.startDate).format("DD - MM - YYYY . HH : mm")}</td>
                                             <td>{event.care?.description}</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>
                                                 <Link to={`/evenements/detail/${event.id}`}><button className='btn-blue'>{t('voir')}</button></Link>

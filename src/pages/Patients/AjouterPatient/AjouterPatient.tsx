@@ -1,78 +1,93 @@
 import React, { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import './ajouterPatient.scss'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
-
-const CREATE_PATIENT = gql`
-    mutation CreatePatient($name: String, $lastName: String, $birthDate: String, $birthCityId: String, $adressId: String, $phoneNumber: String, $email: String, $description: String) {
-  createPatient(name: $name, lastName: $lastName, birthDate: $birthDate, birthCityId: $birthCityId, adressId: $adressId, phoneNumber: $phoneNumber, email: $email, description: $description) {
-    id
-    name
-    lastName
-    birthDate
-    birthCityId
-    adressId
-    phoneNumber
-    email
-    description
-  }
-}
-`
+import { CREATE_PATIENT } from './PatientMutation'
+import { GET_PATIENTS } from '../../../hooks/Patients/usePatients'
 
 const AjouterPatient = () => {
 
     const navigate = useNavigate()
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     const { t } = useTranslation()
 
-    let name: any, lastName: any, birthDate: any, birthCityId: any, adressId: any, phoneNumber: any, email: any, description: any
-    const [createPatient, { error, loading }] = useMutation(CREATE_PATIENT)
+    const [name, setName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [description, setDescription] = useState('')
+    const [adressId, setAdressId] = useState('')
+    const [birthCityId, setBirthCityId] = useState('')
+    const [birthDate, setBirthDate] = useState('')
 
-    if (loading) return 'Soumission...'
-    if (error) return `
-    Erreur de soumission ! ${error.message}`
+    const [createPatient] = useMutation(CREATE_PATIENT, {
+        variables: {
+            description, phoneNumber, email, name, lastName, adressId, birthCityId, birthDate
+        },
+        update(cache, { data: { createPatient } }) {
+            const { patients }: any = cache.readQuery({ query: GET_PATIENTS })
+
+            cache.writeQuery({
+                query: GET_PATIENTS,
+                data: { patients: [...patients, createPatient] },
+            })
+        }
+    })
+
+    const onSubmit = (e: any) => {
+        e.preventDefault()
+
+        if (description === '' || adressId === '' || phoneNumber === '' || name === '' || lastName === '' || birthCityId === '' || birthDate === '' || email === '') {
+            return alert('Merci de remplir tous les champs');
+        }
+
+        createPatient({ description, name, lastName, email, birthCityId, birthDate, phoneNumber, adressId } as any)
+        navigate('/patients')
+        setDescription('')
+        setName('')
+        setPhoneNumber('')
+        setLastName('')
+        setEmail('')
+        setBirthCityId('')
+        setBirthDate('')
+        setAdressId('')
+    }
 
     return (
         <div className='home-container'>
             <Outlet />
             <div className='add-patient'>
-                <h2>{t('ajouterPatient')}</h2>
+                <h2>{t('ajouterPatient')}
+                    <button className='back' onClick={goBack}>Retour</button>
+                </h2>
                 <div className='form'>
-                    <form onSubmit={e => {
-                        e.preventDefault()
-
-                        try {
-                            createPatient({ variables: { name: name.value, lastName: lastName.value, birthDate: birthDate.value, birthCityId: birthCityId.value, adressId: adressId.value, phoneNumber: phoneNumber.value, email: email.value, description: description.value } })
-                            navigate('/patients')
-                            window.location.reload()
-                        }
-                        catch (error: any) {
-                            return `
-                            Erreur de soumission ! ${error.message}`
-                        }
-                    }}>
+                    <form onSubmit={onSubmit}>
                         <div className='form-top'>
                             <div className='card identite'>
                                 <h3>{t('identite')}</h3>
                                 <div className='control'>
                                     <label>{t('prenom')}</label><br />
-                                    <input ref={node => { lastName = node }} type="text" required />
+                                    <input value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" required />
                                 </div>
                                 <div className='control'>
                                     <label>{t('nom')}</label><br />
-                                    <input ref={node => { name = node }} type="text" required />
+                                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" required />
                                 </div>
                             </div>
                             <div className='card adresse'>
                                 <h3>{t('adrePers')}</h3>
                                 <div className='control'>
                                     <label>{t('adresse')}</label><br />
-                                    <input ref={node => { adressId = node }} type="text" required />
+                                    <input value={adressId} onChange={(e) => setAdressId(e.target.value)} type="text" required />
                                 </div>
                                 <div className='control'>
                                     <label>{t('tel')}</label><br />
-                                    <input ref={node => { phoneNumber = node }} type="text" required />
+                                    <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="text" required />
                                 </div>
                             </div>
                         </div>
@@ -81,22 +96,22 @@ const AjouterPatient = () => {
                                 <h3>{t('etatCivil')}</h3>
                                 <div className='control'>
                                     <label>{t('dateNaiss')}</label><br />
-                                    <input ref={node => { birthDate = node }} type="date" required />
+                                    <input value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" required />
                                 </div>
                                 <div className='control'>
                                     <label>{t('lieu')}</label><br />
-                                    <input ref={node => { birthCityId = node }} type="text" required />
+                                    <input value={birthCityId} onChange={(e) => setBirthCityId(e.target.value)} type="text" required />
                                 </div>
                             </div>
                             <div className='card complement'>
                                 <h3>{t('infoComp')}</h3>
                                 <div className='control'>
                                     <label>Email</label><br />
-                                    <input ref={node => { email = node }} type="text" required />
+                                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" required />
                                 </div>
                                 <div className='control'>
                                     <label>Description</label><br />
-                                    <input ref={node => { description = node }} type="text" required />
+                                    <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" required />
                                 </div>
                             </div>
                         </div>

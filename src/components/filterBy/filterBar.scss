@@ -1,20 +1,34 @@
 .filter {
+    background-color: whitesmoke;
+    padding: .4rem;
+    margin: .3rem 1rem;
 
-    margin: 1rem 1rem;
+    h2 {
+        font-size: 1rem;
+    }
 
     .filterby {
         display: flex;
         gap: .4rem;
-        margin: 0 1rem;
+        margin: 0 .8rem;
     }
 
     .control {
         width: 100%;
+        padding: .4rem 0;
+
+        label {
+            font-size: .8rem;
+            font-weight: 600;
+        }
 
         input {
             padding: .5rem;
             width: 100%;
-            border: .1px solid rgb(182, 159, 212);
+            border: none;
+            background-color: #fff;
+            font-weight: 600;
+            color: rgb(114, 111, 117);
             border-radius: .4rem;
         }
     }

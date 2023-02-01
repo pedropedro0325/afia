@@ -29,12 +29,6 @@ query Partakers {
 }
 `
 
-export const useMedecins = () => {
-  const { error, loading, data } = useQuery(GET_MEDECINS)
-  console.log(error, data)
-  return {
-    error,
-    data,
-    loading
-  }
+export {
+  GET_MEDECINS
 }

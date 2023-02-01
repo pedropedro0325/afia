@@ -1,11 +1,18 @@
-import { Outlet, useParams, Link } from 'react-router-dom'
+import { Outlet, useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './detailPatient.scss'
 import DossierMedical from '../../../components/DossierMedical/DossierMedical'
 import { usePatient } from '../../../hooks/Patients/usePatient'
 import { useTranslation } from 'react-i18next'
+const Day = require('dayjs')
 
 const DetailPatient = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1);
+    };
 
     const { t } = useTranslation()
 
@@ -53,7 +60,7 @@ const DetailPatient = () => {
                         <div
                             className={toggleState === 1 ? "content  active-content" : "content"}
                         >
-                            <button className='back'><Link to='/patients'>Retour</Link></button>
+                            <button className='back' onClick={goBack}>Retour</button>
                             <h2>Patient N° {data.patient.id}</h2>
                             <hr />
                             <div className='pers'>
@@ -64,7 +71,7 @@ const DetailPatient = () => {
                                             <li>{t('nom')} : <h5>{data.patient.lastName}</h5></li>
                                         </div>
                                         <div className='class'>
-                                            <li>{t('dateNaiss')} : <h5>{data.patient.birthDate}</h5></li>
+                                            <li>{t('dateNaiss')} : <h5>{Day(data.patient.birthDate).format("DD/MM/YYYY")}</h5></li>
                                             <li>{t('lieu')} : <h5>{data.patient.birthCityId}</h5></li>
                                         </div>
                                         <div className='class'>
@@ -91,6 +98,7 @@ const DetailPatient = () => {
                             className={toggleState === 3 ? "content  active-content" : "content"}
                         >
                             <div className='gen'>
+                                <button className='back' onClick={goBack}>Retour</button>
                                 <div className='rapport'>
                                     <div className='space'>
                                         <h5>{t('bCoeur')}</h5>
