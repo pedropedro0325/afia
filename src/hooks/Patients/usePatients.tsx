@@ -10,7 +10,6 @@ query Patients {
     birthCityId
     adressId
     phoneNumber
-    email
     description
   }
 }

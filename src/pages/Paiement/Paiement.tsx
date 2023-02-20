@@ -6,7 +6,6 @@ import { useForm } from '../../utils/hooks'
 import { useMutation, useQuery } from '@apollo/client'
 import './paiement.scss'
 import { CREATE_INSTANCE } from './PaiementMutation'
-import { GET_CARES } from '../../hooks/Cares/useCares'
 
 const Paiement = () => {
 
@@ -33,26 +32,20 @@ const Paiement = () => {
 
   const care = updateData?.event?.care?.id
 
+  const careDesc = updateData?.event?.care?.description
+
   const act = updateData?.event?.care?.acts?.map((el: any) => (el.id))
 
-  const [cares, setCares] = useState([])
-
-  const { data: dataC, error: errorC, loading: loadingC } = useQuery(GET_CARES)
-
-  useEffect(() => {
-    setCares(dataC?.cares)
-    console.log(cares);
-
-  }, [dataC])
+  const actDesc = updateData?.event?.care?.acts?.map((el: any) => (el.description?.fr))
 
   const [createUpdateInstanceActPrice, { loading, error }] = useMutation(CREATE_INSTANCE)
 
   const [initialState] = useState({
-    careId: "",
-    actId: "",
+    careId: care,
+    actId: act,
     amountPaid: "",
-    amountDue: "",
-    amountRejected: "",
+    amountDue: actId,
+    amountRejected: '0',
     userId: "",
     dateAmount: Date,
     payWho: ""
@@ -91,20 +84,7 @@ const Paiement = () => {
         <h2>{t('paiement')}
           <button className='back' onClick={goBack}>&larr; {t('retour')}</button>
         </h2>
-        <div className='info'>
-          <div className='acte'>
-            <h3>{t('motif')}</h3>
-            <h4>{updateData?.event?.care?.description}</h4>
-          </div>
-          <div className='acte'>
-            <h3>{t('acte')}</h3>
-            <h4>{updateData?.event?.care?.acts?.map((el: any) => (<p key={el.id}>{el.description?.fr}</p>))}</h4>
-          </div>
-          <div className='prix'>
-            <h3>{t('prix')}</h3>
-            <h4>{actId}.00 $</h4>
-          </div>
-        </div>
+
         <div className='regle'>
           <hr /><br />
           <div className='methode'>
@@ -112,17 +92,19 @@ const Paiement = () => {
               <div className='partiel'>
                 <div className='partiel1'>
                   <h4>{t('motif')}</h4>
-                  <input type='text' name="careId" value={care} onChange={onChange} placeholder={`${care}`} required />
+                  <input type='text' value={careDesc} name="careId" onChange={onChange} placeholder={`${care}`} required />
                   <h4>{t('acte')}</h4>
-                  <input type='text' name="actId" onChange={onChange} placeholder={`${act}`} required />
+                  <input type='text' value={actDesc} name="actId" onChange={onChange} placeholder={`${act}`} required />
                   <h4>{t('montantPayer')}</h4>
                   <input type="text" name="amountPaid" onChange={onChange} placeholder='' required />
                   <h4>{t('montantDu')}</h4>
-                  <input type="text" name="amountDue" onChange={onChange} placeholder={`${actId}`} required />
+                  <input type="text" value={actId} name="amountDue" onChange={onChange} placeholder={`${actId}`} required />
                 </div>
                 <div className='partiel1'>
-                  <h4>{t('montantRej')}</h4>
-                  <input type="text" name="amountRejected" onChange={onChange} placeholder='0' required />
+                  <div className='hidden'>
+                    <h4>{t('montantRej')}</h4>
+                    <input type="text" name="amountRejected" onChange={onChange} placeholder='0' />
+                  </div>
                   <h4>{t('user')}</h4>
                   <input type="text" name="userId" onChange={onChange} placeholder='' required />
                   <h4>{t('datePay')}</h4>

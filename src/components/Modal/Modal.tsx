@@ -18,6 +18,7 @@ const Modal: React.FC<ModalProps> = ({ closeModal, selectedEvent }) => {
     }, [])
 
 
+
     return (
         <div className='modal'>
             <div className='modalContainer'>
@@ -27,9 +28,9 @@ const Modal: React.FC<ModalProps> = ({ closeModal, selectedEvent }) => {
                 <div className='title'>
                     <h2>{selectedEvent?.description}</h2>
                 </div>
-                <div className='body'>
+                {/* <div className='body'>
                     <p></p>
-                </div>
+                </div> */}
                 <div className='footer'>
                     <button className='cancelBtn'>{t('annuler')}</button>
                     <button>{t('update')}</button>

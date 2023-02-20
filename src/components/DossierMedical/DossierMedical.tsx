@@ -24,6 +24,9 @@ const DossierMedical = ({ data }: any) => {
 
     const { data: dataE, loading, error } = useQuery(GET_EVENTS)
 
+    const [event, setEvent] = useState([])
+
+
     const [search, setSearch] = useState('')
 
     return (

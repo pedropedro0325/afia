@@ -61,7 +61,7 @@ const ListeChambres = () => {
                             </button>
                             <Link to='/salles/types'>
                                 <button className='type'>
-                                    Types des salles
+                                    Types
                                 </button>
                             </Link>
                             <button className='back' onClick={goBack}>Retour</button>

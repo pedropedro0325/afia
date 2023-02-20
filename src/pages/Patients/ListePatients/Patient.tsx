@@ -38,9 +38,8 @@ const Patient = () => {
                     <br />
                     <div className='top'>
                         <div className='nav'>
-                            <h4>{t('patient')}</h4>
                             <div className='search'>
-                                <input type="search" placeholder='Recherche'
+                                <input type="search" placeholder={`${t('searchP')}`}
                                     onChange={(e) => setSearch(e.target.value)}
                                 />
                             </div>
@@ -62,7 +61,6 @@ const Patient = () => {
                                     <th>N°</th>
                                     <th>{t('prenom')}</th>
                                     <th>{t('nom')}</th>
-                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -75,7 +73,6 @@ const Patient = () => {
                                             <td>{patient.id}</td>
                                             <td>{patient.name}</td>
                                             <td>{patient.lastName}</td>
-                                            <td>{patient.email}</td>
                                             <td><Link to={`/patients/detail/${patient.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>
                                     ))

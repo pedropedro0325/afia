@@ -6,11 +6,6 @@ query Partakers {
     id
     name
     lastName
-    birthDate
-    birthCityId
-    adressId
-    phoneNumber
-    email
     partakerTypes {
       id
       description

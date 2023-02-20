@@ -72,9 +72,8 @@ const Medecin = () => {
                                 <tr>
                                     <th>{t('prenom')}</th>
                                     <th>{t('nom')}</th>
-                                    <th>Email</th>
                                     <th>{t('type')}</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,7 +86,6 @@ const Medecin = () => {
                                         <tr key={medecin.id}>
                                             <td>{medecin.name}</td>
                                             <td>{medecin.lastName}</td>
-                                            <td>{medecin.email}</td>
                                             <td>{medecin?.partakerTypes?.map((el: any) => el?.description).at(0)}</td>
                                             <td><Link to={`/personnels/detail/${medecin.id}`}><button className='btn-blue'>{t('voir')}</button></Link></td>
                                         </tr>

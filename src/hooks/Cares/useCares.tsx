@@ -5,17 +5,12 @@ query Cares {
   cares {
     id
     description
-    specialities {
-      id
-    }
-    patient {
+    patient{
       name
     }
     partakers {
       lastName
-      partakerTypes {
-        description
-      }
+      name
     }
     acts {
       description {
@@ -24,13 +19,8 @@ query Cares {
       lastInstanceActPrices {
         actId
         amountPaid
-        amountDue
-        amountRejected
-        payWho
         careId
         dateAmount
-        seqNumber
-        userId
       }
     }
     status {

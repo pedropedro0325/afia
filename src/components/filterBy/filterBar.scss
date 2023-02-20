@@ -1,35 +1,67 @@
 .filter {
-    background-color: whitesmoke;
-    padding: .4rem;
-    margin: .3rem 1rem;
+    background-color: white;
+    padding: .6rem 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
 
-    h2 {
-        font-size: 1rem;
+    .select {
+        width: 45%;
+
+        select {
+            height: 2rem;
+            padding: .2rem;
+        }
     }
 
     .filterby {
-        display: flex;
-        gap: .4rem;
         margin: 0 .8rem;
+        width: 45%;
     }
 
     .control {
         width: 100%;
-        padding: .4rem 0;
 
-        label {
-            font-size: .8rem;
-            font-weight: 600;
+        .date {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+            width: 100%;
+
+            .col {
+                width: 50%;
+
+                input {
+                    padding: .5rem;
+                    width: 100%;
+                    border: none;
+                    border: .1px solid rgba(148, 95, 198, 0.305);
+                    font-weight: 600;
+                    color: black;
+                    border-radius: .4rem;
+
+                    &::placeholder {
+                        font-size: 12px;
+                        font-weight: 300;
+                    }
+                }
+            }
         }
 
         input {
             padding: .5rem;
             width: 100%;
             border: none;
-            background-color: #fff;
+            border: .1px solid rgba(148, 95, 198, 0.305);
             font-weight: 600;
-            color: rgb(114, 111, 117);
+            color: black;
             border-radius: .4rem;
+
+            &::placeholder {
+                font-size: 12px;
+                font-weight: 300;
+            }
         }
     }
 }

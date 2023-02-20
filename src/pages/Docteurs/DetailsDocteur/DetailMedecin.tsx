@@ -95,6 +95,7 @@ const DetailPatient = () => {
                             <h3> {dataE?.partaker?.partakerType?.description}
                                 <p className='name'>{dataE?.partaker?.name} {dataE?.partaker?.lastName}</p>
                             </h3>
+                            <hr />
                             <br />
                             <div className='top'>
                                 <div className='nav'>

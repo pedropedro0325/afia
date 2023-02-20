@@ -7,58 +7,6 @@
         border-radius: .4rem;
     }
 
-    .info {
-        background-color: #fff;
-        margin: 1rem 0;
-        padding: .8rem;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-
-        .acte {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-
-            h3 {
-                &::after {
-                    content: ':';
-                    padding: 0 .4rem;
-                }
-            }
-
-            h4 {
-                color: rgb(118, 118, 143);
-                border: .1px rgb(118, 118, 143) solid;
-                padding: .3rem;
-                border-radius: .4rem;
-            }
-        }
-
-        .prix {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-
-            h3 {
-                &::after {
-                    content: ':';
-                    padding: 0 .4rem;
-                }
-            }
-
-            h4 {
-                color: rgb(118, 118, 143);
-                border: .1px rgb(118, 118, 143) solid;
-                padding: .3rem;
-                border-radius: .4rem;
-            }
-        }
-    }
-
     .regle {
         background-color: #fff;
         margin: 1rem 0;
@@ -69,63 +17,25 @@
             background-color: rgba(59, 59, 80, 0.699);
         }
 
-        .montant {
-            display: flex;
-            align-items: center;
-            gap: 6rem;
-            flex-wrap: wrap;
-            margin: 0 0 3rem 0;
-
-            h3 {
-                &::after {
-                    content: ':';
-                    padding: 0 .4rem;
-                }
-            }
-
-            h4 {
-                color: blue;
-            }
-        }
-
         .methode {
             margin-bottom: 1rem;
 
-            .select-methode {
-                margin-bottom: 1rem;
-            }
-
-            h4 {
-                margin-bottom: .5rem;
-            }
-
-            select {
-                width: 30%;
-                margin-bottom: 1rem;
-                padding: .5rem;
-            }
-
             .partiel {
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 gap: 1rem;
                 flex-wrap: wrap;
                 width: 100%;
 
                 .partiel1 {
                     width: 45%;
+
+                    .hidden {
+                        display: none;
+                    }
                 }
 
                 input {
-                    width: 90%;
-                    padding: .5rem;
-                    border: rgb(179, 165, 192) .1px solid;
-                    outline: none;
-                    border-radius: .4rem;
-                    margin-bottom: 1rem;
-                }
-
-                select {
                     width: 90%;
                     padding: .5rem;
                     border: rgb(179, 165, 192) .1px solid;
@@ -145,8 +55,51 @@
                 .btn-blue {
                     padding: 1rem 1.4rem;
                     font-size: large;
+
+                    &:hover {
+                        background-color: yellowgreen;
+                        transition: .3s all;
+                    }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .paiement {
+        .regle {
+            .methode {
+                margin: .3rem .7rem;
+
+                .partiel {
+                    display: block;
+
+                    .partiel1 {
+                        width: 100%;
+                    }
+
+                    input {
+                        width: 100%;
+                        margin-bottom: 1.4rem;
+                    }
+                }
+
+                .submit {
+
+                    .btn-blue {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .paiement {
+        h2 {
+            font-size: 1.2rem;
         }
     }
 }

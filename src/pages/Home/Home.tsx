@@ -58,8 +58,6 @@ const Home = ({ closeSideBar }: any) => {
         <div>
             <div className='home-container'>
                 <Outlet />
-                <section>
-                </section>
                 <div className='stats'>
                     <div className='parents'>
                         <div className='box'>
@@ -124,7 +122,7 @@ const Home = ({ closeSideBar }: any) => {
                             </tr>
                             <tbody>
                                 {
-                                    event?.slice(2, 6)?.reverse()?.map((event: any) => (
+                                    event?.slice(3, 6)?.reverse()?.map((event: any) => (
                                         <tr key={event.id}>
                                             <td>{event.care?.patient?.name}</td>
                                             <td>{event.care?.partakers?.map((el: any) => el?.name)}</td>

@@ -96,7 +96,7 @@
     "dispo": "Available",
     "titre": "Title",
     "maladie": "Disease",
-    "infoPatient": "Patient information",
+    "infoPatient": "Informations",
     "dossierMed": "Medical file",
     "rapportMed": "General report",
     "apropos": "About",
@@ -149,5 +149,15 @@
     "user": "User",
     "detailPay": "Payment details",
     "error": "error",
-    "revenir": "Back to home page"
+    "revenir": "Back to home page",
+    "searchP": "Find a patient",
+    "searchM": "Search for a Pattern",
+    "searchA": "Find an Act",
+    "searchD": "Find a description",
+    "searchDoc": "Find a doctor",
+    "searchMon": "Find an amount",
+    "montant": "Amount",
+    "du": "From",
+    "au": "To",
+    "filtrerPar": "Filter by"
 }

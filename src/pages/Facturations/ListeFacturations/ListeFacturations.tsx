@@ -11,8 +11,8 @@ import { useTranslation } from 'react-i18next'
 import FilterBar from '../../../components/filterBy/FilterBar'
 import { useQuery } from '@apollo/client'
 
-const isSameOrBefore = require("dayjs/plugin/isSameOrBefore")
-dayjs.extend(isSameOrBefore)
+const isSameOrAfter = require("dayjs/plugin/isSameOrAfter")
+dayjs.extend(isSameOrAfter)
 
 const Day = require('dayjs')
 
@@ -38,6 +38,16 @@ const ListeFacturations = () => {
     const handleFilterNamne = (name: any) => {
         const filteredData = data?.cares?.filter((el: any) => {
             const fullName = `${el?.patient?.name} ${el?.patient?.lastName}`
+            if (fullName?.toLowerCase().includes(name?.toLowerCase())) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
+
+    const handleFilterDoc = (name: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            const fullName = `${el?.partakers?.map((el: any) => el?.name)} ${el?.partakers?.map((el: any) => el?.name)}`
             if (fullName?.toLowerCase().includes(name?.toLowerCase())) {
                 return el
             }
@@ -74,6 +84,16 @@ const ListeFacturations = () => {
         setFacture(filteredData)
     }
 
+    const handleFilterAmount = (paie: any) => {
+        const filteredData = data?.cares?.filter((el: any) => {
+            const Paie = `${el?.acts?.map((el: any) => el?.lastInstanceActPrices?.amountPaid)}`
+            if (Paie?.toLowerCase().includes(paie?.toLowerCase())) {
+                return el
+            }
+        })
+        setFacture(filteredData)
+    }
+
     function refreshPage() {
         window.location.reload();
     }
@@ -96,7 +116,7 @@ const ListeFacturations = () => {
                             <button className='back' onClick={goBack}>{t('retour')}</button>
                         </div>
                         <div>
-                            <FilterBar onNameFilter={handleFilterNamne} onEmailFilter={handleFilterCare} onActFilter={handleFilterAct} onDateFilter={handleFilterDate} />
+                            <FilterBar onNameFilter={handleFilterNamne} onDocFilter={handleFilterDoc} onEmailFilter={handleFilterCare} onActFilter={handleFilterAct} onAmountFilter={handleFilterAmount} onDateFilter={handleFilterDate} />
                         </div>
                     </div>
                     <div className='table-patient'>
@@ -106,9 +126,10 @@ const ListeFacturations = () => {
                                     <th>{t('motif')}</th>
                                     <th>{t('nomPatient')}</th>
                                     <th>{t('acte')}</th>
+                                    <th>{t('nomMed')}</th>
                                     <th>Date</th>
                                     <th>Total</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,6 +139,7 @@ const ListeFacturations = () => {
                                             <td>{el?.description}</td>
                                             <td>{el?.patient?.name}</td>
                                             <td>{el?.acts?.map((el: any) => el?.description?.fr)}</td>
+                                            <td>{el?.partakers?.map((el: any) => el?.name)}</td>
                                             <td>{el?.acts?.map((el: any) => Day(el?.lastInstanceActPrices?.dateAmount).format("DD / MM / YYYY"))}</td>
                                             <td>{el?.acts?.map((el: any) => el?.lastInstanceActPrices?.amountPaid)} $</td>
                                             <td className='flex'><button className='btn-blue'><FontAwesomeIcon icon={faTrash} className="i-plus" /></button>

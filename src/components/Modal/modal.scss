@@ -24,6 +24,7 @@
             display: inline-block;
             text-align: left;
             margin-top: 10px;
+            margin-left: .7rem;
         }
 
         body {
@@ -36,7 +37,7 @@
         }
 
         .footer {
-            margin-top: 4rem;
+            margin-top: 1rem;
             flex: 20%;
             display: flex;
             align-items: center;
@@ -68,9 +69,12 @@
 
             button {
                 border: none;
-                font-size: 25px;
+                font-size: 14px;
+                padding: .2rem;
+                background-color: #2C3E50;
+                border-radius: .3rem;
                 cursor: pointer;
-                color: black;
+                color: #fff;
             }
         }
     }

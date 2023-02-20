@@ -13,6 +13,13 @@ const FilterBarEvent = ({ onNameFilter, onCareFilter, onDateFilter }: any) => {
         date: ""
     })
 
+    const [showHide, setShowHide] = useState('')
+
+    const handleShowHide = (event: any) => {
+        const getFilter = event.target.value
+        setShowHide(getFilter)
+    }
+
     const handleInput = (field: any) => (event: any) => {
         const { value } = event.target
 
@@ -40,20 +47,36 @@ const FilterBarEvent = ({ onNameFilter, onCareFilter, onDateFilter }: any) => {
 
     return (
         <div className='filter'>
-            <h2>{t('Filtrer par')}</h2>
+            <div className='select'>
+                <select name="filter" onChange={(e: any) => (handleShowHide(e))}>
+                    <option value="">{t('filtrerPar')}</option>
+                    <option value="1">Description</option>
+                    <option value="2">Motif</option>
+                    <option value="3">Date</option>
+                </select>
+            </div>
             <div className='filterby'>
-                <div className='control'>
-                    <label htmlFor="">Description</label><br />
-                    <input type="text" onChange={handleInput("desc")} value={filters.desc} />
-                </div>
-                <div className='control'>
-                    <label htmlFor="">Motif</label><br />
-                    <input type="text" onChange={handleInput("care")} />
-                </div>
-                <div className='control'>
-                    <label htmlFor="">Date</label><br />
-                    <input type="date" onChange={handleInput("date")} value={filters.date} />
-                </div>
+                {
+                    showHide === '1' && (
+                        <div className='control'>
+                            <input type="text" onChange={handleInput("desc")} value={filters.desc} placeholder={`${t('searchD')}`} />
+                        </div>
+                    )
+                }
+                {
+                    showHide === '2' && (
+                        <div className='control'>
+                            <input type="text" onChange={handleInput("care")} placeholder={`${t('searchM')}`} />
+                        </div>
+                    )
+                }
+                {
+                    showHide === '3' && (
+                        <div className='control'>
+                            <input type="date" onChange={handleInput("date")} value={filters.date} />
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

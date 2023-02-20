@@ -99,33 +99,30 @@
         .info {
             li {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 gap: 1rem;
                 font-weight: 600;
                 margin-bottom: .5rem;
+                font-size: .8rem;
 
                 h5 {
                     color: rgb(111, 104, 117);
-                    font-size: 1rem;
+                    font-size: .8rem;
                 }
             }
 
             .class {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                margin-bottom: 1rem;
+                margin-bottom: .5rem;
 
                 li {
-                    border: rgb(187, 182, 190) .1rem solid;
-                    padding: .4rem;
+                    padding: .4rem 0;
                     border-radius: .4rem;
                 }
             }
         }
 
         .name {
-            color: blueviolet;
+            color: #222;
         }
 
         table {
@@ -213,8 +210,6 @@
                 .part2 {
                     width: 40%;
                     padding: 2rem;
-                    border: rgb(187, 182, 190) 1px solid;
-                    border-radius: .5rem;
 
                     h4 {
                         margin-bottom: 1rem;
@@ -244,15 +239,9 @@
                 }
 
                 .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
 
                     li {
-                        border: rgb(187, 182, 190) .1rem solid;
                         padding: .4rem;
-                        border-radius: .4rem;
                     }
                 }
             }
@@ -292,8 +281,6 @@
                 .part2 {
                     width: 100%;
                     padding: 2rem;
-                    border: rgb(187, 182, 190) 1px solid;
-                    border-radius: .5rem;
 
                     h4 {
                         margin-bottom: 1rem;
@@ -323,15 +310,9 @@
                 }
 
                 .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
 
                     li {
-                        border: rgb(187, 182, 190) .1rem solid;
                         padding: .4rem;
-                        border-radius: .4rem;
                     }
                 }
             }
@@ -351,19 +332,7 @@
     }
 }
 
-@media (max-width: 750px) {
-    .details {
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .8rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 654px) {
+@media (max-width: 817px) {
     .details {
         .tabs {
 
@@ -406,8 +375,6 @@
 
                 .part2 {
                     padding: 2rem;
-                    border: rgb(187, 182, 190) 1px solid;
-                    border-radius: .5rem;
 
                     h4 {
                         margin-bottom: 1rem;
@@ -428,24 +395,16 @@
                     gap: 1rem;
                     font-weight: 600;
                     margin-bottom: .5rem;
-                    font-size: .6rem;
 
                     h5 {
                         color: rgb(111, 104, 117);
-                        font-size: .6rem;
                     }
                 }
 
                 .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
 
                     li {
-                        border: rgb(187, 182, 190) .1rem solid;
                         padding: .4rem;
-                        border-radius: .4rem;
                     }
                 }
             }
@@ -454,60 +413,16 @@
                 color: blueviolet;
             }
         }
-
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .5rem;
-            }
-        }
     }
 }
 
-@media (max-width: 522px) {
+@media (max-width: 511px) {
     .details {
         .tabs {
 
             h2 {
                 text-transform: uppercase;
                 font-size: .5rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 750px) {
-    .details {
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .8rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 654px) {
-    .details {
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .7rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 588px) {
-    .details {
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .6rem;
             }
         }
     }
@@ -532,8 +447,6 @@
 
                 .part2 {
                     padding: 2rem;
-                    border: rgb(187, 182, 190) 1px solid;
-                    border-radius: .5rem;
 
                     h4 {
                         margin-bottom: 1rem;
@@ -556,24 +469,16 @@
                     flex-wrap: wrap;
                     font-weight: 600;
                     margin-bottom: .5rem;
-                    font-size: .6rem;
 
                     h5 {
                         color: rgb(111, 104, 117);
-                        font-size: .6rem;
                     }
                 }
 
                 .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
 
                     li {
-                        border: rgb(187, 182, 190) .1rem solid;
                         padding: .4rem;
-                        border-radius: .4rem;
                     }
                 }
             }
@@ -582,24 +487,16 @@
                 color: blueviolet;
             }
         }
-
-        .tabs {
-
-            h2 {
-                text-transform: uppercase;
-                font-size: .5rem;
-            }
-        }
     }
 }
 
-@media (max-width: 588px) {
+@media (max-width: 463px) {
     .details {
         .tabs {
 
             h2 {
                 text-transform: uppercase;
-                font-size: .5rem;
+                font-size: .4rem;
             }
         }
     }
@@ -637,24 +534,18 @@
                     flex-wrap: wrap;
                     font-weight: 600;
                     margin-bottom: .5rem;
-                    font-size: .5rem;
+                    font-size: .6rem;
 
                     h5 {
                         color: rgb(111, 104, 117);
-                        font-size: .5rem;
+                        font-size: .6rem;
                     }
                 }
 
                 .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
 
                     li {
-                        border: rgb(187, 182, 190) .1rem solid;
                         padding: .4rem;
-                        border-radius: .4rem;
                     }
                 }
             }

@@ -37,6 +37,11 @@ li {
   right: 2rem;
   margin-top: .1rem;
 
+  &:hover {
+    background-color: yellowgreen;
+    transition: .3s all;
+  }
+
   a {
     color: #fff;
   }
@@ -59,8 +64,14 @@ li {
     right: 2rem;
     margin-top: .1rem;
 
+    &:hover {
+      background-color: yellowgreen;
+      transition: .3s all;
+    }
+
     a {
       color: #fff;
+      font-size: .7rem;
     }
   }
 
@@ -84,6 +95,10 @@ li {
       input {
         border: none;
         padding: .8rem .8rem;
+
+        &::placeholder {
+          font-size: .7rem;
+        }
       }
 
 
@@ -97,6 +112,11 @@ li {
       border-radius: .4rem;
       cursor: pointer;
       color: #fff;
+
+      &:hover {
+        background-color: yellowgreen;
+        transition: .3s all;
+      }
     }
 
     .btn-blue {
@@ -106,6 +126,11 @@ li {
       outline: none;
       border-radius: 50%;
       cursor: pointer;
+
+      &:hover {
+        background-color: yellowgreen;
+        transition: .3s all;
+      }
 
       .i-plus {
         font-size: larger;
@@ -538,5 +563,46 @@ li {
   .loader {
     width: 60px;
     height: 60px;
+  }
+}
+
+@media (max-width: 425px) {
+  .err {
+    margin: 10rem 14rem;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 65px;
+    height: 65px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+}
+
+@media (max-width: 320px) {
+  .err {
+    margin: 10rem 9rem;
+  }
+
+  .loader {
+    width: 60px;
+    height: 60px;
+
+    .table-patient {
+
+      td {
+        padding: 4px 2px;
+        font-size: 7px;
+      }
+
+      th {
+        padding: 5px;
+        font-size: 8px;
+      }
+    }
   }
 }

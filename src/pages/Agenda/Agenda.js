@@ -95,11 +95,6 @@ const Agenda = () => {
 
     console.log('next', allEvents);
 
-    const handleSelectEvent = useCallback(
-        (allEvents) => window.alert(allEvents.description),
-        []
-    )
-
     const handleModal = (event) => {
         console.log("=================selectedEvent", event)
         setSelectedEvent(event)
